@@ -335,6 +335,91 @@ body{background:#fff;color:#1c1e21;font-family:Arial,Helvetica,sans-serif;letter
 .navico svg,.mobile-nav svg{width:19px;height:19px;display:block}.service .ico svg{width:22px;height:22px}.bigico svg,.security-shield svg{width:26px;height:26px}
 @media(max-width:600px){.welcome{border-radius:24px}.service{border-radius:24px}.product{border-radius:20px}.catalog-notice,.security-panel{padding:13px;border-radius:16px}.navico svg,.mobile-nav svg{width:18px;height:18px}}
 </style>
+<style id="uniease-skills-responsive-motion">
+.skill-page-hero{margin-bottom:24px}
+.skills-section-heading{display:flex;align-items:end;justify-content:space-between;gap:14px;margin:25px 0 12px}
+.skills-section-heading h2,.chinese-learning-copy h2{margin:0;font-size:20px;letter-spacing:-.45px}
+.skills-section-heading p{margin:5px 0 0;color:var(--muted);font-size:12px}
+.skills-count{flex:none;color:#5d6c7b;font-size:11px;font-weight:700}
+.skill-tabs{margin:0 0 16px}
+.skill-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;align-items:stretch}
+.skill-card{min-width:0;overflow:hidden;display:flex;flex-direction:column;background:#fff;border:1px solid #dee3e9;border-radius:24px;animation:uniease-skill-enter .48s cubic-bezier(.2,.75,.25,1) both;animation-delay:calc(min(var(--skill-index,0),7)*34ms);transition:transform .22s ease,border-color .22s ease,box-shadow .22s ease}
+.skill-card-media{height:172px;position:relative;overflow:hidden;background:#f1f4f7}
+.skill-card-media img{width:100%;height:100%;display:block;object-fit:cover;transition:transform .4s cubic-bezier(.2,.75,.25,1)}
+.skill-card-category{position:absolute;left:12px;bottom:12px;max-width:calc(100% - 24px);padding:6px 11px;border-radius:100px;background:rgba(255,255,255,.94);color:#1c1e21;font-size:10px;font-weight:750;backdrop-filter:blur(8px)}
+.skill-card-body{flex:1;display:flex;flex-direction:column;padding:15px}
+.skill-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:10px}
+.skill-card-top h3{margin:0;font-size:14px;line-height:1.35;letter-spacing:-.2px}
+.skill-card-fee{flex:none;text-align:right;color:#0064e0;font-size:11px;font-weight:800}
+.skill-card-body>p{margin:9px 0 14px;color:#5d6c7b;font-size:12px;line-height:1.55}
+.skill-card-footer{margin-top:auto;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.skill-card-provider{min-width:0;color:#75818d;font-size:10px;line-height:1.35}
+.skill-card-footer .btn{flex:none}
+.skill-photo-credit{display:inline-block;margin-top:10px;color:#718096;font-size:9px;text-decoration:none}
+.skill-photo-credit:hover{text-decoration:underline}
+.skill-empty{grid-column:1/-1}
+.chinese-learning-section{margin-top:42px;padding:22px;border:1px solid #dee3e9;border-radius:28px;background:#f1f4f7}
+.chinese-learning-intro{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(220px,.9fr);gap:22px;align-items:center;margin-bottom:18px}
+.chinese-learning-copy{padding:8px 2px}
+.chinese-eyebrow{display:block;margin-bottom:9px;color:#0064e0;font-size:10px;font-weight:850;letter-spacing:1.4px}
+.chinese-learning-copy h2{font-size:25px}
+.chinese-learning-copy p{max-width:570px;margin:9px 0 0;color:#5d6c7b;font-size:13px;line-height:1.65}
+.chinese-learning-intro img{width:100%;height:190px;object-fit:cover;border-radius:20px;background:#e5ebef}
+.chinese-resource-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.chinese-resource-card{min-width:0;min-height:174px;padding:16px;display:flex;flex-direction:column;gap:7px;background:#fff;border:1px solid #dee3e9;border-radius:20px;color:#1c1e21;text-decoration:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}
+.resource-platform-icon{width:30px;height:30px;display:grid;place-items:center;border-radius:10px;background:#f1f4f7;color:#0064e0;font-size:13px;font-weight:850}
+.resource-platform{margin-top:2px;color:#718096;font-size:9px;font-weight:800;letter-spacing:.8px}
+.chinese-resource-card b{font-size:13px;line-height:1.35}
+.resource-description{color:#5d6c7b;font-size:11px;line-height:1.5}
+.resource-link-label{margin-top:auto;color:#0064e0;font-size:11px;font-weight:800}
+.resource-disclaimer{margin:12px 2px 0;color:#718096;font-size:10px;line-height:1.5}
+.skill-card:focus-within,.chinese-resource-card:focus-visible{outline:3px solid rgba(0,100,224,.2);outline-offset:3px}
+@keyframes uniease-skill-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+@media(hover:hover) and (pointer:fine){
+ .skill-card:hover{transform:translateY(-3px);border-color:#c4d7ec;box-shadow:0 12px 26px rgba(10,19,23,.07)}
+ .skill-card:hover .skill-card-media img{transform:scale(1.035)}
+ .chinese-resource-card:hover{transform:translateY(-2px);border-color:#b7cce7;box-shadow:0 8px 22px rgba(10,19,23,.06)}
+}
+@media(max-width:1000px){
+ .skill-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .chinese-resource-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .chinese-resource-card:last-child{grid-column:1/-1}
+}
+@media(max-width:600px){
+ .skills-section-heading{align-items:flex-start}
+ .skills-section-heading h2{font-size:17px}
+ .skill-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .skill-card{border-radius:18px}
+ .skill-card-media{height:clamp(118px,34vw,160px)}
+ .skill-card-body{padding:11px}
+ .skill-card-top{display:block}
+ .skill-card-top h3{font-size:12px}
+ .skill-card-fee{display:block;margin-top:5px;text-align:left}
+ .skill-card-body>p{font-size:11px;margin:7px 0 11px}
+ .skill-card-footer{align-items:flex-start;flex-direction:column}
+ .skill-card-footer .btn{width:100%}
+ .skill-photo-credit{font-size:9px}
+ .chinese-learning-section{margin-top:30px;padding:14px;border-radius:20px}
+ .chinese-learning-intro{grid-template-columns:1fr;gap:12px;margin-bottom:14px}
+ .chinese-learning-copy h2{font-size:21px}
+ .chinese-learning-copy p{font-size:12px}
+ .chinese-learning-intro img{height:150px}
+ .chinese-resource-grid{grid-template-columns:1fr}
+ .chinese-resource-card:last-child{grid-column:auto}
+ .chinese-resource-card{min-height:0}
+}
+@media(max-width:380px){
+ .skill-grid{grid-template-columns:1fr}
+ .skill-card-media{height:190px}
+ .skill-card-footer{flex-direction:row;align-items:center}
+ .skill-card-footer .btn{width:auto}
+}
+@media(prefers-reduced-motion:reduce){
+ .skill-card{animation:none!important;transition:none!important}
+ .skill-card-media img,.chinese-resource-card{transition:none!important}
+ .skill-card:hover,.chinese-resource-card:hover{transform:none!important}
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -415,13 +500,24 @@ sample.forEach(seed=>{const saved=state.listings.find(item=>item.id===seed.id);i
 seedListings.forEach(item=>{if(!state.listings.some(existing=>existing.id===item.id))state.listings.push(item)});
 localStorage.setItem('unieaseListings',JSON.stringify(state.listings));
 const tutors=[
-{title:'Level 200 Statistics tutoring',kind:'Academic support',price:25,unit:'/ hour',person:'Michael A.',emoji:'📊',desc:'Patient peer tutor • Online or on campus'},
-{title:'Knotless braids',kind:'Hair & beauty',price:100,unit:'from',person:'Abena B.',emoji:'💇🏽‍♀️',desc:'Neat protective styles • Book a slot'},
-{title:'Graphic design & flyers',kind:'Creative',price:35,unit:'from',person:'Kobby D.',emoji:'🎨',desc:'Posters, logos and social media designs'},
-{title:'Mathematics peer lessons',kind:'Academic support',price:20,unit:'/ hour',person:'Sandra K.',emoji:'✏️',desc:'One-on-one revision and exam preparation'},
-{title:'Gel nails',kind:'Hair & beauty',price:70,unit:'from',person:'Mavis N.',emoji:'💅🏽',desc:'Simple, clean nail sets by appointment'},
-{title:'Crochet bags & tops',kind:'Creative',price:60,unit:'from',person:'Efua T.',emoji:'🧶',desc:'Custom handmade pieces'}
+{title:'Level 200 Statistics tutoring session',kind:'Academic support',price:25,unit:'/ session',person:'Michael A.',desc:'One-to-one or small-group peer support. Bring your topics, lecture notes and questions.',image:'https://images.pexels.com/photos/5311450/pexels-photo-5311450.jpeg?auto=compress&cs=tinysrgb&w=1200',imageSource:'https://www.pexels.com/photo/a-tutor-teaching-a-student-5311450/',imageAlt:'A student tutor guiding a learner through notes during a study session'},
+{title:'Mathematics peer tutoring',kind:'Academic support',price:20,unit:'/ session',person:'Sandra K.',desc:'Work through difficult concepts, practice questions and exam preparation with a fellow student.',image:'https://images.pexels.com/photos/6502731/pexels-photo-6502731.jpeg?auto=compress&cs=tinysrgb&w=1200',imageSource:'https://www.pexels.com/photo/a-female-teacher-tutoring-her-male-student-6502731/',imageAlt:'A tutor and student discussing classwork at a study desk'},
+{title:'Graphic design and digital content',kind:'Graphic design',price:35,unit:'from',person:'Kobby D.',desc:'Learn or request help with flyers, posters, layouts, social media graphics and design fundamentals.',image:'https://images.pexels.com/photos/12902996/pexels-photo-12902996.jpeg?auto=compress&cs=tinysrgb&w=1200',imageSource:'https://www.pexels.com/photo/graphic-designer-working-on-laptop-12902996/',imageAlt:'A graphic designer working on visual layouts using a laptop'},
+{title:'Nail tech and nail art',kind:'Nail tech',price:70,unit:'from',person:'Mavis N.',desc:'Manicure practice, nail preparation, polish application and creative nail-art services.',image:'https://images.pexels.com/photos/6135688/pexels-photo-6135688.jpeg?auto=compress&cs=tinysrgb&w=1200',imageSource:'https://www.pexels.com/photo/professional-worker-with-face-mask-doing-manicure-for-customer-6135688/',imageAlt:'A nail technician providing a manicure service to a client'},
+{title:'Makeup and cosmetics',kind:'Makeup & cosmetics',price:null,priceLabel:'Ask provider for a quote',person:'Student beauty artists',desc:'Learn makeup application, blending, skin preparation, product selection and event looks.',image:'https://images.pexels.com/photos/33580449/pexels-photo-33580449.jpeg?auto=compress&cs=tinysrgb&w=1200',imageSource:'https://www.pexels.com/photo/professional-makeup-artist-applying-makeup-on-client-33580449/',imageAlt:'A makeup artist applying makeup to a client in a salon'},
+{title:'Crocheting and handmade crafts',kind:'Crocheting',price:60,unit:'from',person:'Efua T.',desc:'Get started with yarn, hooks and basic stitches, then build bags, tops and handmade pieces.',image:'https://images.pexels.com/photos/7585579/pexels-photo-7585579.jpeg?auto=compress&cs=tinysrgb&w=1200',imageSource:'https://www.pexels.com/photo/close-up-of-woman-crocheting-7585579/',imageAlt:'Hands crocheting yarn into a handmade piece'},
+{title:'Barbering and grooming',kind:'Barbering',price:null,priceLabel:'Ask provider for a quote',person:'Student barbers',desc:'Learn clipper handling, line-ups, fades, beard grooming and safe tool care.',image:'https://images.pexels.com/photos/7447139/pexels-photo-7447139.jpeg?auto=compress&cs=tinysrgb&w=1200',imageSource:'https://www.pexels.com/photo/man-in-a-barber-shop-getting-a-haircut-7447139/',imageAlt:'A barber working on a client’s haircut in a barbershop'},
+{title:'Knotless braids and protective styling',kind:'Hair & beauty',price:100,unit:'from',person:'Abena B.',desc:'Protective styling and neat braiding services, available by appointment.',image:'https://static.wixstatic.com/media/11062b_700ee5649be04f148c29bc70e6481966~mv2.jpg/v1/fill/w_742%2Ch_494%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/11062b_700ee5649be04f148c29bc70e6481966~mv2.jpg',imageSource:'https://www.hairandmakeuptrainingacademy.co.uk/success-stories',imageAlt:'A beauty professional working with a client in a makeup and beauty studio'}
 ];
+const skillImageDefaults={
+'Academic support':{image:'https://images.pexels.com/photos/5311450/pexels-photo-5311450.jpeg?auto=compress&cs=tinysrgb&w=1200',source:'https://www.pexels.com/photo/a-tutor-teaching-a-student-5311450/',alt:'A student tutor guiding a learner through notes during a study session'},
+'Graphic design':{image:'https://images.pexels.com/photos/12902996/pexels-photo-12902996.jpeg?auto=compress&cs=tinysrgb&w=1200',source:'https://www.pexels.com/photo/graphic-designer-working-on-laptop-12902996/',alt:'A graphic designer working on visual layouts using a laptop'},
+'Nail tech':{image:'https://images.pexels.com/photos/6135688/pexels-photo-6135688.jpeg?auto=compress&cs=tinysrgb&w=1200',source:'https://www.pexels.com/photo/professional-worker-with-face-mask-doing-manicure-for-customer-6135688/',alt:'A nail technician providing a manicure service to a client'},
+'Makeup & cosmetics':{image:'https://images.pexels.com/photos/33580449/pexels-photo-33580449.jpeg?auto=compress&cs=tinysrgb&w=1200',source:'https://www.pexels.com/photo/professional-makeup-artist-applying-makeup-on-client-33580449/',alt:'A makeup artist applying makeup to a client in a salon'},
+'Crocheting':{image:'https://images.pexels.com/photos/7585579/pexels-photo-7585579.jpeg?auto=compress&cs=tinysrgb&w=1200',source:'https://www.pexels.com/photo/close-up-of-woman-crocheting-7585579/',alt:'Hands crocheting yarn into a handmade piece'},
+'Barbering':{image:'https://images.pexels.com/photos/7447139/pexels-photo-7447139.jpeg?auto=compress&cs=tinysrgb&w=1200',source:'https://www.pexels.com/photo/man-in-a-barber-shop-getting-a-haircut-7447139/',alt:'A barber working on a client’s haircut in a barbershop'},
+'Hair & beauty':{image:'https://static.wixstatic.com/media/11062b_700ee5649be04f148c29bc70e6481966~mv2.jpg/v1/fill/w_742%2Ch_494%2Cal_c%2Cq_85%2Cusm_0.66_1.00_0.01%2Cenc_avif%2Cquality_auto/11062b_700ee5649be04f148c29bc70e6481966~mv2.jpg',source:'https://www.hairandmakeuptrainingacademy.co.uk/success-stories',alt:'A beauty professional working with a client in a makeup and beauty studio'}
+};
 const china=[
 {title:'Portable mist fan — white edition',cat:'Electronics',price:null,priceLabel:'Request a landed quote',desc:'Compact cooling fan with water tank • Product details and shipping quote to confirm',condition:'China import catalogue',image:'WhatsApp Image 2026-11-16 at 12.05.13 PM.jpeg',galleryImages:['WhatsApp Image 2026-11-16 at 12.05.14 PM (1).jpeg','WhatsApp Image 2026-11-16 at 12.05.14 PM (2).jpeg','WhatsApp Image 2026-11-16 at 12.05.14 PM.jpeg'],emoji:'🌀'},
 {title:'Portable desktop fan — black edition',cat:'Electronics',price:null,priceLabel:'Request a landed quote',desc:'Black portable fan style • Confirm specifications, availability and shipping',condition:'China import catalogue',image:'WhatsApp Image 2026-11-16 at 12.08.24 PM.jpeg',emoji:'🌀'},
@@ -478,7 +574,53 @@ function home(){return `<section class="welcome"><div class="eyebrow">YOUR CAMPU
 <div class="sectionhead"><div><h2>Earn with your skills</h2><div class="sub">Student talent deserves a platform.</div></div><button class="textbtn" onclick="nav('skills')">Explore services →</button></div><div class="grid">${tutors.slice(0,3).map(x=>card(x,'skills')).join('')}</div>`}
 function pageHead(title,desc,button=''){return `<div class="page-title"><div><h1>${title}</h1><p>${desc}</p></div>${button}</div>`}
 function marketPage(){let items=state.listings||sample;let cats=['All','Books','Stationery','Furniture','Electronics','Appliances','Clothing','Accessories','Footwear','Beauty & Care','Everyday Essentials'];let filtered=items.filter(x=>(state.filter==='All'||x.cat===state.filter)&&(`${x.title} ${x.owner||''}`).toLowerCase().includes(state.search.toLowerCase()));return `${pageHead('Student Marketplace','Browse student listings and product-photo showcases. Confirm seller, condition and price before arranging a purchase.',`<button class="btn teal" onclick="openListing()">＋ Sell an item</button>`)}<div class="catalog-notice"><b>Shop with care</b><span>Some images are illustrative catalogue photos. Confirm the actual item, condition, size, seller and final price before arranging collection.</span><span class="catalog-safety">Safety reminder: uniEase will never ask for your Mobile Money PIN, banking password or one-time password.</span></div><div class="panel"><div class="row"><div><b>Browse listings</b><div class="sub">Student-to-student buying and selling</div></div><input style="max-width:220px;border:1px solid var(--line);border-radius:10px;padding:9px" placeholder="Search listings..." oninput="state.search=this.value;renderContent()" value="${state.search}"></div><div class="tabs">${cats.map(c=>`<button class="tab ${state.filter===c?'active':''}" onclick="state.filter='${c}';render()">${c}</button>`).join('')}</div><div class="grid" id="listingGrid">${filtered.map(x=>card(x)).join('')||'<div class="empty">No listings match your search yet.</div>'}</div></div>`}
-function skillsPage(){return `${pageHead('Skills & Tutors','Find affordable academic help and student-run services.',`<button class="btn teal" onclick="openProvider()">＋ Offer a service</button>`)}<div class="servicehero"><div class="bigico" data-icon="graduation"></div><div><h2>Learn something. Share something.</h2><p>Connect with talented students for tutoring, beauty, grooming and creative services.</p></div></div><div class="tabs">${['All','Academic support','Hair & beauty','Creative'].map(c=>`<button class="tab ${state.filter===c?'active':''}" onclick="state.filter='${c}';render()">${c}</button>`).join('')}</div><div class="grid">${[...state.providers,...tutors].filter(x=>state.filter==='All'||x.kind===state.filter).map(x=>card(x,'skills')).join('')}</div><div class="sectionhead"><div><h2>Beauty and personal-style finds</h2><div class="sub">Explore beauty accessories in the student marketplace</div></div><button class="textbtn" onclick="nav('market');state.filter='Beauty & Care';render()">Shop beauty finds →</button></div><div class="grid">${marketPhotoCatalog.filter(x=>x.cat==='Beauty & Care').map(x=>card(x)).join('')}</div>`}
+function normaliseSkillKind(item){
+const text=((item.title||'')+' '+(item.kind||'')).toLowerCase();
+if(/chinese|mandarin/.test(text))return 'Chinese language';
+if(/statistic|mathemat|tutor|peer lesson|academic support|study session/.test(text))return 'Academic support';
+if(/graphic|design|flyer|poster|creative/.test(text))return 'Graphic design';
+if(/nail|manicure|gel/.test(text))return 'Nail tech';
+if(/makeup|make-up|cosmetic/.test(text))return 'Makeup & cosmetics';
+if(/crochet|crocheting|yarn|handmade craft/.test(text))return 'Crocheting';
+if(/barber|barbering|fade|clipper/.test(text))return 'Barbering';
+if(/braid|hair|beauty/.test(text))return 'Hair & beauty';
+if((item.kind||'').toLowerCase()==='creative')return 'Graphic design';
+return skillImageDefaults[item.kind]?item.kind:null;
+}
+function skillCard(item,index){
+const kind=normaliseSkillKind(item)||'Student skill';
+const fallback=skillImageDefaults[kind]||skillImageDefaults['Graphic design'];
+const image=item.image||fallback.image;
+const source=item.imageSource||fallback.source;
+const alt=item.imageAlt||fallback.alt;
+const price=item.price!==null&&item.price!==undefined&&Number.isFinite(Number(item.price));
+const fee=item.priceLabel||(price?money(item.price)+(item.unit?' '+item.unit:''):'Ask provider for a quote');
+const title=escapeHtml(item.title||'Student skill');
+const desc=escapeHtml(item.desc||'Learn with a fellow UCC student or request this service');
+const provider=escapeHtml(item.person||'UCC student provider');
+const action='bookService('+JSON.stringify(item.title||'Student skill')+','+(price?Number(item.price):'null')+')';
+return '<article class="skill-card" style="--skill-index:'+index+'"><div class="skill-card-media"><img src="'+escapeHtml(image)+'" alt="'+escapeHtml(alt)+'" loading="lazy" decoding="async"><span class="skill-card-category">'+escapeHtml(kind)+'</span></div><div class="skill-card-body"><div class="skill-card-top"><h3>'+title+'</h3><span class="skill-card-fee">'+escapeHtml(fee)+'</span></div><p>'+desc+'</p><div class="skill-card-footer"><span class="skill-card-provider">'+provider+'</span><button class="btn teal small" onclick="'+action.replace(/"/g,'&quot;')+'">Request session</button></div><a class="skill-photo-credit" href="'+escapeHtml(source)+'" target="_blank" rel="noopener noreferrer">Photo credit / source</a></div></article>';
+}
+function chineseResourceCard(platform,title,detail,url,label,icon){
+return '<a class="chinese-resource-card" href="'+url+'" target="_blank" rel="noopener noreferrer"><span class="resource-platform-icon">'+icon+'</span><span class="resource-platform">'+platform+'</span><b>'+title+'</b><span class="resource-description">'+detail+'</span><span class="resource-link-label">'+label+' ↗</span></a>';
+}
+function skillsPage(){
+const categories=['All','Academic support','Graphic design','Nail tech','Makeup & cosmetics','Crocheting','Barbering','Hair & beauty'];
+const services=[...tutors,...(state.providers||[])].map(item=>({...item,kind:normaliseSkillKind(item)})).filter(item=>item.kind&&item.kind!=='Chinese language');
+const filtered=services.filter(item=>state.filter==='All'||item.kind===state.filter);
+const tabs=categories.map(category=>'<button class="tab '+(state.filter===category?'active':'')+'" onclick="state.filter='+JSON.stringify(category)+';render()">'+escapeHtml(category)+'</button>').join('');
+const cards=filtered.map((item,index)=>skillCard(item,index)).join('')||'<div class="empty skill-empty"><div class="big">🎓</div><b>No services in this category yet</b><p>Try another skill category or offer your own service.</p></div>';
+const resources=[
+chineseResourceCard('COURSERA · PEKING UNIVERSITY','Chinese for Beginners','A structured beginner course covering Mandarin sounds, useful expressions and everyday conversation. Access conditions are set by Coursera.','https://www.coursera.org/learn/learn-chinese','Explore course','C'),
+chineseResourceCard('YOUTUBE · YOYO CHINESE','Beginner Mandarin lessons','Video lessons for pinyin, tones, pronunciation and everyday Chinese, explained for English-speaking learners.','https://www.youtube.com/@YoyoChinese','Watch lessons','▶'),
+chineseResourceCard('YOUTUBE · CHINESE ZERO TO HERO','Chinese and HSK learning','Free video lessons and guided topics for learners building Mandarin foundations and preparing for HSK levels.','https://www.youtube.com/@ChineseZeroToHero','Open channel','▶')
+].join('');
+return pageHead('Skills & Tutors','Learn from UCC students, practise a new craft or book a helpful peer session.', '<button class="btn teal" onclick="openProvider()">＋ Offer a skill</button>')+
+'<div class="servicehero skill-page-hero"><div class="bigico" data-icon="graduation"></div><div><h2>Learn it. Practise it. Earn from it.</h2><p>Find peer tutoring, creative skills and hands-on grooming or beauty services. These are sessions and services—not marketplace products.</p></div></div>'+
+'<div class="skills-section-heading"><div><h2>Explore student skills</h2><p>Choose a category to find a student provider or learning session.</p></div><span class="skills-count">'+services.length+' services</span></div>'+
+'<div class="tabs skill-tabs">'+tabs+'</div><div class="skill-grid">'+cards+'</div>'+
+'<section class="chinese-learning-section"><div class="chinese-learning-intro"><div class="chinese-learning-copy"><span class="chinese-eyebrow">LANGUAGE LEARNING RESOURCES</span><h2>Start learning Chinese</h2><p>uniEase connects you to trusted external learning resources. Lessons open on YouTube or Coursera; Chinese is not taught or hosted directly inside this app.</p></div><img src="https://images.pexels.com/photos/5905709/pexels-photo-5905709.jpeg?auto=compress&cs=tinysrgb&w=1200" alt="A student following an online language lesson on a laptop" loading="lazy" decoding="async"></div><div class="chinese-resource-grid">'+resources+'</div><p class="resource-disclaimer">External platforms open in a new tab. Their account requirements, course availability and fees are controlled by those providers.</p></section>';
+}
 function chinaPage(){return `${pageHead('China Shopping','Explore selected products from China and request a quote for the items you want.') }<div class="servicehero"><div class="bigico" data-icon="package"></div><div><h2>From China to your campus</h2><p>Request products, review an estimated landed price and follow the order journey.</p></div></div><div class="notice">These are product-photo examples, not confirmed stock. Use “Enquire” to save a request; final item prices, shipping, customs and delivery costs must be confirmed before payment.</div><div class="sectionhead"><div><h2>Featured products</h2><div class="sub">Popular picks students may want</div></div><button class="btn teal small" onclick="openChinaRequest()">＋ Request a product</button></div><div class="grid">${china.map(x=>card(x,'china')).join('')}</div><div class="panel" style="margin-top:18px"><h3 style="margin:0 0 6px">How assisted ordering works</h3><div class="listrow"><div class="thumb">1</div><div class="details"><b>Share the product link or photo</b><span class="muted">Tell us what you want to purchase.</span></div></div><div class="listrow"><div class="thumb">2</div><div class="details"><b>Review the final quote</b><span class="muted">Confirm item price, shipping and estimated delivery.</span></div></div><div class="listrow"><div class="thumb">3</div><div class="details"><b>Track and collect</b><span class="muted">Get updates until your product reaches campus.</span></div></div></div>`}
 function printingPage(){return `${pageHead('Smart Printing','Skip the queue around Science Market. Send your files and book a collection time.') }<div class="servicehero"><div class="bigico" data-icon="printer"></div><div><h2>Print first. Pick up later.</h2><p>Upload documents, choose print settings and reserve a collection slot.</p></div></div><div class="panel"><h3 style="margin:0 0 16px">Create a printing request</h3><div class="formgrid"><div class="field full"><label>Choose a Science Market print centre</label><select id="printCenter" required><option value="">Select a centre</option><option value="Mystic Printing">Mystic Printing</option><option value="Mentor Printing">Mentor Printing</option></select><span class="muted">Choose the centre where you want to collect your work.</span></div><div class="field full"><label>Upload document (PDF, DOC or image)</label><div class="upload">📎 Select your assignment or document<input type="file" id="printFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"></div></div><div class="field"><label>Printing service</label><select id="printType"><option>Black & white printing</option><option>Colour printing</option><option>Photocopying</option><option>Typing</option><option>Book binding</option><option>Past questions</option><option>Photoshop / image editing</option></select></div><div class="field"><label>Number of copies</label><input id="copies" type="number" min="1" value="1"></div><div class="field"><label>Print format</label><select id="printFormat"><option>Single-sided</option><option>Double-sided</option></select></div><div class="field"><label>Paper size</label><select id="paper"><option>A4</option><option>A3</option></select></div><div class="field"><label>Preferred collection date</label><input type="date" id="printDate"></div><div class="field"><label>Collection time</label><select id="printTime"><option>09:00 – 10:00</option><option>10:00 – 11:00</option><option>11:00 – 12:00</option><option>12:00 – 13:00</option><option>14:00 – 15:00</option><option>15:00 – 16:00</option></select></div><div class="field full"><label>Special instructions</label><textarea id="printNotes" rows="2" placeholder="e.g. Bind with blue cover, staple top-left..."></textarea></div></div><div class="notice">The print shop will confirm the final price and readiness. Do not upload confidential documents in this demo.</div><button class="btn teal" onclick="submitPrinting()">Submit printing request →</button></div>`}
 function ordersPage(){return `${pageHead('My orders & bookings','Keep track of purchases, service bookings and campus requests.')}<div class="panel">${state.orders.length?state.orders.slice().reverse().map(o=>`<div class="listrow"><div class="thumb">${o.icon||'📦'}</div><div class="details"><b>${o.title}</b><span class="muted">${o.date} • ${o.status||'Request received'} • ${o.method||'Awaiting confirmation'}${o.center?' • Centre: '+o.center:''}${o.collectionDate?' • Collection: '+o.collectionDate+' '+(o.collectionTime||''):''}${o.reference?' • Ref: '+o.reference:''}</span></div><b>${o.price?money(o.price):''}</b></div>`).join(''):'<div class="empty"><div class="big">🧾</div><b>No orders yet</b><p>Your purchases and bookings will appear here.</p><button class="btn teal" onclick="nav(\'market\')">Explore marketplace</button></div>'}</div>`}
@@ -494,9 +636,15 @@ function logout(){state.user=null;persist();$('#avatar').textContent='G';render(
 function openListing(){modal({title:'List an item for sale',body:`<div class="formgrid"><div class="field full"><label>Item name</label><input id="liTitle" placeholder="e.g. Used course textbook"></div><div class="field"><label>Category</label><select id="liCat"><option>Books</option><option>Stationery</option><option>Furniture</option><option>Electronics</option><option>Appliances</option><option>Clothing</option><option>Accessories</option><option>Footwear</option><option>Beauty & Care</option><option>Everyday Essentials</option></select></div><div class="field"><label>Price (GH₵)</label><input id="liPrice" type="number" min="1" placeholder="45"></div><div class="field full"><label>Condition and description</label><textarea id="liDesc" rows="2" placeholder="Describe condition, collection location..."></textarea></div><div class="field full"><label>Upload photos</label><input type="file" id="liPhoto" accept="image/*" multiple></div></div><button class="btn teal" style="margin-top:14px" onclick="saveListing()">Publish listing</button>`})}
 function saveListing(){let title=$('#liTitle').value.trim(),price=Number($('#liPrice').value);if(!title||!price){toast('Add an item name and price');return}let f=$('#liPhoto').files[0],item={id:Date.now(),title,price,cat:$('#liCat').value,owner:(state.user?.name||'UCC student')+' • UCC',emoji:'📦',condition:$('#liDesc').value||'Student listing'};if(f){if(f.size>2*1024*1024){toast('Please choose an image under 2 MB');return}let reader=new FileReader();reader.onload=()=>{item.image=reader.result;finishListing(item)};reader.readAsDataURL(f)}else finishListing(item)}
 function finishListing(item){state.listings=state.listings||sample;state.listings.unshift(item);persist();closeModal();nav('market');toast('Your listing is live in this demo')}
-function openProvider(){modal({title:'Offer a student service',body:`<div class="formgrid"><div class="field full"><label>Service title</label><input id="prTitle" placeholder="e.g. Level 200 Economics tutoring"></div><div class="field"><label>Category</label><select id="prCat"><option>Academic support</option><option>Hair & beauty</option><option>Creative</option></select></div><div class="field"><label>Starting price (GH₵)</label><input id="prPrice" type="number" placeholder="25"></div><div class="field full"><label>About your service</label><textarea id="prDesc" rows="2" placeholder="What do you offer?"></textarea></div><div class="field full"><label>Upload a service photo (optional)</label><input type="file" id="prPhoto" accept="image/*"></div></div><button class="btn teal" style="margin-top:14px" onclick="saveProvider()">Publish service</button>`})}
+function openProvider(){modal({title:'Offer a student service',body:`<div class="formgrid"><div class="field full"><label>Service title</label><input id="prTitle" placeholder="e.g. Graphic design, nail tech or Statistics tutoring"></div><div class="field"><label>Category</label><select id="prCat"><option>Academic support</option><option>Graphic design</option><option>Nail tech</option><option>Makeup & cosmetics</option><option>Crocheting</option><option>Barbering</option><option>Hair & beauty</option></select></div><div class="field"><label>Starting price (GH₵)</label><input id="prPrice" type="number" placeholder="25"></div><div class="field full"><label>About your service</label><textarea id="prDesc" rows="2" placeholder="Describe what students will learn or the service you provide."></textarea></div><div class="field full"><label>Upload a service photo (optional)</label><input type="file" id="prPhoto" accept="image/*"></div></div><button class="btn teal" style="margin-top:14px" onclick="saveProvider()">Publish service</button>`})}
 function saveProvider(){let title=$('#prTitle').value.trim(),price=Number($('#prPrice').value);if(!title||!price){toast('Add a service title and price');return}let item={title,price,kind:$('#prCat').value,person:state.user?.name||'UCC student',emoji:'✨',desc:$('#prDesc').value,unit:'from'};let f=$('#prPhoto').files[0];if(f){if(f.size>2*1024*1024){toast('Please choose an image under 2 MB');return}let reader=new FileReader();reader.onload=()=>{item.image=reader.result;state.providers.unshift(item);persist();closeModal();nav('skills');toast('Your service is now listed in this demo')};reader.readAsDataURL(f)}else{state.providers.unshift(item);persist();closeModal();nav('skills');toast('Your service is now listed in this demo')}}
-function bookService(title,price){modal({title:'Book a service',body:`<p><b>${title}</b></p><p class="price">${money(price)}</p><div class="formgrid"><div class="field"><label>Preferred date</label><input id="bookDate" type="date"></div><div class="field"><label>Preferred time</label><input id="bookTime" type="time"></div><div class="field full"><label>Message to provider</label><textarea id="bookNote" rows="2" placeholder="Share any useful details"></textarea></div></div><button class="btn teal" style="margin-top:14px" onclick="createOrder('${title.replace(/'/g,"\\'")}',${price},'Booking requested','📅')">Request booking</button>`})}
+function bookService(title,price){
+const hasPrice=price!==null&&price!==undefined&&Number.isFinite(Number(price));
+const safeTitle=escapeHtml(title);
+const call="createOrder("+JSON.stringify(title)+","+(hasPrice?Number(price):0)+",'Booking requested','📅')";
+const body='<p><b>'+safeTitle+'</b></p><p class="price">'+(hasPrice?money(price):'Confirm the fee with the provider')+'</p><div class="formgrid"><div class="field"><label>Preferred date</label><input id="bookDate" type="date"></div><div class="field"><label>Preferred time</label><input id="bookTime" type="time"></div><div class="field full"><label>Message to provider</label><textarea id="bookNote" rows="2" placeholder="Share your preferred session or any useful details"></textarea></div></div><div class="notice">This sends a booking request only. The provider must confirm availability and the final fee.</div><button class="btn teal" style="margin-top:14px" onclick="'+call.replace(/"/g,'&quot;')+'">Send booking request</button>';
+modal({title:'Request a skill session',body});
+}
 function openChinaRequest(){modal({title:'Request a product from China',body:`<div class="formgrid"><div class="field full"><label>Product name or link</label><input id="chName" placeholder="Paste a product link or name"></div><div class="field"><label>Estimated budget (GH₵)</label><input id="chBudget" type="number" placeholder="150"></div><div class="field"><label>Quantity</label><input id="chQty" type="number" value="1" min="1"></div><div class="field full"><label>Upload product picture</label><input id="chPhoto" type="file" accept="image/*"></div><div class="field full"><label>Additional details</label><textarea id="chNote" rows="2" placeholder="Colour, size, preferred seller..."></textarea></div></div><div class="notice">This creates a request only. A verified quote is needed before any payment.</div><button class="btn teal" onclick="submitChina()">Send product request</button>`})}
 function submitChina(){let title=$('#chName').value.trim();if(!title){toast('Enter a product name or link');return}createOrder('China order request: '+title,Number($('#chBudget').value)||0,'Quote requested','📦');}
 function submitPrinting(){
