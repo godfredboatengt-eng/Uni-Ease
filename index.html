@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, interactive-widget=resizes-content">
 <meta name="theme-color" content="#102d46">
 <meta name="description" content="uniEase brings UCC students affordable campus shopping, a student marketplace, peer tutoring, skills, printing and essentials in one place.">
 <title>uniEase — Your campus, made easier</title>
@@ -146,6 +146,140 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 }
 </style>
 
+
+<style id="uniease-mobile-native">
+/* Mobile browser and touch baseline */
+html{-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%;scroll-padding-top:76px}
+body{min-height:100vh;min-height:100dvh}
+.app{min-height:100vh;min-height:100dvh}
+button,a,[role="button"]{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+button{-webkit-tap-highlight-color:transparent}
+img{max-width:100%}
+.main,.panel,.product,.service,.listrow,.details{min-width:0}
+.details b,.details .muted,.product-body h3{overflow-wrap:anywhere}
+.searchbar input{min-width:0}
+.modalback{overflow-y:auto;overscroll-behavior:contain}
+.modal{max-height:90vh;max-height:90dvh;overscroll-behavior:contain}
+.mobile-nav{padding-bottom:calc(9px + env(safe-area-inset-bottom))}
+.mobile-nav button{min-width:0;min-height:48px;flex:1 1 0;padding:5px 1px;align-content:center;gap:2px}
+.mobile-nav button span{display:block;line-height:1.1;font-size:17px}
+.mobile-nav button small{display:block;font-size:9px;line-height:1.2;white-space:nowrap}
+.btn,.tab,.navbtn,.close,.mobile-nav button{touch-action:manipulation}
+.service:active,.product:active,.btn:active,.navbtn:active,.mobile-nav button:active,.close:active{transform:scale(.98)}
+/* Keep hover effects for actual mouse/trackpad devices only */
+@media(hover:hover) and (pointer:fine){
+ .service:hover,.product:hover{transform:translateY(-2px)}
+ .btn:hover{box-shadow:0 4px 10px rgba(18,50,74,.12)}
+ .navbtn:hover:not(.active){background:#f1f7f5;color:var(--ink)}
+ .close:hover{background:#e7eef1;transform:scale(1.04)}
+}
+@media(hover:none),(pointer:coarse){
+ .service:hover,.product:hover{transform:none;box-shadow:var(--shadow-sm)}
+ .navbtn:hover:not(.active){background:transparent;color:#5c6c79}
+ .btn:hover{box-shadow:none}
+ .close:hover{transform:none}
+}
+@media(max-width:1000px){
+ .topbar{padding-top:env(safe-area-inset-top)}
+ .layout{padding-bottom:calc(104px + env(safe-area-inset-bottom))}
+ .mobile-nav{
+   display:flex;position:fixed;left:0;right:0;bottom:0;z-index:40;
+   justify-content:space-around;align-items:stretch;gap:0;
+   padding:7px 4px calc(7px + env(safe-area-inset-bottom));
+   background:rgba(255,255,255,.97);border-top:1px solid var(--line);
+   box-shadow:0 -5px 18px rgba(18,50,74,.06);
+   -webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px)
+ }
+ .mobile-nav button{font-size:9px;color:#6b7b87}
+ .mobile-nav button.active{color:#087d63}
+ .mobile-nav button:focus-visible{outline-offset:-2px;border-radius:9px}
+ .sidebar{display:none}
+ .layout{grid-template-columns:minmax(0,1fr);gap:0}
+ .main{width:100%;max-width:100%;min-width:0}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .services{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .panel>.row{flex-wrap:wrap;align-items:stretch}
+ .panel>.row>input{width:100%!important;max-width:none!important;min-width:0}
+ .page-title{flex-wrap:wrap}
+ .page-title>.btn{flex:none}
+ .listrow{align-items:flex-start;flex-wrap:wrap}
+ .listrow .details{min-width:0}
+ .listrow>.btn{flex:none}
+ .modalback{place-items:center;padding:calc(12px + env(safe-area-inset-top)) 12px calc(12px + env(safe-area-inset-bottom))}
+ .modal{width:min(520px,100%);max-height:calc(100dvh - 24px - env(safe-area-inset-top) - env(safe-area-inset-bottom));padding:18px}
+}
+@media(max-width:600px){
+ .topbar{height:62px;min-height:62px;padding-inline:14px}
+ .top-actions{gap:7px}
+ .top-actions .btn{padding:8px 10px;min-height:38px}
+ .brand{font-size:19px;gap:8px}
+ .brandmark{width:34px;height:34px}
+ .layout{padding:15px 13px calc(106px + env(safe-area-inset-bottom))}
+ .welcome{padding:24px 19px}
+ .welcome h1{font-size:clamp(25px,7vw,29px);overflow-wrap:anywhere}
+ .welcome p{max-width:100%;font-size:13px}
+ .searchbar{width:100%;max-width:100%;gap:7px}
+ .searchbar input{font-size:16px;padding:12px 0}
+ .searchbar .btn{padding-inline:11px;white-space:nowrap}
+ .sectionhead{align-items:flex-start}
+ .sectionhead>div{min-width:0}
+ .sectionhead h2{font-size:16px}
+ .textbtn{font-size:11px}
+ .services{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .service{min-height:132px;padding:14px 12px}
+ .service b{font-size:12px}
+ .service small{font-size:10px}
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+ .product{min-width:0}
+ .product-img{height:clamp(100px,30vw,132px)}
+ .product-body{min-width:0;padding:10px}
+ .product-body h3{font-size:12px;min-height:34px}
+ .product-body .row{flex-wrap:wrap;align-items:center}
+ .product-body .btn{max-width:100%;white-space:normal}
+ .price{font-size:14px}
+ .panel{padding:14px}
+ .panel>.row{gap:10px}
+ .tabs{gap:6px}
+ .tab{max-width:100%;white-space:normal;text-align:center}
+ .page-title{align-items:flex-start;gap:10px}
+ .page-title h1{font-size:22px}
+ .page-title p{font-size:12px}
+ .servicehero{align-items:flex-start;gap:11px;padding:14px}
+ .servicehero>div:last-child{min-width:0}
+ .servicehero h2{font-size:15px}
+ .servicehero p{font-size:12px}
+ .formgrid{grid-template-columns:minmax(0,1fr);gap:13px}
+ .field,.field.full{grid-column:1/-1;min-width:0}
+ .field input,.field select,.field textarea{width:100%;min-width:0}
+ .upload{padding:14px}
+ .upload input{width:100%;font-size:13px}
+ .listrow{gap:10px}
+ .thumb{width:48px;height:48px}
+ .footer{padding:20px 0 10px}
+ .modalback{padding:calc(8px + env(safe-area-inset-top)) 8px calc(8px + env(safe-area-inset-bottom))}
+ .modal{padding:16px;border-radius:16px}
+ .modalhead h2{font-size:18px}
+}
+@media(max-width:380px){
+ .layout{padding-inline:10px}
+ .grid{grid-template-columns:minmax(0,1fr)}
+ .product-img{height:160px}
+ .product-body h3{min-height:0}
+ .services{gap:8px}
+ .service{padding:12px 10px}
+ .mobile-nav{padding-inline:2px}
+ .mobile-nav button small{font-size:8px}
+}
+@media(pointer:coarse){
+ input,textarea,select{font-size:16px!important}
+ .field input,.field select,.field textarea{font-size:16px!important}
+ .searchbar input{font-size:16px!important}
+}
+@media(prefers-reduced-motion:reduce){
+ .service:active,.product:active,.btn:active,.navbtn:active,.mobile-nav button:active,.close:active{transform:none}
+}
+</style>
+
 </head>
 <body>
 <div class="app">
@@ -169,8 +303,14 @@ button:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible,te
 </aside>
 <main class="main" id="main"></main>
 </div>
-<nav class="mobile-nav">
-<button data-page="home" class="active"><span>⌂</span>Home</button><button data-page="market"><span>♧</span>Market</button><button data-page="printing"><span>▤</span>Print</button><button data-page="orders"><span>▣</span>Orders</button><button data-page="profile"><span>◉</span>Profile</button>
+<nav class="mobile-nav" aria-label="Main navigation">
+<button data-page="home" class="active" aria-label="Overview"><span>⌂</span><small>Home</small></button>
+<button data-page="china" aria-label="China Shopping"><span>🛍</span><small>China</small></button>
+<button data-page="market" aria-label="Student Marketplace"><span>♧</span><small>Market</small></button>
+<button data-page="skills" aria-label="Skills and Tutors"><span>✦</span><small>Skills</small></button>
+<button data-page="printing" aria-label="Smart Printing"><span>▤</span><small>Print</small></button>
+<button data-page="orders" aria-label="My orders and bookings"><span>▣</span><small>Orders</small></button>
+<button data-page="profile" aria-label="My profile"><span>◉</span><small>Profile</small></button>
 </nav>
 </div>
 <div id="modalRoot"></div>
