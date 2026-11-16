@@ -444,15 +444,84 @@ input,select,textarea{max-width:100%}
  .notice,.success,.catalog-notice,.security-panel{overflow-wrap:anywhere}
 }
 </style>
+<style id="uniease-product-card-readability">
+.product{display:flex;flex-direction:column;min-width:0;height:100%}
+.product-img{height:clamp(112px,12vw,154px);min-height:112px;flex:0 0 auto;background:#f1f4f7}
+.product-img img{display:block;width:100%;height:100%;object-fit:contain;padding:10px}
+.product-body{display:flex;flex:1 1 auto;flex-direction:column;gap:7px;min-width:0;padding:14px}
+.product-body h3{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.7em;margin:0;font-size:14px;line-height:1.35;font-weight:750;overflow-wrap:anywhere}
+.product-body>.muted{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;min-height:2.7em;font-size:11px;line-height:1.35;overflow-wrap:anywhere}
+.product-body .price{display:block;margin:2px 0 5px;font-size:16px;line-height:1.3;font-weight:850;overflow-wrap:anywhere}
+.product-body .price small{display:block;margin-top:3px;font-size:10px;line-height:1.35;font-weight:600;white-space:normal}
+.product-body .row{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin-top:auto}
+.product-body .row .muted{flex:1 1 100%;max-width:none;font-size:10px;line-height:1.35}
+.product-body .row .btn{width:100%;min-height:38px;white-space:normal}
+.product-credit{align-self:flex-start;margin-top:1px}
+@media(max-width:1000px){.product-img{height:clamp(108px,17vw,146px)}.product-body{padding:12px}}
+@media(max-width:600px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px}
+ .product{border-radius:18px}
+ .product-img{height:116px;min-height:116px}
+ .product-img img{padding:8px}
+ .product-body{padding:10px;gap:6px}
+ .product-body h3{font-size:12px;line-height:1.35;min-height:2.7em}
+ .product-body>.muted{font-size:10px;line-height:1.35;min-height:2.7em}
+ .product-body .price{font-size:14px;line-height:1.25;margin:1px 0 4px}
+ .product-body .price small{font-size:9px}
+ .product-body .row .muted{font-size:9px}
+ .product-body .row .btn{min-height:36px;padding:8px 10px;font-size:11px}
+}
+@media(max-width:380px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .product-img{height:100px;min-height:100px}
+ .product-body{padding:9px;gap:5px}
+ .product-body h3{font-size:11px;min-height:2.7em}
+ .product-body>.muted{font-size:9px;min-height:2.7em}
+ .product-body .price{font-size:13px}
+}
+</style>
+<style id="uniease-collapsible-sidebar">
+.sidebar-toggle{display:none;flex:0 0 40px;width:40px;height:40px;place-items:center;border:1px solid #dee3e9;border-radius:12px;background:#fff;color:#1c1e21}
+.sidebar-toggle svg{width:20px;height:20px}
+.sidebar-drawer-header{display:none}
+.sidebar-close{width:38px;height:38px;display:grid;place-items:center;border:1px solid #dee3e9;border-radius:12px;background:#f1f4f7;color:#1c1e21}
+.sidebar-close svg{width:18px;height:18px}
+.sidebar-backdrop{display:none}
+body.drawer-open{overflow:hidden}
+@media(max-width:1000px){
+ .topbar{justify-content:flex-start;gap:10px;padding-inline:14px}
+ .sidebar-toggle{display:grid;cursor:pointer}
+ .topbar .brand{margin-right:auto}
+ .mobile-nav{display:none!important}
+ .layout{grid-template-columns:minmax(0,1fr);gap:0}
+ .layout .main{width:100%;min-width:0;max-width:100%}
+ .sidebar{display:block!important;position:fixed;top:0;bottom:0;left:0;z-index:102;width:min(320px,calc(100vw - 48px));max-width:88vw;height:100vh;height:100dvh;overflow-x:hidden;overflow-y:auto;overscroll-behavior:contain;align-self:auto;margin:0;padding:calc(14px + env(safe-area-inset-top)) 14px calc(20px + env(safe-area-inset-bottom));border:0;border-right:1px solid #dee3e9;border-radius:0 24px 24px 0;background:#fff;box-shadow:12px 0 38px rgba(10,19,23,.14);transform:translateX(-105%);visibility:hidden;pointer-events:none;transition:transform .24s cubic-bezier(.2,.75,.25,1),visibility .24s}
+ .app.sidebar-open .sidebar{transform:translateX(0);visibility:visible;pointer-events:auto}
+ .sidebar-drawer-header{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:5px 4px 16px;margin-bottom:8px;border-bottom:1px solid #eef1f4;color:#1c1e21;font-size:16px}
+ .sidebar .side-label{padding-top:14px}
+ .sidebar .navbtn{min-height:48px;font-size:14px}
+ .sidebar-backdrop{display:block;position:fixed;inset:0;z-index:101;width:100%;height:100%;padding:0;border:0;border-radius:0;background:rgba(10,19,23,.48);opacity:0;visibility:hidden;pointer-events:none;transition:opacity .2s ease,visibility .2s ease}
+ .app.sidebar-open .sidebar-backdrop{opacity:1;visibility:visible;pointer-events:auto}
+}
+@media(max-width:600px){
+ .sidebar-toggle{width:38px;height:38px;flex-basis:38px}
+ .topbar{height:62px;min-height:62px}
+ .top-actions{gap:7px}
+}
+@media(prefers-reduced-motion:reduce){.sidebar,.sidebar-backdrop{transition:none!important}}
+</style>
 </head>
 <body>
 <div class="app">
 <header class="topbar">
+  <button class="sidebar-toggle" id="sidebarToggle" type="button" aria-label="Open navigation" aria-controls="sidebar" aria-expanded="false" onclick="toggleSidebar()"><span data-icon="menu"></span></button>
   <div class="brand"><div class="brandmark">u</div>uniEase</div>
   <div class="top-actions"><button class="btn light small" onclick="showCart()"><span class="header-cart-icon" data-icon="cart"></span> Cart <span id="cartCount" class="cartcount">0</span></button><button class="avatar" onclick="openAuth()" id="avatar">G</button></div>
 </header>
 <div class="layout">
-<aside class="sidebar">
+<button class="sidebar-backdrop" type="button" tabindex="-1" aria-label="Close navigation" onclick="closeSidebar()"></button>
+<aside class="sidebar" id="sidebar" aria-label="Main navigation">
+  <div class="sidebar-drawer-header"><b>Navigate uniEase</b><button class="sidebar-close" type="button" aria-label="Close navigation" onclick="closeSidebar()"><span data-icon="close"></span></button></div>
   <div class="side-label">CAMPUS</div>
   <button class="navbtn active" data-page="home"><span class="navico" data-icon="house"></span>Overview</button>
   <button class="navbtn" data-page="china"><span class="navico" data-icon="package"></span>China Shopping</button>
@@ -558,13 +627,19 @@ printer:'<path d="M6 9V3h12v6"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h
 receipt:'<path d="M5 3h14v18l-3.5-2-3.5 2-3.5-2L5 21z"/><path d="M8 8h8M8 12h8M8 16h4"/>',
 user:'<circle cx="12" cy="8" r="4"/><path d="M4 21a8 8 0 0 1 16 0"/>',
 cart:'<circle cx="9" cy="21" r="1"/><circle cx="19" cy="21" r="1"/><path d="M2 3h2l2.4 12.2A2 2 0 0 0 8.4 17H18a2 2 0 0 0 2-1.6L21.5 8H5"/>',
-shield:'<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="m9 12 2 2 4-4"/>'
+shield:'<path d="M12 22s8-4 8-11V5l-8-3-8 3v6c0 7 8 11 8 11z"/><path d="m9 12 2 2 4-4"/>',
+menu:'<path d="M4 6h16M4 12h16M4 18h16"/>',
+close:'<path d="m18 6-12 12M6 6l12 12"/>'
 };
 function uiIcon(name){return '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" focusable="false" aria-hidden="true">'+(iconPaths[name]||iconPaths.package)+'</svg>'}
 function hydrateIcons(){document.querySelectorAll('[data-icon]').forEach(el=>{el.innerHTML=uiIcon(el.dataset.icon);el.setAttribute('aria-hidden','true')})}
 
 function money(n){return 'GH₵ '+Number(n).toFixed(2)}
-function nav(page){state.page=page;state.filter='All';state.search='';render();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));window.scrollTo(0,0)}
+function toggleSidebar(){const app=document.querySelector('.app');if(app.classList.contains('sidebar-open'))closeSidebar();else{app.classList.add('sidebar-open');document.body.classList.add('drawer-open');$('#sidebarToggle').setAttribute('aria-expanded','true');$('#sidebarToggle').setAttribute('aria-label','Close navigation');$('#sidebar .navbtn')?.focus({preventScroll:true});}}
+function closeSidebar(returnFocus=true){const app=document.querySelector('.app');if(!app)return;app.classList.remove('sidebar-open');document.body.classList.remove('drawer-open');const toggle=$('#sidebarToggle');if(toggle){toggle.setAttribute('aria-expanded','false');toggle.setAttribute('aria-label','Open navigation');if(returnFocus)toggle.focus({preventScroll:true});}}
+document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.querySelector('.app.sidebar-open'))closeSidebar(true)});
+window.addEventListener('resize',()=>{if(window.innerWidth>1000)closeSidebar(false)});
+function nav(page){closeSidebar(false);state.page=page;state.filter='All';state.search='';render();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));window.scrollTo(0,0)}
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.page)));
 function persist(){localStorage.setItem('unieaseOrders',JSON.stringify(state.orders));localStorage.setItem('unieaseListings',JSON.stringify(state.listings||sample));localStorage.setItem('unieaseProviders',JSON.stringify(state.providers));localStorage.setItem('unieaseUser',JSON.stringify(state.user))}
 function count(){ $('#cartCount').textContent=state.cart.length}
