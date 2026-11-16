@@ -53,6 +53,7 @@ const sample=[
 {id:9,cat:'Everyday Essentials',title:'Personal care kit',price:35,owner:'uniEase essentials',emoji:'🧴',condition:'Everyday hygiene essentials'},
 {id:10,cat:'Everyday Essentials',title:'Pregnancy test kit',price:25,owner:'uniEase essentials',emoji:'🧪',condition:'Home testing • follow product instructions'}
 ];
+if(state.listings){const essentials=sample.filter(x=>x.id>=7);essentials.forEach(e=>{if(!state.listings.some(x=>x.id===e.id))state.listings.push(e)});localStorage.setItem('unieaseListings',JSON.stringify(state.listings));}
 const tutors=[
 {title:'Level 200 Statistics tutoring',kind:'Academic support',price:25,unit:'/ hour',person:'Michael A.',emoji:'📊',desc:'Patient peer tutor • Online or on campus'},
 {title:'Knotless braids',kind:'Hair & beauty',price:100,unit:'from',person:'Abena B.',emoji:'💇🏽‍♀️',desc:'Neat protective styles • Book a slot'},
