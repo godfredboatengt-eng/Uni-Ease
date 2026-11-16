@@ -530,11 +530,8 @@ body.drawer-open{overflow:hidden}
  position:absolute!important;inset:0!important;display:block!important;
  width:100%!important;height:100%!important;max-width:none!important;max-height:none!important;
  padding:12px!important;border:0!important;border-radius:0!important;
- object-fit:contain!important;object-position:center!important;
- opacity:0;z-index:1;transition:opacity .16s ease;
+ object-fit:contain!important;object-position:center!important;opacity:1;z-index:1;
 }
-.product-card .product-photo.is-loaded{opacity:1}
-.product-card .product-photo.is-failed{display:none!important}
 .product-card .product-img>.pill{
  position:absolute;top:10px;left:10px;z-index:2;max-width:calc(100% - 20px);
  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
@@ -751,11 +748,12 @@ const detailText=escapeHtml(item.condition||item.desc||'');
 const imageUrl=item.image?escapeHtml(asset(item.image)):'';
 const imageAlt=escapeHtml(item.imageAlt||item.title||'Product photo');
 const placeholder=escapeHtml(item.emoji||'📦');
-const photo=imageUrl?'<img class="product-photo" src="'+imageUrl+'" alt="'+imageAlt+'" width="720" height="540" loading="lazy" decoding="async" onload="this.classList.add(\\'is-loaded\\')" onerror="this.classList.add(\\'is-failed\\')">':'';
+const photo=imageUrl?'<img class="product-photo" src="'+imageUrl+'" alt="'+imageAlt+'" width="720" height="540" loading="lazy" decoding="async" onerror="this.hidden=true">':'';
 const categoryMarkup=category?'<span class="pill">'+category+'</span>':'';
 const sellerMarkup=sellerText?'<p class="product-seller">'+sellerText+'</p>':'';
 const detailMarkup=detailText?'<p class="product-description">'+detailText+'</p>':'';
-const source=/^https?:\\/\\//i.test(item.imageSource||'')?'<a class="product-credit" href="'+escapeHtml(item.imageSource)+'" target="_blank" rel="noopener noreferrer">Photo source</a>':'';
+const imageSource=String(item.imageSource||'');
+const source=(imageSource.startsWith('https://')||imageSource.startsWith('http://'))?'<a class="product-credit" href="'+escapeHtml(imageSource)+'" target="_blank" rel="noopener noreferrer">Photo source</a>':'';
 const action=(kind==='skills'?'bookService('+JSON.stringify(item.title||'Student skill')+','+(item.price===undefined?'null':item.price)+')':hasPrice?'addCart('+JSON.stringify(item).replace(/"/g,'&quot;')+')':'requestProduct('+JSON.stringify(item.title||'Student product')+')').replace(/"/g,'&quot;');
 const actionLabel=kind==='skills'?'Book':hasPrice?'Add':'Enquire';
 const gallery=(Array.isArray(item.galleryImages)&&item.galleryImages.length)?'<div class="product-gallery" aria-label="Additional product photos">'+item.galleryImages.map((src,i)=>'<img src="'+escapeHtml(asset(src))+'" alt="'+imageAlt+' — view '+(i+2)+'" width="48" height="48" loading="lazy" decoding="async">').join('')+'</div>':'';
