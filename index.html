@@ -420,6 +420,30 @@ body{background:#fff;color:#1c1e21;font-family:Arial,Helvetica,sans-serif;letter
  .skill-card:hover,.chinese-resource-card:hover{transform:none!important}
 }
 </style>
+<style id="uniease-final-mobile-audit">
+html,body{max-width:100%;overflow-x:clip}
+img,video,canvas,iframe{max-width:100%}
+#main,.main,.layout,.panel,.page-title,.formgrid,.field,.product,.skill-card,.chinese-learning-section{min-width:0}
+input,select,textarea{max-width:100%}
+@media(max-width:1000px){
+ .page-title{flex-wrap:wrap}
+ .page-title>button,.page-title>.btn{max-width:100%}
+ .panel .row{min-width:0;flex-wrap:wrap}
+ .panel .row>*{min-width:0}
+ .tabs{max-width:100%}
+ .servicehero{min-width:0}
+}
+@media(max-width:600px){
+ .page-title{gap:10px}
+ .page-title>button,.page-title>.btn{white-space:normal}
+ .modal{width:100%;min-width:0}
+ .formgrid{grid-template-columns:minmax(0,1fr)}
+ .field,.field.full{grid-column:1/-1}
+ .field input,.field select,.field textarea{width:100%;min-width:0}
+ .listrow .details{overflow-wrap:anywhere}
+ .notice,.success,.catalog-notice,.security-panel{overflow-wrap:anywhere}
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -641,9 +665,14 @@ function saveProvider(){let title=$('#prTitle').value.trim(),price=Number($('#pr
 function bookService(title,price){
 const hasPrice=price!==null&&price!==undefined&&Number.isFinite(Number(price));
 const safeTitle=escapeHtml(title);
-const call="createOrder("+JSON.stringify(title)+","+(hasPrice?Number(price):0)+",'Booking requested','📅')";
+const call="requestSkillBooking("+JSON.stringify(title)+","+(hasPrice?Number(price):'null')+")";
 const body='<p><b>'+safeTitle+'</b></p><p class="price">'+(hasPrice?money(price):'Confirm the fee with the provider')+'</p><div class="formgrid"><div class="field"><label>Preferred date</label><input id="bookDate" type="date"></div><div class="field"><label>Preferred time</label><input id="bookTime" type="time"></div><div class="field full"><label>Message to provider</label><textarea id="bookNote" rows="2" placeholder="Share your preferred session or any useful details"></textarea></div></div><div class="notice">This sends a booking request only. The provider must confirm availability and the final fee.</div><button class="btn teal" style="margin-top:14px" onclick="'+call.replace(/"/g,'&quot;')+'">Send booking request</button>';
 modal({title:'Request a skill session',body});
+}
+function requestSkillBooking(title,price){
+const hasPrice=price!==null&&price!==undefined&&Number.isFinite(Number(price));
+const details={preferredDate:$('#bookDate')?.value||'Date to confirm',preferredTime:$('#bookTime')?.value||'Time to confirm',providerMessage:$('#bookNote')?.value||''};
+createOrder(title,hasPrice?Number(price):0,'Booking requested','📅',details);
 }
 function openChinaRequest(){modal({title:'Request a product from China',body:`<div class="formgrid"><div class="field full"><label>Product name or link</label><input id="chName" placeholder="Paste a product link or name"></div><div class="field"><label>Estimated budget (GH₵)</label><input id="chBudget" type="number" placeholder="150"></div><div class="field"><label>Quantity</label><input id="chQty" type="number" value="1" min="1"></div><div class="field full"><label>Upload product picture</label><input id="chPhoto" type="file" accept="image/*"></div><div class="field full"><label>Additional details</label><textarea id="chNote" rows="2" placeholder="Colour, size, preferred seller..."></textarea></div></div><div class="notice">This creates a request only. A verified quote is needed before any payment.</div><button class="btn teal" onclick="submitChina()">Send product request</button>`})}
 function submitChina(){let title=$('#chName').value.trim();if(!title){toast('Enter a product name or link');return}createOrder('China order request: '+title,Number($('#chBudget').value)||0,'Quote requested','📦');}
