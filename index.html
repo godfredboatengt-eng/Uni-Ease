@@ -849,6 +849,61 @@ function home(){
 <div class="home-feed-note">Feed items are catalogue examples and demo student listings. Confirm availability and provider details before making arrangements.</div>`;
 }
 
+function selectedBuyerInterests(){return state.user?.interests||{products:[],skills:[]}}
+function buildHomeFeedItems(){
+ const productSource=[...(state.listings||sample),...(marketPhotoCatalog||[])],seenProducts=new Set(),products=[];
+ productSource.forEach(item=>{const key=String(item.id??item.title);if(seenProducts.has(key))return;seenProducts.add(key);const chosen=selectedBuyerInterests().products||[];if(chosen.length&&!chosen.includes(item.cat))return;products.push({type:'product',item})});
+ const skillSource=[...(tutors||[]),...(state.providers||[])],seenSkills=new Set(),skills=[];
+ skillSource.forEach(item=>{const key=(item.title||'')+'|'+(item.person||item.kind||'');if(seenSkills.has(key))return;seenSkills.add(key);const chosen=selectedBuyerInterests().skills||[];const category=normaliseSkillKind(item)||item.kind||'Student skill';if(chosen.length&&!chosen.includes(category))return;skills.push({type:'skill',item})});
+ const mixed=[],max=Math.max(products.length,skills.length);
+ for(let i=0;i<max;i++){if(products[i])mixed.push(products[i]);if(skills[i])mixed.push(skills[i])}
+ return mixed.length?mixed:[...productSource.slice(0,6).map(item=>({type:'product',item})),...(tutors||[]).slice(0,4).map(item=>({type:'skill',item}))];
+}
+function appendHomeFeedBatch(){
+ const grid=$('#homeFeedGrid'),loading=$('#homeFeedLoading');if(!grid||!homeFeedState.items.length)return;
+ for(let i=0;i<6;i++){
+  const entry=homeFeedState.items[homeFeedState.cursor];if(!entry)break;
+  const markup=entry.type==='skill'?skillCard(entry.item,homeFeedState.cycle*6+i):card(entry.item);
+  const wrapper=document.createElement('div');wrapper.innerHTML=markup;const node=wrapper.firstElementChild;
+  if(node){node.classList.add('home-feed-item');grid.appendChild(node)}
+  homeFeedState.cursor++;if(homeFeedState.cursor>=homeFeedState.items.length){homeFeedState.cursor=0;homeFeedState.cycle++}
+ }
+ if(loading)loading.textContent='More campus discoveries load as you scroll.';
+}
+function initHomeFeed(){
+ if(homeFeedState.observer){homeFeedState.observer.disconnect();homeFeedState.observer=null}
+ if(homeFeedState.scrollHandler){window.removeEventListener('scroll',homeFeedState.scrollHandler);homeFeedState.scrollHandler=null}
+ const grid=$('#homeFeedGrid');if(!grid)return;
+ homeFeedState.items=buildHomeFeedItems();homeFeedState.cursor=0;homeFeedState.cycle=0;grid.innerHTML='';appendHomeFeedBatch();
+ const sentinel=$('#homeFeedSentinel');
+ if('IntersectionObserver' in window&&sentinel){
+  homeFeedState.observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){homeFeedState.observer.unobserve(sentinel);appendHomeFeedBatch();requestAnimationFrame(()=>{if(homeFeedState.observer&&sentinel.isConnected)homeFeedState.observer.observe(sentinel)})}},{root:null,rootMargin:'480px 0px',threshold:0});
+  homeFeedState.observer.observe(sentinel);
+ }else{
+  homeFeedState.scrollHandler=()=>{if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-500)appendHomeFeedBatch()};
+  window.addEventListener('scroll',homeFeedState.scrollHandler,{passive:true});
+ }
+}
+function showBuyerOnboarding(edit=false){
+ if(!state.user||state.user.role!=='buyer'){toast('Buyer onboarding is available on buyer accounts');return}
+ const options=[['products','Books'],['products','Stationery'],['products','Furniture'],['products','Electronics'],['products','Appliances'],['products','Everyday Essentials'],['skills','Academic support'],['skills','Graphic design'],['skills','Nail tech'],['skills','Makeup & cosmetics'],['skills','Crocheting'],['skills','Barbering'],['skills','Hair & beauty']];
+ const current=selectedBuyerInterests();
+ const productOptions=options.filter(o=>o[0]==='products').map(o=>'<label class="interest-choice"><input type="checkbox" name="productInterest" value="'+o[1]+'" '+((current.products||[]).includes(o[1])?'checked':'')+'><span>'+o[1]+'</span></label>').join('');
+ const skillOptions=options.filter(o=>o[0]==='skills').map(o=>'<label class="interest-choice"><input type="checkbox" name="skillInterest" value="'+o[1]+'" '+((current.skills||[]).includes(o[1])?'checked':'')+'><span>'+o[1]+'</span></label>').join('');
+ modal({title:edit?'Personalise your uniEase feed':'A few quick interests',body:'<p class="muted">Choose the products and student skills you would like to discover. We will use your choices to organise your Overview feed. You can change these later.</p>'+
+ '<div class="interest-group"><b>Products I am interested in</b><div class="interest-grid">'+productOptions+'</div></div>'+
+ '<div class="interest-group"><b>Skills and services I want to discover</b><div class="interest-grid">'+skillOptions+'</div></div>'+
+ '<div class="onboarding-actions"><button class="btn teal" type="button" onclick="saveBuyerInterests()">Personalise my feed</button><button class="btn outline" type="button" onclick="skipBuyerOnboarding()">Skip for now</button></div><small class="interest-privacy-note">Saved in this browser in this demo version. You can skip without selecting anything.</small>'});
+}
+function saveBuyerInterests(){
+ const products=[...document.querySelectorAll('input[name="productInterest"]:checked')].map(input=>input.value);
+ const skills=[...document.querySelectorAll('input[name="skillInterest"]:checked')].map(input=>input.value);
+ state.user={...state.user,interests:{products,skills},onboardingCompleted:true};persist();closeModal();state.page='home';render();toast('Your Overview feed has been personalised');
+}
+function skipBuyerOnboarding(){
+ state.user={...state.user,interests:{products:[],skills:[]},onboardingCompleted:true,onboardingSkipped:true};persist();closeModal();state.page='home';render();toast('You can personalise your feed any time from Overview');
+}
+
 function pageHead(title,desc,button=''){return `<div class="page-title"><div><h1>${title}</h1><p>${desc}</p></div>${button}</div>`}
 function marketPage(){let items=state.listings||sample;let cats=['All','Books','Stationery','Furniture','Electronics','Appliances','Clothing','Accessories','Footwear','Beauty & Care','Everyday Essentials'];let filtered=items.filter(x=>(state.filter==='All'||x.cat===state.filter)&&(`${x.title} ${x.owner||''}`).toLowerCase().includes(state.search.toLowerCase()));return `${pageHead('Student Marketplace','Browse student listings and product-photo showcases. Confirm seller, condition and price before arranging a purchase.',`<button class="btn teal" onclick="openListing()">＋ Sell an item</button>`)}<div class="catalog-notice"><b>Shop with care</b><span>Some images are illustrative catalogue photos. Confirm the actual item, condition, size, seller and final price before arranging collection.</span><span class="catalog-safety">Safety reminder: uniEase will never ask for your Mobile Money PIN, banking password or one-time password.</span></div><div class="panel"><div class="row"><div><b>Browse listings</b><div class="sub">Student-to-student buying and selling</div></div><input style="max-width:220px;border:1px solid var(--line);border-radius:10px;padding:9px" placeholder="Search listings..." oninput="state.search=this.value;renderContent()" value="${state.search}"></div><div class="tabs">${cats.map(c=>`<button class="tab ${state.filter===c?'active':''}" onclick="state.filter='${c}';render()">${c}</button>`).join('')}</div><div class="grid" id="listingGrid">${filtered.map(x=>card(x)).join('')||'<div class="empty">No listings match your search yet.</div>'}</div></div>`}
 function normaliseSkillKind(item){
