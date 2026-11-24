@@ -643,6 +643,15 @@ body.drawer-open{overflow:hidden}
 @media(max-width:560px){.security-control-grid,.privacy-feature-grid{grid-template-columns:1fr}.privacy-panel-head{flex-direction:column}.checkout-summary{padding:11px}.cloud-handoff-head,.payment-provider-banner{align-items:flex-start}}
 @media(prefers-reduced-motion:reduce){.app-toast,.cart-bump,.product-card.is-adding,.cloud-progress span,.payment-progress span,.handoff-step,.payment-stage,.receipt-check{animation:none!important;transition:none!important}}
 </style>
+<style id="uniease-branded-receipts">
+.receipt-page-note{display:flex;align-items:center;gap:12px;margin:14px 0;padding:14px 16px;border:1px solid #dce6ef;border-radius:15px;background:#f5f9fd}.receipt-page-note>span{width:38px;height:38px;flex:0 0 38px;display:grid;place-items:center;border-radius:11px;background:#e8f1fc;color:#0064e0;font-size:21px}.receipt-page-note div{display:flex;flex-direction:column;gap:3px}.receipt-page-note b{font-size:13px}.receipt-page-note small{color:#667789;font-size:11px;line-height:1.4}
+.receipt-order-list{display:flex;flex-direction:column;gap:12px}.receipt-order-card{padding:15px;border:1px solid #dfe5eb;border-radius:18px;background:#fff;box-shadow:0 5px 18px rgba(16,45,70,.035);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.receipt-order-card:hover{transform:translateY(-2px);border-color:#c4d7e9;box-shadow:0 10px 24px rgba(16,45,70,.07)}
+.receipt-order-main{display:flex;align-items:center;gap:12px;min-width:0}.receipt-order-icon{width:44px;height:44px;flex:0 0 44px;display:grid;place-items:center;border-radius:13px;background:#f1f5f8;font-size:21px}.receipt-order-copy{display:flex;flex:1 1 auto;flex-direction:column;gap:3px;min-width:0}.receipt-order-copy>b{font-size:13px;color:#182b3a;overflow-wrap:anywhere}.receipt-order-copy small{font-size:10px;color:#748294;line-height:1.35;overflow-wrap:anywhere}.receipt-order-copy .receipt-order-status{color:#285d8d}
+.receipt-type{align-self:flex-start;padding:3px 8px;border-radius:99px;background:#edf4ff;color:#24558d;font-size:9px;font-weight:800;letter-spacing:.2px}.receipt-order-amount{flex:0 0 auto;color:#182b3a;font-size:13px;text-align:right}
+.receipt-order-actions{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;margin-top:13px;padding-top:12px;border-top:1px solid #edf0f3}.receipt-order-actions .btn{min-height:36px}
+@media(max-width:560px){.receipt-order-card{padding:12px}.receipt-order-main{align-items:flex-start;gap:9px}.receipt-order-icon{width:38px;height:38px;flex-basis:38px}.receipt-order-amount{font-size:12px}.receipt-order-actions{display:grid;grid-template-columns:1fr 1fr}.receipt-order-actions .btn{width:100%;padding:9px 7px;font-size:10px}}
+@media(prefers-reduced-motion:reduce){.receipt-order-card{transition:none!important}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -873,7 +882,79 @@ return pageHead('Skills & Tutors','Learn from UCC students, practise a new craft
 }
 function chinaPage(){return `${pageHead('China Shopping','Explore selected products from China and request a quote for the items you want.') }<div class="servicehero"><div class="bigico" data-icon="package"></div><div><h2>From China to your campus</h2><p>Request products, review an estimated landed price and follow the order journey.</p></div></div><div class="notice">These are product-photo examples, not confirmed stock. Use “Enquire” to save a request; final item prices, shipping, customs and delivery costs must be confirmed before payment.</div><div class="sectionhead"><div><h2>Featured products</h2><div class="sub">Popular picks students may want</div></div><button class="btn teal small" onclick="openChinaRequest()">＋ Request a product</button></div><div class="grid">${china.map(x=>card(x,'china')).join('')}</div><div class="panel" style="margin-top:18px"><h3 style="margin:0 0 6px">How assisted ordering works</h3><div class="listrow"><div class="thumb">1</div><div class="details"><b>Share the product link or photo</b><span class="muted">Tell us what you want to purchase.</span></div></div><div class="listrow"><div class="thumb">2</div><div class="details"><b>Review the final quote</b><span class="muted">Confirm item price, shipping and estimated delivery.</span></div></div><div class="listrow"><div class="thumb">3</div><div class="details"><b>Track and collect</b><span class="muted">Get updates until your product reaches campus.</span></div></div></div>`}
 function printingPage(){return `${pageHead('Smart Printing','Skip the queue around Science Market. Send your files and book a collection time.') }<div class="servicehero"><div class="bigico" data-icon="printer"></div><div><h2>Print first. Pick up later.</h2><p>Upload documents, choose print settings and reserve a collection slot.</p></div></div><div class="panel"><h3 style="margin:0 0 16px">Create a printing request</h3><div class="formgrid"><div class="field full"><label>Choose a Science Market print centre</label><select id="printCenter" required><option value="">Select a centre</option><option value="Mystic Printing">Mystic Printing</option><option value="Mentor Printing">Mentor Printing</option></select><span class="muted">Choose the centre where you want to collect your work.</span></div><div class="field full"><label>Upload document (PDF, DOC or image)</label><div class="upload">📎 Select your assignment or document<input type="file" id="printFile" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png"></div></div><div class="field"><label>Printing service</label><select id="printType"><option>Black & white printing</option><option>Colour printing</option><option>Photocopying</option><option>Typing</option><option>Book binding</option><option>Past questions</option><option>Photoshop / image editing</option></select></div><div class="field"><label>Number of copies</label><input id="copies" type="number" min="1" value="1"></div><div class="field"><label>Print format</label><select id="printFormat"><option>Single-sided</option><option>Double-sided</option></select></div><div class="field"><label>Paper size</label><select id="paper"><option>A4</option><option>A3</option></select></div><div class="field"><label>Preferred collection date</label><input type="date" id="printDate"></div><div class="field"><label>Collection time</label><select id="printTime"><option>09:00 – 10:00</option><option>10:00 – 11:00</option><option>11:00 – 12:00</option><option>12:00 – 13:00</option><option>14:00 – 15:00</option><option>15:00 – 16:00</option></select></div><div class="field full"><label>Special instructions</label><textarea id="printNotes" rows="2" placeholder="e.g. Bind with blue cover, staple top-left..."></textarea></div></div><div class="notice">The print shop will confirm the final price and readiness. Do not upload confidential documents in this demo.</div><button class="btn teal" onclick="submitPrinting()">Submit printing request →</button></div>`}
-function ordersPage(){return `${pageHead('My orders & bookings','Keep track of purchases, service bookings and campus requests.')}<div class="panel">${state.orders.length?state.orders.slice().reverse().map(o=>`<div class="listrow"><div class="thumb">${o.icon||'📦'}</div><div class="details"><b>${o.title}</b><span class="muted">${o.date} • ${o.status||'Request received'} • ${o.method||'Awaiting confirmation'}${o.center?' • Centre: '+o.center:''}${o.collectionDate?' • Collection: '+o.collectionDate+' '+(o.collectionTime||''):''}${o.reference?' • Ref: '+o.reference:''}</span></div><b>${o.price?money(o.price):''}</b></div>`).join(''):'<div class="empty"><div class="big">🧾</div><b>No orders yet</b><p>Your purchases and bookings will appear here.</p><button class="btn teal" onclick="nav(\'market\')">Explore marketplace</button></div>'}</div>`}
+function receiptType(order){
+ if(order.orderType)return order.orderType;
+ if(order.preferredDate||order.preferredTime||order.icon==='📅')return 'Service booking';
+ if(order.center||order.fileName)return 'Smart Printing request';
+ if(/^china order request:/i.test(order.title||''))return 'China Shopping request';
+ if(/^product enquiry:/i.test(order.title||''))return 'Marketplace enquiry';
+ if(order.paymentStatus||/checkout demonstration/i.test(order.title||''))return 'Marketplace checkout';
+ return 'Student service request';
+}
+function receiptPaymentStatus(order){
+ if(order.paymentStatus)return order.paymentStatus;
+ const marker=((order.status||'')+' '+(order.method||'')).toLowerCase();
+ if(marker.includes('demo')||marker.includes('simulation')||marker.includes('not paid'))return 'Not paid · demonstration only';
+ return 'Not processed by this prototype';
+}
+function receiptDetailsMarkup(order){
+ const rows=[
+  ['Printing centre',order.center],['Delivery / collection point',order.delivery],
+  ['Collection date',order.collectionDate],['Collection time',order.collectionTime],
+  ['Preferred session date',order.preferredDate],['Preferred session time',order.preferredTime],
+  ['Print service',order.printType],['Print format',order.printFormat],['Paper size',order.paper],
+  ['Number of copies',order.copies],['Selected document',order.fileName],
+  ['Document size',Number.isFinite(Number(order.fileSizeBytes))?(Number(order.fileSizeBytes)/1048576).toFixed(2)+' MB':null],
+  ['Instructions',order.instructions],['Message to provider',order.providerMessage]
+ ].filter(row=>row[1]!==undefined&&row[1]!==null&&row[1]!=='');
+ return rows.map(row=>'<div class="receipt-detail"><span>'+escapeHtml(row[0])+'</span><b>'+escapeHtml(row[1])+'</b></div>').join('');
+}
+function receiptDocument(order){
+ const kind=receiptType(order),reference=order.reference||'UE-REFERENCE-PENDING';
+ const customer=order.customerName||state.user?.name||'Guest student';
+ const contact=order.customerPhone||state.user?.phone||'Not provided';
+ const status=order.status||'Request received',paymentStatus=receiptPaymentStatus(order);
+ const amountLabel=kind.toLowerCase().includes('china')?'Estimated budget':kind.toLowerCase().includes('booking')?'Indicative service fee':'Order value';
+ const items=Array.isArray(order.items)&&order.items.length?order.items:[{title:order.title||'Student request',price:order.price}];
+ const itemRows=items.map(item=>'<tr><td>'+escapeHtml(item.title||'Item')+'</td><td>'+((item.price!==undefined&&item.price!==null&&item.price!=='')?money(item.price):'To be confirmed')+'</td></tr>').join('');
+ const amount=order.price!==undefined&&order.price!==null&&Number.isFinite(Number(order.price))&&Number(order.price)>0?money(order.price):'To be confirmed';
+ const detailRows=receiptDetailsMarkup(order);
+ const logo='https://godfredboatengt-eng.github.io/Uni-Ease/UniEase-logo.jpeg';
+ const note='<div class="notice"><b>Payment status: '+escapeHtml(paymentStatus)+'</b><p>This receipt confirms the request or demonstration record saved by uniEase. It is not proof of payment. A booking receipt also does not mean the provider has accepted the booking.</p></div>';
+ return '<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>uniEase Receipt '+escapeHtml(reference)+'</title><style>'+
+ '*{box-sizing:border-box}body{margin:0;padding:28px;background:#eef2f6;color:#172b3b;font:14px/1.5 Arial,Helvetica,sans-serif}.sheet{max-width:760px;margin:0 auto;background:#fff;border:1px solid #dde4ea;border-radius:18px;overflow:hidden;box-shadow:0 12px 34px #142b4012}.top{display:flex;align-items:center;gap:16px;padding:22px 26px;border-bottom:1px solid #e5ebf0}.logo{width:76px;height:76px;object-fit:contain}.brand b{display:block;color:#101820;font-size:24px;letter-spacing:-.7px}.brand span{color:#647488;font-size:12px}.ribbon{padding:23px 26px;background:#f5f8fb}.ribbon h1{margin:0 0 4px;font-size:24px}.ribbon p{margin:0;color:#647488;font-size:12px}.meta{display:grid;grid-template-columns:1fr 1fr;gap:10px 22px;padding:18px 26px;border-bottom:1px solid #e8edf1}.meta div,.receipt-detail{display:flex;flex-direction:column;gap:3px}.meta span,.receipt-detail span{color:#738194;font-size:11px}.meta b,.receipt-detail b{font-size:13px;overflow-wrap:anywhere}.section{padding:18px 26px;border-bottom:1px solid #e8edf1}.section h2{margin:0 0 12px;font-size:14px}.items{width:100%;border-collapse:collapse}.items th,.items td{padding:10px 8px;border-bottom:1px solid #edf0f3;text-align:left;font-size:12px}.items th:last-child,.items td:last-child{text-align:right;white-space:nowrap}.items th{color:#738194;font-size:10px;text-transform:uppercase;letter-spacing:.5px}.details{display:grid;grid-template-columns:1fr 1fr;gap:12px 20px}.receipt-detail{padding:2px 0}.total{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 26px;background:#f8fafc}.total span{font-size:12px;color:#647488}.total b{font-size:22px;color:#102d46}.notice{margin:0 26px 20px;padding:12px 14px;border:1px solid #ead8a7;border-radius:12px;background:#fff9e9;color:#765515;font-size:11px}.notice b{display:block}.notice p{margin:3px 0 0}.footer{padding:18px 26px;background:#102d46;color:#fff}.footer b{display:block;font-size:13px}.footer span{display:block;margin-top:3px;color:#d5e0eb;font-size:10px}.actions{max-width:760px;margin:14px auto;display:flex;justify-content:flex-end}.actions button{padding:11px 16px;border:0;border-radius:10px;background:#0064e0;color:#fff;font-weight:700;cursor:pointer}@media(max-width:560px){body{padding:10px}.top,.ribbon,.meta,.section,.total{padding-left:16px;padding-right:16px}.logo{width:60px;height:60px}.brand b{font-size:21px}.meta,.details{grid-template-columns:1fr 1fr;gap:10px}.notice{margin-left:16px;margin-right:16px}.footer{padding:16px}}@media print{body{padding:0;background:#fff}.sheet{max-width:none;border:0;border-radius:0;box-shadow:none}.actions{display:none!important}.top,.ribbon,.meta,.section,.total,.footer,.notice{break-inside:avoid}.sheet{print-color-adjust:exact;-webkit-print-color-adjust:exact}}'+
+ '</style></head><body><main class="sheet"><header class="top"><img class="logo" src="'+logo+'" alt="uniEase logo"><div class="brand"><b>uniEase</b><span>Your campus, made easier · UCC student services</span></div></header>'+
+ '<section class="ribbon"><h1>Order & Booking Receipt</h1><p>Keep this document as a reference for your uniEase request.</p></section>'+
+ '<section class="meta"><div><span>Receipt reference</span><b>'+escapeHtml(reference)+'</b></div><div><span>Date issued</span><b>'+escapeHtml(order.date||new Date().toLocaleDateString())+'</b></div><div><span>Customer</span><b>'+escapeHtml(customer)+'</b></div><div><span>Contact</span><b>'+escapeHtml(contact)+'</b></div><div><span>Service category</span><b>'+escapeHtml(kind)+'</b></div><div><span>Request status</span><b>'+escapeHtml(status)+'</b></div></section>'+
+ '<section class="section"><h2>Item / service summary</h2><table class="items"><thead><tr><th>Description</th><th>Amount</th></tr></thead><tbody>'+itemRows+'</tbody></table></section>'+
+ (detailRows?'<section class="section"><h2>Request details</h2><div class="details">'+detailRows+'</div></section>':'')+
+ '<section class="total"><span>'+amountLabel+'</span><b>'+escapeHtml(amount)+'</b></section>'+note+
+ '<footer class="footer"><b>Thank you for choosing uniEase.</b><span>For reference only. Keep your receipt reference when contacting uniEase support. This document reflects the information saved by the current application prototype.</span></footer></main>'+
+ '<div class="actions"><button onclick="window.print()">Print / Save as PDF</button></div></body></html>';
+}
+function safeReceiptFilename(order){const ref=String(order.reference||'receipt').replace(/[^a-z0-9_-]/gi,'-');return 'uniEase-'+ref+'-receipt.html'}
+function downloadReceipt(index){
+ const order=state.orders[index];if(!order){toast('Receipt not found');return}
+ const blob=new Blob([receiptDocument(order)],{type:'text/html;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');
+ link.href=url;link.download=safeReceiptFilename(order);document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1500);toast('uniEase receipt downloaded');
+}
+function printReceipt(index){
+ const order=state.orders[index];if(!order){toast('Receipt not found');return}
+ const win=window.open('','_blank');if(!win){toast('Allow pop-ups to open the receipt for printing');return}
+ win.document.open();win.document.write(receiptDocument(order));win.document.close();win.addEventListener('load',()=>win.print(),{once:true});
+}
+function orderCard(order,index){
+ const kind=escapeHtml(receiptType(order)),title=escapeHtml(order.title||'Student request');
+ const status=escapeHtml(order.status||'Request received'),ref=escapeHtml(order.reference||'Reference pending'),date=escapeHtml(order.date||'Date not recorded');
+ const amount=order.price!==undefined&&order.price!==null&&Number(order.price)>0?money(order.price):'To be confirmed';
+ return '<article class="receipt-order-card"><div class="receipt-order-main"><div class="receipt-order-icon">'+escapeHtml(order.icon||'📦')+'</div><div class="receipt-order-copy"><span class="receipt-type">'+kind+'</span><b>'+title+'</b><small>'+date+' · '+ref+'</small><small class="receipt-order-status">'+status+'</small></div><strong class="receipt-order-amount">'+escapeHtml(amount)+'</strong></div><div class="receipt-order-actions"><button class="btn teal small" type="button" onclick="downloadReceipt('+index+')">↓ Download receipt</button><button class="btn outline small" type="button" onclick="printReceipt('+index+')">Print / Save PDF</button></div></article>';
+}
+function ordersPage(){
+ const entries=state.orders.slice().reverse().map((order,reverseIndex)=>orderCard(order,state.orders.length-1-reverseIndex)).join('');
+ return pageHead('My orders & bookings','Your purchases, service bookings and request receipts.')+
+ '<div class="receipt-page-note"><span>▣</span><div><b>Your uniEase receipts, all in one place</b><small>Download a branded HTML receipt or open the print dialog to save a PDF copy.</small></div></div>'+
+ (entries?'<div class="receipt-order-list">'+entries+'</div>':'<div class="panel"><div class="empty"><div class="big">🧾</div><b>No orders yet</b><p>Your purchases and bookings will appear here. Each saved request will have its own uniEase receipt.</p><button class="btn teal" onclick="nav(\'market\')">Explore marketplace</button></div></div>');
+}
 function securityPrivacyPanel(){return '<section class="panel privacy-panel" aria-labelledby="privacyTitle"><div class="privacy-panel-head"><div><span class="eyebrow">TRUST & TRANSPARENCY</span><h3 id="privacyTitle">Security & Privacy</h3><p class="muted">Visible safeguards in this prototype, with limitations stated clearly.</p></div><span class="prototype-pill">Prototype safeguards</span></div><div class="privacy-feature-grid"><div><span class="privacy-feature-mark">✓</span><b>No PIN / OTP collection</b><small>Checkout never asks for Mobile Money PINs, bank passwords or one-time codes.</small></div><div><span class="privacy-feature-mark">✓</span><b>Payment preview only</b><small>No card details are collected and no live payment request is sent.</small></div><div><span class="privacy-feature-mark">✓</span><b>Clear order review</b><small>The student sees the total and collection choice before confirming the demo flow.</small></div><div><span class="privacy-feature-mark">i</span><b>Local browser storage</b><small>Demo profile, listings and orders stay in this browser. They are not in a secured shared account database.</small></div><div><span class="privacy-feature-mark">i</span><b>Print document handling</b><small>The cloud inbox animation is a preview. Selected files are not uploaded to a drive or print shop.</small></div><div><span class="privacy-feature-mark">i</span><b>Production controls still needed</b><small>Verified sign-in, server-side access control, protected file storage, audit logs and payment-provider integration.</small></div></div><div class="privacy-warning"><b>Use demo data only.</b> Do not enter real passwords, payment credentials, confidential documents or sensitive personal information in this prototype.</div></section>'}
 function profilePage(){return `${pageHead('My profile','Manage your student details and account preferences.')}<div class="panel"><div class="row" style="justify-content:flex-start;margin-bottom:20px"><div class="avatar" style="width:58px;height:58px;font-size:22px">${state.user?(state.user.name||'S').charAt(0).toUpperCase():'G'}</div><div><b>${state.user?.name||'Guest student'}</b><div class="muted">${state.user?.phone||'Sign in to personalise your account'}</div></div></div>${state.user?`<div class="listrow"><div class="details"><b>Student ID</b><span class="muted">${state.user.studentId||'Not provided'}</span></div></div><div class="listrow"><div class="details"><b>Programme</b><span class="muted">${state.user.programme||'Not provided'}</span></div></div><button class="btn outline" onclick="logout()">Sign out</button>`:`<p class="muted">Create a demo profile to personalise your uniEase experience.</p><button class="btn teal" onclick="openAuth()">Create account / Sign in</button>`}</div><div class="panel" style="margin-top:15px"><b>About uniEase</b><p class="muted">A student integrative service platform concept for the University of Cape Coast.</p><span class="tag">Prototype v0.1</span></div>${securityPrivacyPanel()}`}
 function renderContent(){let m=$('#listingGrid');if(!m)return;let items=(state.listings||sample).filter(x=>(state.filter==='All'||x.cat===state.filter)&&(`${x.title} ${x.owner||''}`).toLowerCase().includes(state.search.toLowerCase()));m.innerHTML=items.map(x=>card(x)).join('')||'<div class="empty">No matching listings.</div>'}
@@ -898,11 +979,11 @@ modal({title:'Request a skill session',body});
 }
 function requestSkillBooking(title,price){
 const hasPrice=price!==null&&price!==undefined&&Number.isFinite(Number(price));
-const details={preferredDate:$('#bookDate')?.value||'Date to confirm',preferredTime:$('#bookTime')?.value||'Time to confirm',providerMessage:$('#bookNote')?.value||''};
+const details={orderType:'Service booking',preferredDate:$('#bookDate')?.value||'Date to confirm',preferredTime:$('#bookTime')?.value||'Time to confirm',providerMessage:$('#bookNote')?.value||''};
 createOrder(title,hasPrice?Number(price):0,'Booking requested','📅',details);
 }
 function openChinaRequest(){modal({title:'Request a product from China',body:`<div class="formgrid"><div class="field full"><label>Product name or link</label><input id="chName" placeholder="Paste a product link or name"></div><div class="field"><label>Estimated budget (GH₵)</label><input id="chBudget" type="number" placeholder="150"></div><div class="field"><label>Quantity</label><input id="chQty" type="number" value="1" min="1"></div><div class="field full"><label>Upload product picture</label><input id="chPhoto" type="file" accept="image/*"></div><div class="field full"><label>Additional details</label><textarea id="chNote" rows="2" placeholder="Colour, size, preferred seller..."></textarea></div></div><div class="notice">This creates a request only. A verified quote is needed before any payment.</div><button class="btn teal" onclick="submitChina()">Send product request</button>`})}
-function submitChina(){let title=$('#chName').value.trim();if(!title){toast('Enter a product name or link');return}createOrder('China order request: '+title,Number($('#chBudget').value)||0,'Quote requested','📦');}
+function submitChina(){let title=$('#chName').value.trim();if(!title){toast('Enter a product name or link');return}createOrder('China order request: '+title,Number($('#chBudget').value)||0,'Quote requested','📦',{orderType:'China Shopping request'});}
 function submitPrinting(){
  const file=$('#printFile').files[0],type=$('#printType').value,center=$('#printCenter').value,copies=Math.max(1,Number($('#copies').value)||1);
  if(!center){toast('Choose Mystic Printing or Mentor Printing first');return}
@@ -930,17 +1011,18 @@ function runPrintHandoff(){
 }
 function savePrintDemoRequest(){
  if(!pendingPrintRequest){toast('No print request is waiting to be saved');return}
- const details={...pendingPrintRequest,cloudHandoff:'uniEase Cloud receipt preview · demo only · file not uploaded'};
+ const details={...pendingPrintRequest,orderType:'Smart Printing request',cloudHandoff:'uniEase Cloud receipt preview · demo only · file not uploaded'};
  const title=pendingPrintRequest.printType+' ('+pendingPrintRequest.fileName+')';pendingPrintRequest=null;
  createOrder(title,0,'Demo handoff preview — file not sent to print centre','🖨️',details);
  toast('Demo print request saved');
 }
 function createOrder(title,price,status,icon,details={}){
-const reference='UE-'+Date.now().toString().slice(-8);
-state.orders.push({title,price,status,icon,date:new Date().toLocaleDateString(),method:'Awaiting confirmation',reference,...details});
-persist();closeModal();
-if(state.page!=='orders')nav('orders');else render();
-toast('Request saved · '+reference);
+ const reference=details.reference||'UE-'+Date.now().toString().slice(-8);
+ const orderType=details.orderType||(details.preferredDate||details.preferredTime||icon==='📅'?'Service booking':details.center||details.fileName?'Smart Printing request':/^china order request:/i.test(title)?'China Shopping request':/^product enquiry:/i.test(title)?'Marketplace enquiry':'Student service request');
+ const order={...details,id:details.id||reference,orderType,title,price,status,icon,date:new Date().toLocaleDateString(),createdAt:new Date().toISOString(),customerName:state.user?.name||'Guest student',customerPhone:state.user?.phone||'',method:details.method||'Awaiting confirmation',reference};
+ state.orders.push(order);persist();closeModal();
+ if(state.page!=='orders')nav('orders');else render();
+ toast('Request saved · '+reference);
 }
 function showCart(){let body=state.cart.length?`<div>${state.cart.map((x,i)=>`<div class="listrow"><div class="thumb">${x.emoji||'📦'}</div><div class="details"><b>${x.title}</b><span class="muted">${money(x.price)}</span></div><button class="btn outline small" onclick="removeCart(${i})">Remove</button></div>`).join('')}</div><div class="row" style="margin:15px 0"><b>Total</b><b>${money(state.cart.reduce((a,x)=>a+Number(x.price),0))}</b></div><button class="btn teal" onclick="checkout()">Continue to checkout</button>`:'<div class="empty"><div class="big">🛒</div><b>Your cart is empty</b><p>Add a product or item to get started.</p></div>';modal({title:'Your cart',body})}
 function removeCart(i){state.cart.splice(i,1);count();showCart()}
@@ -980,7 +1062,8 @@ function runDemoPayment(p){
  },620*(index+1)));
 }
 function finishDemoPayment(p){
- state.orders.push({title:p.itemCount+' item(s) checkout demonstration',price:p.total,status:'Demo checkout completed — no funds transferred',method:p.method+' · simulation only',delivery:p.delivery,reference:p.reference,date:new Date().toLocaleDateString(),icon:'🛍️',paymentStatus:'Not paid · no payment provider connected'});
+ const items=state.cart.map(item=>({title:item.title,price:item.price,category:item.cat||item.kind||''}));
+ state.orders.push({id:p.reference,orderType:'Marketplace checkout · demo',items,title:p.itemCount+' item(s) checkout demonstration',price:p.total,status:'Demo checkout completed — no funds transferred',method:p.method+' · simulation only',delivery:p.delivery,reference:p.reference,date:new Date().toLocaleDateString(),createdAt:new Date().toISOString(),customerName:state.user?.name||'Guest student',customerPhone:state.user?.phone||'',icon:'🛍️',paymentStatus:'Not paid · demo only'});
  state.cart=[];count();persist();
  setTimeout(()=>{if(!document.querySelector('.payment-flow'))return;closeModal();nav('orders');toast('Demo receipt saved · no payment made')},1900);
 }
