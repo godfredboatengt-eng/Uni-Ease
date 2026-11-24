@@ -652,6 +652,11 @@ body.drawer-open{overflow:hidden}
 @media(max-width:560px){.receipt-order-card{padding:12px}.receipt-order-main{align-items:flex-start;gap:9px}.receipt-order-icon{width:38px;height:38px;flex-basis:38px}.receipt-order-amount{font-size:12px}.receipt-order-actions{display:grid;grid-template-columns:1fr 1fr}.receipt-order-actions .btn{width:100%;padding:9px 7px;font-size:10px}}
 @media(prefers-reduced-motion:reduce){.receipt-order-card{transition:none!important}}
 </style>
+<style id="uniease-discovery-feed">
+.home-feed-heading{margin-top:30px}.home-feed-grid{align-items:stretch}.home-feed-loading{padding:18px 10px;text-align:center;color:#718091;font-size:11px}.home-feed-sentinel{height:2px;width:100%}.home-feed-note{margin-top:10px;color:#7b8794;font-size:10px;line-height:1.45}.home-feed-item{animation:ue-feed-enter .32s ease both}@keyframes ue-feed-enter{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.interest-group{margin:15px 0}.interest-group>b{display:block;margin-bottom:9px;font-size:13px}.interest-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.interest-choice{display:flex;align-items:center;gap:8px;padding:10px 11px;border:1px solid #dfe5eb;border-radius:11px;background:#fff;font-size:11px;cursor:pointer}.interest-choice input{accent-color:#0064e0}.onboarding-actions{display:flex;gap:9px;margin-top:16px}.onboarding-actions .btn{flex:1}.interest-privacy-note{display:block;margin-top:10px;color:#7a8795;font-size:10px;line-height:1.4}
+@media(max-width:560px){.interest-grid{grid-template-columns:1fr}.onboarding-actions{flex-direction:column}}@media(prefers-reduced-motion:reduce){.home-feed-item{animation:none!important}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -691,7 +696,8 @@ body.drawer-open{overflow:hidden}
 <div id="modalRoot"></div>
 <script>
 const $=s=>document.querySelector(s);
-const state={page:'home',user:JSON.parse(localStorage.getItem('unieaseUser')||'null'),cart:[],orders:JSON.parse(localStorage.getItem('unieaseOrders')||'[]'),listings:JSON.parse(localStorage.getItem('unieaseListings')||'null'),providers:JSON.parse(localStorage.getItem('unieaseProviders')||'[]'),filter:'All',search:''};
+const state={page:'home',user:JSON.parse(localStorage.getItem('unieaseUser')||'null'),cart:[],orders:JSON.parse(localStorage.getItem('unieaseOrders')||'[]'),listings:JSON.parse(localStorage.getItem('unieaseListings')||'null'),providers:JSON.parse(localStorage.getItem('unieaseProviders')||'[]'),accounts:JSON.parse(localStorage.getItem('unieaseAccounts')||'[]'),sellers:JSON.parse(localStorage.getItem('unieaseSellers')||'[]'),filter:'All',search:''};
+const homeFeedState={items:[],cursor:0,cycle:0,observer:null,scrollHandler:null};
 let pendingPrintRequest=null;
 const sample=[
 {id:1,cat:'Books',title:'Introduction to Sociology textbook',price:45,owner:'Ama • Valco Hall',emoji:'📚',condition:'Good condition',image:'https://client-data.knak.io/production/email_assets/633dac4655ece/hxVMdKxIVHJOncSGZMO8q0dUGv4z6dzwPnJxQgyI.png',imageSource:'https://seagull.wwnorton.com/sociology'},
@@ -784,7 +790,7 @@ document.addEventListener('keydown',event=>{if(event.key==='Escape'&&document.qu
 window.addEventListener('resize',()=>{if(window.innerWidth>1000)closeSidebar(false)});
 function nav(page){closeSidebar(false);state.page=page;state.filter='All';state.search='';render();document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===page));window.scrollTo(0,0)}
 document.querySelectorAll('[data-page]').forEach(b=>b.addEventListener('click',()=>nav(b.dataset.page)));
-function persist(){localStorage.setItem('unieaseOrders',JSON.stringify(state.orders));localStorage.setItem('unieaseListings',JSON.stringify(state.listings||sample));localStorage.setItem('unieaseProviders',JSON.stringify(state.providers));localStorage.setItem('unieaseUser',JSON.stringify(state.user))}
+function persist(){localStorage.setItem('unieaseOrders',JSON.stringify(state.orders));localStorage.setItem('unieaseListings',JSON.stringify(state.listings||sample));localStorage.setItem('unieaseProviders',JSON.stringify(state.providers));localStorage.setItem('unieaseUser',JSON.stringify(state.user));localStorage.setItem('unieaseAccounts',JSON.stringify(state.accounts||[]));localStorage.setItem('unieaseSellers',JSON.stringify(state.sellers||[]))}
 function count(){ $('#cartCount').textContent=state.cart.length}
 function addCart(item){
  state.cart.push(item);count();
@@ -819,18 +825,72 @@ const unit=item.unit?'<small>'+escapeHtml(item.unit)+'</small>':'';
 return '<article class="product product-card" data-product-id="'+escapeHtml(item.id??'')+'"><div class="product-img"><span class="product-image-fallback" aria-hidden="true">'+placeholder+'</span>'+photo+categoryMarkup+'</div><div class="product-body"><div class="product-copy"><h3>'+title+'</h3>'+sellerMarkup+detailMarkup+'</div>'+gallery+'<div class="product-footer"><div class="product-price">'+escapeHtml(priceText)+unit+'</div><div class="product-actions"><button class="btn small" type="button" onclick="'+action+'">'+actionLabel+'</button></div></div>'+source+'</div></article>';
 }
 function requestProduct(title){createOrder('Product enquiry: '+title,0,'Price and availability requested','🛍️')}
-function home(){return `<section class="welcome"><div class="eyebrow">YOUR CAMPUS. YOUR COMMUNITY.</div><h1>Make student life<br>feel a little easier.</h1><p>Shop, learn, sell, book and get essentials — all in one place, built around UCC students.</p><div class="searchbar"><span>⌕</span><input id="globalSearch" placeholder="Search products, services, tutors..." onkeydown="if(event.key==='Enter')searchAll(this.value)"><button class="btn teal small" onclick="searchAll($('#globalSearch').value)">Search</button></div></section>
-<div class="sectionhead"><div><h2>Explore uniEase</h2><div class="sub">Four core services. One student community.</div></div></div>
-<div class="services">
-<button class="service" onclick="nav('china')"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="package"></div><b>China Shopping</b><small>Order products from China</small></button>
-<button class="service" onclick="nav('market')"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="store"></div><b>Student Marketplace</b><small>Buy & sell pre-loved items</small></button>
-<button class="service" onclick="nav('skills')"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="graduation"></div><b>Skills & Tutors</b><small>Learn from student talent</small></button>
-<button class="service" onclick="nav('printing')"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="printer"></div><b>Smart Printing</b><small>Book before you arrive</small></button>
+function home(){
+ return '<section class="welcome"><div class="eyebrow">YOUR CAMPUS. YOUR COMMUNITY.</div><h1>Make student life<br>feel a little easier.</h1><p>Shop, learn, sell, book and get essentials — all in one place, built around UCC students.</p><div class="searchbar"><span>⌕</span><input id="globalSearch" placeholder="Search products, services, tutors..." onkeydown="if(event.key===\\"Enter\\")searchAll(document.getElementById(\\"globalSearch\\").value)"><button class="btn teal small" onclick="searchAll(document.getElementById(\\"globalSearch\\").value)">Search</button></div></section>'+
+ '<div class="sectionhead"><div><h2>Explore uniEase</h2><div class="sub">Four core services. One student community.</div></div></div>'+
+ '<div class="services"><button class="service" onclick="nav(\\"china\\")"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="package"></div><b>China Shopping</b><small>Order products from China</small></button>'+
+ '<button class="service" onclick="nav(\\"market\\")"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="store"></div><b>Student Marketplace</b><small>Buy & sell pre-loved items</small></button>'+
+ '<button class="service" onclick="nav(\\"skills\\")"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="graduation"></div><b>Skills & Tutors</b><small>Learn from student talent</small></button>'+
+ '<button class="service" onclick="nav(\\"printing\\")"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="printer"></div><b>Smart Printing</b><small>Book before you arrive</small></button></div>'+
+ '<div class="sectionhead home-feed-heading"><div><h2>'+(state.user?.interests?.products?.length||state.user?.interests?.skills?.length?'Picked for your interests':'Popular around campus')+'</h2><div class="sub">A continuous campus feed of products and student skills. Scroll to discover more.</div></div><button class="textbtn" onclick="showBuyerOnboarding(true)">Tune my feed ✦</button></div>'+
+ '<div class="home-feed-grid grid" id="homeFeedGrid" aria-live="polite"></div><div id="homeFeedLoading" class="home-feed-loading" role="status">Loading more from the campus community…</div><div id="homeFeedSentinel" class="home-feed-sentinel" aria-hidden="true"></div>'+
+ '<div class="home-feed-note">Feed items are catalogue examples and demo student listings. Confirm availability and provider details before making arrangements.</div>';
+}
+function selectedBuyerInterests(){return state.user?.interests||{products:[],skills:[]}}
+function buildHomeFeedItems(){
+ const productSource=[...(state.listings||sample),...(marketPhotoCatalog||[])],seenProducts=new Set(),products=[];
+ productSource.forEach(item=>{const key=String(item.id??item.title);if(seenProducts.has(key))return;seenProducts.add(key);const chosen=selectedBuyerInterests().products||[];if(chosen.length&&!chosen.includes(item.cat))return;products.push({type:'product',item})});
+ const skillSource=[...(tutors||[]),...(state.providers||[])],seenSkills=new Set(),skills=[];
+ skillSource.forEach(item=>{const key=(item.title||'')+'|'+(item.person||item.kind||'');if(seenSkills.has(key))return;seenSkills.add(key);const chosen=selectedBuyerInterests().skills||[];const category=normaliseSkillKind(item)||item.kind||'Student skill';if(chosen.length&&!chosen.includes(category))return;skills.push({type:'skill',item})});
+ const mixed=[],max=Math.max(products.length,skills.length);
+ for(let i=0;i<max;i++){if(products[i])mixed.push(products[i]);if(skills[i])mixed.push(skills[i])}
+ return mixed.length?mixed:[...productSource.slice(0,6).map(item=>({type:'product',item})),...(tutors||[]).slice(0,4).map(item=>({type:'skill',item}))];
+}
+function appendHomeFeedBatch(){
+ const grid=$('#homeFeedGrid'),loading=$('#homeFeedLoading');if(!grid||!homeFeedState.items.length)return;
+ for(let i=0;i<6;i++){
+  const entry=homeFeedState.items[homeFeedState.cursor];if(!entry)break;
+  const markup=entry.type==='skill'?skillCard(entry.item,homeFeedState.cycle*6+i):card(entry.item);
+  const wrapper=document.createElement('div');wrapper.innerHTML=markup;const node=wrapper.firstElementChild;
+  if(node){node.classList.add('home-feed-item');grid.appendChild(node)}
+  homeFeedState.cursor++;if(homeFeedState.cursor>=homeFeedState.items.length){homeFeedState.cursor=0;homeFeedState.cycle++}
+ }
+ if(loading)loading.textContent='More campus discoveries load as you scroll.';
+}
+function initHomeFeed(){
+ if(homeFeedState.observer){homeFeedState.observer.disconnect();homeFeedState.observer=null}
+ if(homeFeedState.scrollHandler){window.removeEventListener('scroll',homeFeedState.scrollHandler);homeFeedState.scrollHandler=null}
+ const grid=$('#homeFeedGrid');if(!grid)return;
+ homeFeedState.items=buildHomeFeedItems();homeFeedState.cursor=0;homeFeedState.cycle=0;grid.innerHTML='';appendHomeFeedBatch();
+ const sentinel=$('#homeFeedSentinel');
+ if('IntersectionObserver' in window&&sentinel){
+  homeFeedState.observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){homeFeedState.observer.unobserve(sentinel);appendHomeFeedBatch();requestAnimationFrame(()=>{if(homeFeedState.observer&&sentinel.isConnected)homeFeedState.observer.observe(sentinel)})}},{root:null,rootMargin:'480px 0px',threshold:0});
+  homeFeedState.observer.observe(sentinel);
+ }else{
+  homeFeedState.scrollHandler=()=>{if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-500)appendHomeFeedBatch()};
+  window.addEventListener('scroll',homeFeedState.scrollHandler,{passive:true});
+ }
+}
+function showBuyerOnboarding(edit=false){
+ if(!state.user||state.user.role!=='buyer'){toast('Buyer onboarding is available on buyer accounts');return}
+ const options=[['products','Books'],['products','Stationery'],['products','Furniture'],['products','Electronics'],['products','Appliances'],['products','Everyday Essentials'],['skills','Academic support'],['skills','Graphic design'],['skills','Nail tech'],['skills','Makeup & cosmetics'],['skills','Crocheting'],['skills','Barbering'],['skills','Hair & beauty']];
+ const current=selectedBuyerInterests();
+ const productOptions=options.filter(o=>o[0]==='products').map(o=>'<label class="interest-choice"><input type="checkbox" name="productInterest" value="'+o[1]+'" '+((current.products||[]).includes(o[1])?'checked':'')+'><span>'+o[1]+'</span></label>').join('');
+ const skillOptions=options.filter(o=>o[0]==='skills').map(o=>'<label class="interest-choice"><input type="checkbox" name="skillInterest" value="'+o[1]+'" '+((current.skills||[]).includes(o[1])?'checked':'')+'><span>'+o[1]+'</span></label>').join('');
+ modal({title:edit?'Personalise your uniEase feed':'A few quick interests',body:'<p class="muted">Choose the products and student skills you would like to discover. We will use your choices to organise your Overview feed. You can change these later.</p>'+
+ '<div class="interest-group"><b>Products I am interested in</b><div class="interest-grid">'+productOptions+'</div></div>'+
+ '<div class="interest-group"><b>Skills and services I want to discover</b><div class="interest-grid">'+skillOptions+'</div></div>'+
+ '<div class="onboarding-actions"><button class="btn teal" type="button" onclick="saveBuyerInterests()">Personalise my feed</button><button class="btn outline" type="button" onclick="skipBuyerOnboarding()">Skip for now</button></div><small class="interest-privacy-note">Saved in this browser in this demo version. You can skip without selecting anything.</small>'});
+}
+function saveBuyerInterests(){
+ const products=[...document.querySelectorAll('input[name="productInterest"]:checked')].map(input=>input.value);
+ const skills=[...document.querySelectorAll('input[name="skillInterest"]:checked')].map(input=>input.value);
+ state.user={...state.user,interests:{products,skills},onboardingCompleted:true};persist();closeModal();state.page='home';render();toast('Your Overview feed has been personalised');
+}
+function skipBuyerOnboarding(){
+ state.user={...state.user,interests:{products:[],skills:[]},onboardingCompleted:true,onboardingSkipped:true};persist();closeModal();state.page='home';render();toast('You can personalise your feed any time from Overview');
+}
 
-</div>
-<div class="sectionhead"><div><h2>Popular around campus</h2><div class="sub">Product-photo showcases and student listings</div></div><button class="textbtn" onclick="nav('market')">View marketplace →</button></div>
-<div class="grid">${marketPhotoCatalog.slice(0,3).map(x=>card(x)).join('')}</div>
-<div class="sectionhead"><div><h2>Earn with your skills</h2><div class="sub">Student talent deserves a platform.</div></div><button class="textbtn" onclick="nav('skills')">Explore services →</button></div><div class="grid">${tutors.slice(0,3).map(x=>card(x,'skills')).join('')}</div>`}
 function pageHead(title,desc,button=''){return `<div class="page-title"><div><h1>${title}</h1><p>${desc}</p></div>${button}</div>`}
 function marketPage(){let items=state.listings||sample;let cats=['All','Books','Stationery','Furniture','Electronics','Appliances','Clothing','Accessories','Footwear','Beauty & Care','Everyday Essentials'];let filtered=items.filter(x=>(state.filter==='All'||x.cat===state.filter)&&(`${x.title} ${x.owner||''}`).toLowerCase().includes(state.search.toLowerCase()));return `${pageHead('Student Marketplace','Browse student listings and product-photo showcases. Confirm seller, condition and price before arranging a purchase.',`<button class="btn teal" onclick="openListing()">＋ Sell an item</button>`)}<div class="catalog-notice"><b>Shop with care</b><span>Some images are illustrative catalogue photos. Confirm the actual item, condition, size, seller and final price before arranging collection.</span><span class="catalog-safety">Safety reminder: uniEase will never ask for your Mobile Money PIN, banking password or one-time password.</span></div><div class="panel"><div class="row"><div><b>Browse listings</b><div class="sub">Student-to-student buying and selling</div></div><input style="max-width:220px;border:1px solid var(--line);border-radius:10px;padding:9px" placeholder="Search listings..." oninput="state.search=this.value;renderContent()" value="${state.search}"></div><div class="tabs">${cats.map(c=>`<button class="tab ${state.filter===c?'active':''}" onclick="state.filter='${c}';render()">${c}</button>`).join('')}</div><div class="grid" id="listingGrid">${filtered.map(x=>card(x)).join('')||'<div class="empty">No listings match your search yet.</div>'}</div></div>`}
 function normaliseSkillKind(item){
@@ -958,7 +1018,7 @@ function ordersPage(){
 function securityPrivacyPanel(){return '<section class="panel privacy-panel" aria-labelledby="privacyTitle"><div class="privacy-panel-head"><div><span class="eyebrow">TRUST & TRANSPARENCY</span><h3 id="privacyTitle">Security & Privacy</h3><p class="muted">Visible safeguards in this prototype, with limitations stated clearly.</p></div><span class="prototype-pill">Prototype safeguards</span></div><div class="privacy-feature-grid"><div><span class="privacy-feature-mark">✓</span><b>No PIN / OTP collection</b><small>Checkout never asks for Mobile Money PINs, bank passwords or one-time codes.</small></div><div><span class="privacy-feature-mark">✓</span><b>Payment preview only</b><small>No card details are collected and no live payment request is sent.</small></div><div><span class="privacy-feature-mark">✓</span><b>Clear order review</b><small>The student sees the total and collection choice before confirming the demo flow.</small></div><div><span class="privacy-feature-mark">i</span><b>Local browser storage</b><small>Demo profile, listings and orders stay in this browser. They are not in a secured shared account database.</small></div><div><span class="privacy-feature-mark">i</span><b>Print document handling</b><small>The cloud inbox animation is a preview. Selected files are not uploaded to a drive or print shop.</small></div><div><span class="privacy-feature-mark">i</span><b>Production controls still needed</b><small>Verified sign-in, server-side access control, protected file storage, audit logs and payment-provider integration.</small></div></div><div class="privacy-warning"><b>Use demo data only.</b> Do not enter real passwords, payment credentials, confidential documents or sensitive personal information in this prototype.</div></section>'}
 function profilePage(){return `${pageHead('My profile','Manage your student details and account preferences.')}<div class="panel"><div class="row" style="justify-content:flex-start;margin-bottom:20px"><div class="avatar" style="width:58px;height:58px;font-size:22px">${state.user?(state.user.name||'S').charAt(0).toUpperCase():'G'}</div><div><b>${state.user?.name||'Guest student'}</b><div class="muted">${state.user?.phone||'Sign in to personalise your account'}</div></div></div>${state.user?`<div class="listrow"><div class="details"><b>Student ID</b><span class="muted">${state.user.studentId||'Not provided'}</span></div></div><div class="listrow"><div class="details"><b>Programme</b><span class="muted">${state.user.programme||'Not provided'}</span></div></div><button class="btn outline" onclick="logout()">Sign out</button>`:`<p class="muted">Create a demo profile to personalise your uniEase experience.</p><button class="btn teal" onclick="openAuth()">Create account / Sign in</button>`}</div><div class="panel" style="margin-top:15px"><b>About uniEase</b><p class="muted">A student integrative service platform concept for the University of Cape Coast.</p><span class="tag">Prototype v0.1</span></div>${securityPrivacyPanel()}`}
 function renderContent(){let m=$('#listingGrid');if(!m)return;let items=(state.listings||sample).filter(x=>(state.filter==='All'||x.cat===state.filter)&&(`${x.title} ${x.owner||''}`).toLowerCase().includes(state.search.toLowerCase()));m.innerHTML=items.map(x=>card(x)).join('')||'<div class="empty">No matching listings.</div>'}
-function render(){let pages={home,china:chinaPage,market:marketPage,skills:skillsPage,printing:printingPage,orders:ordersPage,profile:profilePage};$('#main').innerHTML=(pages[state.page]||home)()+`<div class="footer">© 2026 uniEase · Built for UCC students · Prototype experience</div>`;document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page));hydrateIcons();}
+function render(){let pages={home,china:chinaPage,market:marketPage,skills:skillsPage,printing:printingPage,orders:ordersPage,seller:sellerPage,admin:adminDashboardPage,profile:profilePage};$('#main').innerHTML=(pages[state.page]||home)()+`<div class="footer">© 2026 uniEase · Built for UCC students · Prototype experience</div>`;document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page));hydrateIcons();if(state.page==='home')initHomeFeed();}
 function searchAll(q){let s=q.toLowerCase();if(sample.some(x=>x.title.toLowerCase().includes(s))){state.page='market';state.search=q;render();}else if(tutors.some(x=>x.title.toLowerCase().includes(s))){state.page='skills';render();}else{state.page='market';state.search=q;render();}}
 function modal(content){$('#modalRoot').innerHTML=`<div class="modalback" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modalhead"><h2>${content.title}</h2><button class="close" onclick="closeModal()">×</button></div>${content.body}</div></div>`}
 function closeModal(){$('#modalRoot').innerHTML=''}
