@@ -37,3 +37,8 @@ The repository includes `.github/workflows/pages.yml`, which deploys the root fo
 One-time setup: open **Repository → Settings → Pages → Build and deployment → Source** and select **GitHub Actions**. Then open the **Actions** tab and confirm the **Deploy uniEase to GitHub Pages** run completes successfully. The expected site URL is:
 
 https://godfredboatengt-eng.github.io/Uni-Ease/
+
+## Smart Printing centre contacts
+
+- **Mystic Printing (Science Market):** 0596475392
+- **Mentor Printing (Science Market):** 0246058695
