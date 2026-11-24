@@ -657,6 +657,15 @@ body.drawer-open{overflow:hidden}
 .interest-group{margin:15px 0}.interest-group>b{display:block;margin-bottom:9px;font-size:13px}.interest-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.interest-choice{display:flex;align-items:center;gap:8px;padding:10px 11px;border:1px solid #dfe5eb;border-radius:11px;background:#fff;font-size:11px;cursor:pointer}.interest-choice input{accent-color:#0064e0}.onboarding-actions{display:flex;gap:9px;margin-top:16px}.onboarding-actions .btn{flex:1}.interest-privacy-note{display:block;margin-top:10px;color:#7a8795;font-size:10px;line-height:1.4}
 @media(max-width:560px){.interest-grid{grid-template-columns:1fr}.onboarding-actions{flex-direction:column}}@media(prefers-reduced-motion:reduce){.home-feed-item{animation:none!important}}
 </style>
+<style id="uniease-seller-portal">
+.demo-nav-tag{margin-left:auto;padding:3px 6px;border-radius:99px;background:#fff2d8;color:#805b12;font-size:8px;font-weight:900}
+.role-gate{padding:24px;display:flex;flex-direction:column;align-items:flex-start;gap:12px}.role-gate h2{margin:0;font-size:20px}.role-gate p{margin:0;color:#667789;max-width:620px}
+.seller-welcome{display:flex;justify-content:space-between;align-items:center;gap:14px;margin:14px 0;padding:20px 22px;border-radius:18px;background:#102d46;color:#fff}.seller-welcome h2{margin:3px 0;font-size:22px}.seller-welcome p{margin:0;color:#d5e0eb;font-size:12px}.seller-welcome .eyebrow{color:#a7c9ec;font-size:9px}.seller-live-tag{padding:6px 9px;border-radius:99px;background:#ffffff1c;color:#fff;font-size:9px;font-weight:900;letter-spacing:.5px}
+.seller-metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:11px;margin:14px 0}.seller-metric{display:flex;flex-direction:column;gap:6px;min-width:0;padding:15px;border:1px solid #dfe5eb;border-radius:16px;background:#fff}.seller-metric span{color:#68798b;font-size:10px;line-height:1.35}.seller-metric b{color:#152c3e;font-size:clamp(16px,2vw,22px);overflow-wrap:anywhere}.seller-metric small{color:#798796;font-size:9px;line-height:1.4}
+.seller-section{margin-top:14px}.seller-section .sectionhead{margin-bottom:12px}.seller-listing-row,.seller-sale-row{display:flex;align-items:center;gap:12px;padding:11px 0;border-top:1px solid #edf0f3;min-width:0}.seller-listing-thumb{width:54px;height:54px;flex:0 0 54px;display:grid;place-items:center;overflow:hidden;border-radius:11px;background:#f1f4f7}.seller-listing-thumb img{width:100%;height:100%;object-fit:contain}.seller-listing-copy,.seller-sale-row>div{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}.seller-listing-copy b,.seller-sale-row b{font-size:12px;overflow-wrap:anywhere}.seller-listing-copy small,.seller-sale-row small{color:#748294;font-size:10px;line-height:1.35}.seller-listing-row>strong,.seller-sale-row>strong{font-size:12px;white-space:nowrap}.seller-footnote{margin:13px 0;padding:12px 14px;border:1px solid #ead8a7;border-radius:13px;background:#fff9e9;color:#765515;font-size:10px;line-height:1.5}
+.owner-link-panel{margin-top:14px}.owner-link-panel .btn{display:inline-flex;align-items:center;margin-top:8px;text-decoration:none}
+@media(max-width:900px){.seller-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr)}}@media(max-width:560px){.seller-welcome{align-items:flex-start;flex-direction:column;padding:16px}.seller-metric{padding:12px}}
+</style>
 </head>
 <body>
 <div class="app">
@@ -678,6 +687,7 @@ body.drawer-open{overflow:hidden}
   
   <div class="side-label">YOUR SPACE</div>
   <button class="navbtn" data-page="orders"><span class="navico" data-icon="receipt"></span>My orders & bookings</button>
+  <button class="navbtn" data-page="seller"><span class="navico" data-icon="store"></span>Seller portal</button>
   <button class="navbtn" data-page="profile"><span class="navico" data-icon="user"></span>My profile</button>
   <div class="side-note"><b>Made for UCC students</b><br>Discover campus services, support student businesses and make everyday life easier.</div>
 </aside>
@@ -826,69 +836,17 @@ return '<article class="product product-card" data-product-id="'+escapeHtml(item
 }
 function requestProduct(title){createOrder('Product enquiry: '+title,0,'Price and availability requested','🛍️')}
 function home(){
- return '<section class="welcome"><div class="eyebrow">YOUR CAMPUS. YOUR COMMUNITY.</div><h1>Make student life<br>feel a little easier.</h1><p>Shop, learn, sell, book and get essentials — all in one place, built around UCC students.</p><div class="searchbar"><span>⌕</span><input id="globalSearch" placeholder="Search products, services, tutors..." onkeydown="if(event.key===\\"Enter\\")searchAll(document.getElementById(\\"globalSearch\\").value)"><button class="btn teal small" onclick="searchAll(document.getElementById(\\"globalSearch\\").value)">Search</button></div></section>'+
- '<div class="sectionhead"><div><h2>Explore uniEase</h2><div class="sub">Four core services. One student community.</div></div></div>'+
- '<div class="services"><button class="service" onclick="nav(\\"china\\")"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="package"></div><b>China Shopping</b><small>Order products from China</small></button>'+
- '<button class="service" onclick="nav(\\"market\\")"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="store"></div><b>Student Marketplace</b><small>Buy & sell pre-loved items</small></button>'+
- '<button class="service" onclick="nav(\\"skills\\")"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="graduation"></div><b>Skills & Tutors</b><small>Learn from student talent</small></button>'+
- '<button class="service" onclick="nav(\\"printing\\")"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="printer"></div><b>Smart Printing</b><small>Book before you arrive</small></button></div>'+
- '<div class="sectionhead home-feed-heading"><div><h2>'+(state.user?.interests?.products?.length||state.user?.interests?.skills?.length?'Picked for your interests':'Popular around campus')+'</h2><div class="sub">A continuous campus feed of products and student skills. Scroll to discover more.</div></div><button class="textbtn" onclick="showBuyerOnboarding(true)">Tune my feed ✦</button></div>'+
- '<div class="home-feed-grid grid" id="homeFeedGrid" aria-live="polite"></div><div id="homeFeedLoading" class="home-feed-loading" role="status">Loading more from the campus community…</div><div id="homeFeedSentinel" class="home-feed-sentinel" aria-hidden="true"></div>'+
- '<div class="home-feed-note">Feed items are catalogue examples and demo student listings. Confirm availability and provider details before making arrangements.</div>';
-}
-function selectedBuyerInterests(){return state.user?.interests||{products:[],skills:[]}}
-function buildHomeFeedItems(){
- const productSource=[...(state.listings||sample),...(marketPhotoCatalog||[])],seenProducts=new Set(),products=[];
- productSource.forEach(item=>{const key=String(item.id??item.title);if(seenProducts.has(key))return;seenProducts.add(key);const chosen=selectedBuyerInterests().products||[];if(chosen.length&&!chosen.includes(item.cat))return;products.push({type:'product',item})});
- const skillSource=[...(tutors||[]),...(state.providers||[])],seenSkills=new Set(),skills=[];
- skillSource.forEach(item=>{const key=(item.title||'')+'|'+(item.person||item.kind||'');if(seenSkills.has(key))return;seenSkills.add(key);const chosen=selectedBuyerInterests().skills||[];const category=normaliseSkillKind(item)||item.kind||'Student skill';if(chosen.length&&!chosen.includes(category))return;skills.push({type:'skill',item})});
- const mixed=[],max=Math.max(products.length,skills.length);
- for(let i=0;i<max;i++){if(products[i])mixed.push(products[i]);if(skills[i])mixed.push(skills[i])}
- return mixed.length?mixed:[...productSource.slice(0,6).map(item=>({type:'product',item})),...(tutors||[]).slice(0,4).map(item=>({type:'skill',item}))];
-}
-function appendHomeFeedBatch(){
- const grid=$('#homeFeedGrid'),loading=$('#homeFeedLoading');if(!grid||!homeFeedState.items.length)return;
- for(let i=0;i<6;i++){
-  const entry=homeFeedState.items[homeFeedState.cursor];if(!entry)break;
-  const markup=entry.type==='skill'?skillCard(entry.item,homeFeedState.cycle*6+i):card(entry.item);
-  const wrapper=document.createElement('div');wrapper.innerHTML=markup;const node=wrapper.firstElementChild;
-  if(node){node.classList.add('home-feed-item');grid.appendChild(node)}
-  homeFeedState.cursor++;if(homeFeedState.cursor>=homeFeedState.items.length){homeFeedState.cursor=0;homeFeedState.cycle++}
- }
- if(loading)loading.textContent='More campus discoveries load as you scroll.';
-}
-function initHomeFeed(){
- if(homeFeedState.observer){homeFeedState.observer.disconnect();homeFeedState.observer=null}
- if(homeFeedState.scrollHandler){window.removeEventListener('scroll',homeFeedState.scrollHandler);homeFeedState.scrollHandler=null}
- const grid=$('#homeFeedGrid');if(!grid)return;
- homeFeedState.items=buildHomeFeedItems();homeFeedState.cursor=0;homeFeedState.cycle=0;grid.innerHTML='';appendHomeFeedBatch();
- const sentinel=$('#homeFeedSentinel');
- if('IntersectionObserver' in window&&sentinel){
-  homeFeedState.observer=new IntersectionObserver(entries=>{if(entries.some(entry=>entry.isIntersecting)){homeFeedState.observer.unobserve(sentinel);appendHomeFeedBatch();requestAnimationFrame(()=>{if(homeFeedState.observer&&sentinel.isConnected)homeFeedState.observer.observe(sentinel)})}},{root:null,rootMargin:'480px 0px',threshold:0});
-  homeFeedState.observer.observe(sentinel);
- }else{
-  homeFeedState.scrollHandler=()=>{if(window.innerHeight+window.scrollY>=document.documentElement.scrollHeight-500)appendHomeFeedBatch()};
-  window.addEventListener('scroll',homeFeedState.scrollHandler,{passive:true});
- }
-}
-function showBuyerOnboarding(edit=false){
- if(!state.user||state.user.role!=='buyer'){toast('Buyer onboarding is available on buyer accounts');return}
- const options=[['products','Books'],['products','Stationery'],['products','Furniture'],['products','Electronics'],['products','Appliances'],['products','Everyday Essentials'],['skills','Academic support'],['skills','Graphic design'],['skills','Nail tech'],['skills','Makeup & cosmetics'],['skills','Crocheting'],['skills','Barbering'],['skills','Hair & beauty']];
- const current=selectedBuyerInterests();
- const productOptions=options.filter(o=>o[0]==='products').map(o=>'<label class="interest-choice"><input type="checkbox" name="productInterest" value="'+o[1]+'" '+((current.products||[]).includes(o[1])?'checked':'')+'><span>'+o[1]+'</span></label>').join('');
- const skillOptions=options.filter(o=>o[0]==='skills').map(o=>'<label class="interest-choice"><input type="checkbox" name="skillInterest" value="'+o[1]+'" '+((current.skills||[]).includes(o[1])?'checked':'')+'><span>'+o[1]+'</span></label>').join('');
- modal({title:edit?'Personalise your uniEase feed':'A few quick interests',body:'<p class="muted">Choose the products and student skills you would like to discover. We will use your choices to organise your Overview feed. You can change these later.</p>'+
- '<div class="interest-group"><b>Products I am interested in</b><div class="interest-grid">'+productOptions+'</div></div>'+
- '<div class="interest-group"><b>Skills and services I want to discover</b><div class="interest-grid">'+skillOptions+'</div></div>'+
- '<div class="onboarding-actions"><button class="btn teal" type="button" onclick="saveBuyerInterests()">Personalise my feed</button><button class="btn outline" type="button" onclick="skipBuyerOnboarding()">Skip for now</button></div><small class="interest-privacy-note">Saved in this browser in this demo version. You can skip without selecting anything.</small>'});
-}
-function saveBuyerInterests(){
- const products=[...document.querySelectorAll('input[name="productInterest"]:checked')].map(input=>input.value);
- const skills=[...document.querySelectorAll('input[name="skillInterest"]:checked')].map(input=>input.value);
- state.user={...state.user,interests:{products,skills},onboardingCompleted:true};persist();closeModal();state.page='home';render();toast('Your Overview feed has been personalised');
-}
-function skipBuyerOnboarding(){
- state.user={...state.user,interests:{products:[],skills:[]},onboardingCompleted:true,onboardingSkipped:true};persist();closeModal();state.page='home';render();toast('You can personalise your feed any time from Overview');
+ return `<section class="welcome"><div class="eyebrow">YOUR CAMPUS. YOUR COMMUNITY.</div><h1>Make student life<br>feel a little easier.</h1><p>Shop, learn, sell, book and get essentials — all in one place, built around UCC students.</p><div class="searchbar"><span>⌕</span><input id="globalSearch" placeholder="Search products, services, tutors..." onkeydown="if(event.key==='Enter')searchAll(this.value)"><button class="btn teal small" onclick="searchAll(document.getElementById('globalSearch').value)">Search</button></div></section>
+<div class="sectionhead"><div><h2>Explore uniEase</h2><div class="sub">Four core services. One student community.</div></div></div>
+<div class="services">
+<button class="service" onclick="nav('china')"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="package"></div><b>China Shopping</b><small>Order products from China</small></button>
+<button class="service" onclick="nav('market')"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="store"></div><b>Student Marketplace</b><small>Buy & sell pre-loved items</small></button>
+<button class="service" onclick="nav('skills')"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="graduation"></div><b>Skills & Tutors</b><small>Learn from student talent</small></button>
+<button class="service" onclick="nav('printing')"><div class="ico" style="background:#f1f4f7;color:#0064e0" data-icon="printer"></div><b>Smart Printing</b><small>Book before you arrive</small></button>
+</div>
+<div class="sectionhead home-feed-heading"><div><h2>${(state.user?.interests?.products?.length||state.user?.interests?.skills?.length)?'Picked for your interests':'Popular around campus'}</h2><div class="sub">A continuous campus feed of products and student skills. Scroll to discover more.</div></div><button class="textbtn" onclick="showBuyerOnboarding(true)">Tune my feed ✦</button></div>
+<div class="home-feed-grid grid" id="homeFeedGrid" aria-live="polite"></div><div id="homeFeedLoading" class="home-feed-loading" role="status">Loading more from the campus community…</div><div id="homeFeedSentinel" class="home-feed-sentinel" aria-hidden="true"></div>
+<div class="home-feed-note">Feed items are catalogue examples and demo student listings. Confirm availability and provider details before making arrangements.</div>`;
 }
 
 function pageHead(title,desc,button=''){return `<div class="page-title"><div><h1>${title}</h1><p>${desc}</p></div>${button}</div>`}
@@ -1016,18 +974,85 @@ function ordersPage(){
  (entries?'<div class="receipt-order-list">'+entries+'</div>':'<div class="panel"><div class="empty"><div class="big">🧾</div><b>No orders yet</b><p>Your purchases and bookings will appear here. Each saved request will have its own uniEase receipt.</p><button class="btn teal" onclick="nav(\'market\')">Explore marketplace</button></div></div>');
 }
 function securityPrivacyPanel(){return '<section class="panel privacy-panel" aria-labelledby="privacyTitle"><div class="privacy-panel-head"><div><span class="eyebrow">TRUST & TRANSPARENCY</span><h3 id="privacyTitle">Security & Privacy</h3><p class="muted">Visible safeguards in this prototype, with limitations stated clearly.</p></div><span class="prototype-pill">Prototype safeguards</span></div><div class="privacy-feature-grid"><div><span class="privacy-feature-mark">✓</span><b>No PIN / OTP collection</b><small>Checkout never asks for Mobile Money PINs, bank passwords or one-time codes.</small></div><div><span class="privacy-feature-mark">✓</span><b>Payment preview only</b><small>No card details are collected and no live payment request is sent.</small></div><div><span class="privacy-feature-mark">✓</span><b>Clear order review</b><small>The student sees the total and collection choice before confirming the demo flow.</small></div><div><span class="privacy-feature-mark">i</span><b>Local browser storage</b><small>Demo profile, listings and orders stay in this browser. They are not in a secured shared account database.</small></div><div><span class="privacy-feature-mark">i</span><b>Print document handling</b><small>The cloud inbox animation is a preview. Selected files are not uploaded to a drive or print shop.</small></div><div><span class="privacy-feature-mark">i</span><b>Production controls still needed</b><small>Verified sign-in, server-side access control, protected file storage, audit logs and payment-provider integration.</small></div></div><div class="privacy-warning"><b>Use demo data only.</b> Do not enter real passwords, payment credentials, confidential documents or sensitive personal information in this prototype.</div></section>'}
-function profilePage(){return `${pageHead('My profile','Manage your student details and account preferences.')}<div class="panel"><div class="row" style="justify-content:flex-start;margin-bottom:20px"><div class="avatar" style="width:58px;height:58px;font-size:22px">${state.user?(state.user.name||'S').charAt(0).toUpperCase():'G'}</div><div><b>${state.user?.name||'Guest student'}</b><div class="muted">${state.user?.phone||'Sign in to personalise your account'}</div></div></div>${state.user?`<div class="listrow"><div class="details"><b>Student ID</b><span class="muted">${state.user.studentId||'Not provided'}</span></div></div><div class="listrow"><div class="details"><b>Programme</b><span class="muted">${state.user.programme||'Not provided'}</span></div></div><button class="btn outline" onclick="logout()">Sign out</button>`:`<p class="muted">Create a demo profile to personalise your uniEase experience.</p><button class="btn teal" onclick="openAuth()">Create account / Sign in</button>`}</div><div class="panel" style="margin-top:15px"><b>About uniEase</b><p class="muted">A student integrative service platform concept for the University of Cape Coast.</p><span class="tag">Prototype v0.1</span></div>${securityPrivacyPanel()}`}
+function sellerPage(){
+ if(!state.user)return pageHead('Seller portal','Create a seller account to list products and track campus sales.')+'<div class="panel role-gate"><h2>Start selling on uniEase</h2><p>Register as a seller, create a shop profile and publish products for UCC students.</p><button class="btn teal" onclick="openAuth(\'seller\')">Sign up as a seller</button><button class="btn outline" onclick="openAuth(\'buyer\')">Continue as a buyer</button></div>';
+ if(state.user.role!=='seller')return pageHead('Seller portal','Your current account is registered as a buyer.')+'<div class="panel role-gate"><h2>Become a uniEase seller</h2><p>Switch your demo account to Seller to publish listings and view your sales activity.</p><button class="btn teal" onclick="openAuth(\'seller\')">Upgrade to seller account</button></div>';
+ const id=state.user.accountId,mine=(state.listings||sample).filter(item=>item.sellerId===id);
+ const sales=state.orders.flatMap(order=>(order.items||[]).filter(item=>item.sellerId===id).map(item=>({item,order})));
+ const gross=sales.reduce((sum,row)=>sum+Number(row.item.price||0),0),fee=sales.reduce((sum,row)=>sum+Number(row.item.commissionAmount??(Number(row.item.price||0)*.05)),0),net=gross-fee;
+ const listings=mine.length?mine.map(item=>'<div class="seller-listing-row"><div class="seller-listing-thumb">'+(item.image?'<img src="'+escapeHtml(asset(item.image))+'" alt="">':'<span>📦</span>')+'</div><div class="seller-listing-copy"><b>'+escapeHtml(item.title)+'</b><small>'+escapeHtml(item.cat||'Product')+' · '+escapeHtml(item.listingStatus||'Active')+'</small></div><strong>'+money(item.price)+'</strong></div>').join(''):'<div class="empty"><div class="big">🏷️</div><b>No listings yet</b><p>Publish your first product to reach other UCC students.</p></div>';
+ const salesMarkup=sales.length?sales.slice().reverse().map(row=>'<div class="seller-sale-row"><div><b>'+escapeHtml(row.item.title)+'</b><small>'+escapeHtml(row.order.reference||'Demo sale')+' · '+escapeHtml(row.order.date||'')+'</small></div><strong>'+money(row.item.price)+'</strong></div>').join(''):'<p class="muted">Demo sales linked to your listings appear here after a marketplace checkout.</p>';
+ return pageHead('Seller portal','Your campus shop at a glance.','<button class="btn teal" onclick="openListing()">＋ Add a product</button>')+
+ '<div class="seller-welcome"><div><span class="eyebrow">SELLER ACCOUNT</span><h2>'+escapeHtml(state.user.storeName||state.user.name)+'</h2><p>'+escapeHtml(state.user.sellerHall||'UCC campus')+' · Seller workspace</p></div><span class="seller-live-tag">LOCAL DEMO</span></div>'+
+ '<div class="seller-metric-grid"><div class="seller-metric"><span>Active listings</span><b>'+mine.length+'</b></div><div class="seller-metric"><span>Demo items sold</span><b>'+sales.length+'</b></div><div class="seller-metric"><span>Gross demo sales</span><b>'+money(gross)+'</b></div><div class="seller-metric"><span>Estimated seller proceeds</span><b>'+money(net)+'</b><small>After 5% platform commission: '+money(fee)+'</small></div></div>'+
+ '<div class="panel seller-section"><div class="sectionhead"><div><h2>My listings</h2><div class="sub">Products attached to this seller profile</div></div></div>'+listings+'</div>'+
+ '<div class="panel seller-section"><div class="sectionhead"><div><h2>Sales activity</h2><div class="sub">Demo purchases associated with your listings</div></div></div>'+salesMarkup+'</div>'+
+ '<div class="seller-footnote">Figures are browser-local demo records. They are not verified payments or actual seller payouts.</div>';
+}
+function adminDashboardPage(){return pageHead('Owner workspace','The full owner dashboard is hosted as a separate page.')+'<div class="panel"><h2>Manage uniEase performance</h2><p class="muted">The separate owner dashboard includes commission tracking and revenue forecasts.</p><a class="btn teal" href="./admin.html">Open owner dashboard ↗</a></div>'}
+function profilePage(){
+ const user=state.user,role=user?.role||'Not signed in';
+ return pageHead('My profile','Manage your student details and account preferences.')+
+ '<div class="panel"><div class="row" style="justify-content:flex-start;margin-bottom:20px"><div class="avatar" style="width:58px;height:58px;font-size:22px">'+escapeHtml((user?.name||'G').charAt(0).toUpperCase())+'</div><div><b>'+escapeHtml(user?.name||'Guest student')+'</b><div class="muted">'+escapeHtml(user?.phone||'Sign in to personalise your account')+'</div></div></div>'+
+ (user?'<div class="listrow"><div class="details"><b>Student ID</b><span class="muted">'+escapeHtml(user.studentId||'Not provided')+'</span></div></div><div class="listrow"><div class="details"><b>Programme</b><span class="muted">'+escapeHtml(user.programme||'Not provided')+'</span></div></div><div class="listrow"><div class="details"><b>Account type</b><span class="muted">'+escapeHtml(role==='seller'?'Seller':'Buyer')+'</span></div></div><button class="btn outline" onclick="logout()">Sign out</button>':'<p class="muted">Create a buyer or seller profile to personalise uniEase.</p><button class="btn teal" onclick="openAuth()">Create account / Sign in</button>')+
+ '</div>'+
+ (role==='seller'?'<div class="panel seller-profile-link"><b>Your seller workspace</b><p class="muted">Manage your listings and monitor demo sales.</p><button class="btn teal" onclick="nav(\'seller\')">Open seller portal</button></div>':'<div class="panel seller-profile-link"><b>Want to sell on uniEase?</b><p class="muted">Create a seller profile to list products and manage campus sales.</p><button class="btn teal" onclick="openAuth(\'seller\')">Sign up as a seller</button></div>')+
+ (role==='buyer'?'<div class="panel"><b>Your discovery preferences</b><p class="muted">Adjust the products and skills shown on your Overview feed.</p><button class="btn outline" onclick="showBuyerOnboarding(true)">Personalise my feed</button></div>':'')+
+ '<div class="panel owner-link-panel"><b>Application owner workspace</b><p class="muted">Open the separate owner dashboard to review demo sales, seller activity and 5% commission projections.</p><a class="btn outline" href="./admin.html">Open owner dashboard ↗</a></div>'+
+ securityPrivacyPanel();
+}
 function renderContent(){let m=$('#listingGrid');if(!m)return;let items=(state.listings||sample).filter(x=>(state.filter==='All'||x.cat===state.filter)&&(`${x.title} ${x.owner||''}`).toLowerCase().includes(state.search.toLowerCase()));m.innerHTML=items.map(x=>card(x)).join('')||'<div class="empty">No matching listings.</div>'}
 function render(){let pages={home,china:chinaPage,market:marketPage,skills:skillsPage,printing:printingPage,orders:ordersPage,seller:sellerPage,admin:adminDashboardPage,profile:profilePage};$('#main').innerHTML=(pages[state.page]||home)()+`<div class="footer">© 2026 uniEase · Built for UCC students · Prototype experience</div>`;document.querySelectorAll('[data-page]').forEach(b=>b.classList.toggle('active',b.dataset.page===state.page));hydrateIcons();if(state.page==='home')initHomeFeed();}
 function searchAll(q){let s=q.toLowerCase();if(sample.some(x=>x.title.toLowerCase().includes(s))){state.page='market';state.search=q;render();}else if(tutors.some(x=>x.title.toLowerCase().includes(s))){state.page='skills';render();}else{state.page='market';state.search=q;render();}}
 function modal(content){$('#modalRoot').innerHTML=`<div class="modalback" onclick="if(event.target===this)closeModal()"><div class="modal"><div class="modalhead"><h2>${content.title}</h2><button class="close" onclick="closeModal()">×</button></div>${content.body}</div></div>`}
 function closeModal(){$('#modalRoot').innerHTML=''}
-function openAuth(){modal({title:'Welcome to uniEase',body:`<p class="muted">Create a demo student profile. This prototype stores details only in this browser.</p><div class="formgrid"><div class="field full"><label>Full name</label><input id="authName" placeholder="Your full name" value="${state.user?.name||''}"></div><div class="field full"><label>Telephone number</label><input id="authPhone" placeholder="+233 XX XXX XXXX" value="${state.user?.phone||''}"></div><div class="field"><label>UCC Student ID</label><input id="authId" placeholder="Student ID" value="${state.user?.studentId||''}"></div><div class="field"><label>Programme</label><input id="authProgramme" placeholder="Programme" value="${state.user?.programme||''}"></div></div><div class="notice">Demo only: no OTP or real identity verification is performed.</div><button class="btn teal" onclick="saveAuth()">Continue to uniEase</button>`})}
-function saveAuth(){let name=$('#authName').value.trim(),phone=$('#authPhone').value.trim();if(!name||!phone){toast('Please enter your name and phone number');return}state.user={name,phone,studentId:$('#authId').value,programme:$('#authProgramme').value};persist();$('#avatar').textContent=name[0].toUpperCase();closeModal();toast('Welcome to uniEase, '+name.split(' ')[0]+'!');render()}
+function openAuth(defaultRole='buyer'){
+ const role=defaultRole==='seller'?'seller':(state.user?.role||'buyer');
+ modal({title:'Join uniEase',body:`<p class="muted">Create your student profile and choose how you want to participate in the UCC community.</p>
+ <div class="field"><label>Account type</label><select id="authRole" onchange="toggleSignupRole()"><option value="buyer" ${role==='buyer'?'selected':''}>Buyer · discover and purchase</option><option value="seller" ${role==='seller'?'selected':''}>Seller · list products and manage sales</option></select></div>
+ <div class="formgrid"><div class="field full"><label>Full name</label><input id="authName" placeholder="Your full name" value="${escapeHtml(state.user?.name||'')}"></div><div class="field full"><label>Telephone number</label><input id="authPhone" placeholder="+233 XX XXX XXXX" value="${escapeHtml(state.user?.phone||'')}"></div><div class="field"><label>UCC Student ID</label><input id="authId" placeholder="Student ID" value="${escapeHtml(state.user?.studentId||'')}"></div><div class="field"><label>Programme</label><input id="authProgramme" placeholder="Programme" value="${escapeHtml(state.user?.programme||'')}"></div>
+ <div id="sellerSignupFields" class="formgrid full" style="display:${role==='seller'?'grid':'none'}"><div class="field full"><label>Shop / seller display name</label><input id="authStoreName" placeholder="e.g. Ama Campus Finds" value="${escapeHtml(state.user?.storeName||'')}"></div><div class="field full"><label>Hall / campus location</label><input id="authSellerHall" placeholder="e.g. Valco Hall" value="${escapeHtml(state.user?.sellerHall||'')}"></div></div></div>
+ <div class="notice">Demo account only: no OTP or student identity verification is performed. Details are saved in this browser.</div><button class="btn teal" onclick="saveAuth()">Create / update account</button>`});
+}
+function toggleSignupRole(){const fields=$('#sellerSignupFields');if(fields)fields.style.display=$('#authRole')?.value==='seller'?'grid':'none'}
+function saveAuth(){
+ const name=$('#authName').value.trim(),phone=$('#authPhone').value.trim(),role=$('#authRole').value;
+ if(!name||!phone){toast('Please enter your name and telephone number');return}
+ if(role==='seller'&&!$('#authStoreName').value.trim()){toast('Add a shop or seller display name');return}
+ const accountId=state.user?.accountId||'UEU-'+Date.now().toString(36).toUpperCase(),oldUser=state.user||{};
+ state.user={...oldUser,accountId,name,phone,studentId:$('#authId').value.trim(),programme:$('#authProgramme').value.trim(),role,storeName:role==='seller'?$('#authStoreName').value.trim():'',sellerHall:role==='seller'?$('#authSellerHall').value.trim():'',createdAt:oldUser.createdAt||new Date().toISOString()};
+ state.accounts=state.accounts||[];
+ const summary={id:accountId,name,role,createdAt:state.user.createdAt},accountIndex=state.accounts.findIndex(x=>x.id===accountId);
+ if(accountIndex>=0)state.accounts[accountIndex]=summary;else state.accounts.push(summary);
+ if(role==='seller'){
+  state.sellers=state.sellers||[];
+  const seller={id:accountId,name,storeName:state.user.storeName,hall:state.user.sellerHall||'UCC campus',joinedAt:state.user.createdAt};
+  const sellerIndex=state.sellers.findIndex(x=>x.id===accountId);
+  if(sellerIndex>=0)state.sellers[sellerIndex]=seller;else state.sellers.push(seller);
+ }
+ const firstBuyer=role==='buyer'&&!oldUser.onboardingCompleted;
+ persist();$('#avatar').textContent=name[0].toUpperCase();closeModal();
+ if(firstBuyer){render();showBuyerOnboarding(false);return}
+ toast(role==='seller'?'Seller account ready · welcome to your portal':'Buyer account ready · welcome to uniEase');render();
+}
 function logout(){state.user=null;persist();$('#avatar').textContent='G';render();toast('Signed out')}
-function openListing(){modal({title:'List an item for sale',body:`<div class="formgrid"><div class="field full"><label>Item name</label><input id="liTitle" placeholder="e.g. Used course textbook"></div><div class="field"><label>Category</label><select id="liCat"><option>Books</option><option>Stationery</option><option>Furniture</option><option>Electronics</option><option>Appliances</option><option>Clothing</option><option>Accessories</option><option>Footwear</option><option>Beauty & Care</option><option>Everyday Essentials</option></select></div><div class="field"><label>Price (GH₵)</label><input id="liPrice" type="number" min="1" placeholder="45"></div><div class="field full"><label>Condition and description</label><textarea id="liDesc" rows="2" placeholder="Describe condition, collection location..."></textarea></div><div class="field full"><label>Upload photos</label><input type="file" id="liPhoto" accept="image/*" multiple></div></div><button class="btn teal" style="margin-top:14px" onclick="saveListing()">Publish listing</button>`})}
-function saveListing(){let title=$('#liTitle').value.trim(),price=Number($('#liPrice').value);if(!title||!price){toast('Add an item name and price');return}let f=$('#liPhoto').files[0],item={id:Date.now(),title,price,cat:$('#liCat').value,owner:(state.user?.name||'UCC student')+' • UCC',emoji:'📦',condition:$('#liDesc').value||'Student listing'};if(f){if(f.size>2*1024*1024){toast('Please choose an image under 2 MB');return}let reader=new FileReader();reader.onload=()=>{item.image=reader.result;finishListing(item)};reader.readAsDataURL(f)}else finishListing(item)}
-function finishListing(item){state.listings=state.listings||sample;state.listings.unshift(item);persist();closeModal();nav('market');toast('Your listing is live in this demo')}
+
+function openListing(){
+ if(!state.user){openAuth('seller');return}
+ if(state.user.role!=='seller'){modal({title:'Seller account required',body:'<p>Create a seller account to publish products on the Student Marketplace.</p><button class="btn teal" onclick="closeModal();openAuth(\'seller\')">Sign up as a seller</button>'});return}
+ modal({title:'List an item for sale',body:`<div class="formgrid"><div class="field full"><label>Item name</label><input id="liTitle" placeholder="e.g. Used course textbook"></div><div class="field"><label>Category</label><select id="liCat"><option>Books</option><option>Stationery</option><option>Furniture</option><option>Electronics</option><option>Appliances</option><option>Clothing</option><option>Accessories</option><option>Footwear</option><option>Beauty & Care</option><option>Everyday Essentials</option></select></div><div class="field"><label>Price (GH₵)</label><input id="liPrice" type="number" min="1" placeholder="45"></div><div class="field full"><label>Condition and description</label><textarea id="liDesc" rows="2" placeholder="Describe condition and collection details..."></textarea></div><div class="field full"><label>Upload product photo</label><input type="file" id="liPhoto" accept="image/*"></div></div><button class="btn teal" style="margin-top:14px" onclick="saveListing()">Publish listing</button>`});
+}
+function saveListing(){
+ if(!state.user||state.user.role!=='seller'){toast('Create a seller account before listing an item');return}
+ const title=$('#liTitle').value.trim(),price=Number($('#liPrice').value);
+ if(!title||!Number.isFinite(price)||price<=0){toast('Add an item name and a valid price');return}
+ const item={id:Date.now(),sellerId:state.user.accountId,sellerName:state.user.storeName||state.user.name,title,price,cat:$('#liCat').value,owner:(state.user.storeName||state.user.name)+' • '+(state.user.sellerHall||'UCC'),emoji:'📦',condition:$('#liDesc').value||'Student listing',createdAt:new Date().toISOString(),listingStatus:'Active'};
+ const file=$('#liPhoto').files[0];
+ if(file){if(file.size>2*1024*1024){toast('Please choose an image under 2 MB');return}const reader=new FileReader();reader.onload=()=>{item.image=reader.result;finishListing(item)};reader.readAsDataURL(file)}
+ else finishListing(item);
+}
+function finishListing(item){state.listings=state.listings||sample;state.listings.unshift(item);persist();closeModal();nav('seller');toast('Your listing is live in the seller portal')}
+
 function openProvider(){modal({title:'Offer a student service',body:`<div class="formgrid"><div class="field full"><label>Service title</label><input id="prTitle" placeholder="e.g. Graphic design, nail tech or Statistics tutoring"></div><div class="field"><label>Category</label><select id="prCat"><option>Academic support</option><option>Graphic design</option><option>Nail tech</option><option>Makeup & cosmetics</option><option>Crocheting</option><option>Barbering</option><option>Hair & beauty</option></select></div><div class="field"><label>Starting price (GH₵)</label><input id="prPrice" type="number" placeholder="25"></div><div class="field full"><label>About your service</label><textarea id="prDesc" rows="2" placeholder="Describe what students will learn or the service you provide."></textarea></div><div class="field full"><label>Upload a service photo (optional)</label><input type="file" id="prPhoto" accept="image/*"></div></div><button class="btn teal" style="margin-top:14px" onclick="saveProvider()">Publish service</button>`})}
 function saveProvider(){let title=$('#prTitle').value.trim(),price=Number($('#prPrice').value);if(!title||!price){toast('Add a service title and price');return}let item={title,price,kind:$('#prCat').value,person:state.user?.name||'UCC student',emoji:'✨',desc:$('#prDesc').value,unit:'from'};let f=$('#prPhoto').files[0];if(f){if(f.size>2*1024*1024){toast('Please choose an image under 2 MB');return}let reader=new FileReader();reader.onload=()=>{item.image=reader.result;state.providers.unshift(item);persist();closeModal();nav('skills');toast('Your service is now listed in this demo')};reader.readAsDataURL(f)}else{state.providers.unshift(item);persist();closeModal();nav('skills');toast('Your service is now listed in this demo')}}
 function bookService(title,price){
@@ -1122,10 +1147,15 @@ function runDemoPayment(p){
  },620*(index+1)));
 }
 function finishDemoPayment(p){
- const items=state.cart.map(item=>({title:item.title,price:item.price,category:item.cat||item.kind||''}));
- state.orders.push({id:p.reference,orderType:'Marketplace checkout · demo',items,title:p.itemCount+' item(s) checkout demonstration',price:p.total,status:'Demo checkout completed — no funds transferred',method:p.method+' · simulation only',delivery:p.delivery,reference:p.reference,date:new Date().toLocaleDateString(),createdAt:new Date().toISOString(),customerName:state.user?.name||'Guest student',customerPhone:state.user?.phone||'',icon:'🛍️',paymentStatus:'Not paid · demo only'});
+ const items=state.cart.map(item=>{
+  const gross=Number(item.price)||0,fee=Math.round(gross*.05*100)/100;
+  return {title:item.title,price:gross,category:item.cat||item.kind||'',sellerId:item.sellerId||null,sellerName:item.sellerName||item.owner||'Campus catalogue',commissionRate:.05,commissionAmount:fee,sellerNet:Math.round((gross-fee)*100)/100};
+ });
+ const grossAmount=Math.round(items.reduce((sum,item)=>sum+item.price,0)*100)/100,commissionAmount=Math.round(items.reduce((sum,item)=>sum+item.commissionAmount,0)*100)/100,reference=p.reference;
+ state.orders.push({id:reference,orderType:'Marketplace purchase · demo',isMarketplacePurchase:true,items,grossAmount,commissionRate:.05,commissionAmount,sellerPayout:Math.round((grossAmount-commissionAmount)*100)/100,title:p.itemCount+' item(s) checkout demonstration',price:grossAmount,status:'Demo purchase recorded — no funds collected',method:p.method+' · simulation only',delivery:p.delivery,reference,date:new Date().toLocaleDateString(),createdAt:new Date().toISOString(),customerName:state.user?.name||'Guest student',customerPhone:state.user?.phone||'',icon:'🛍️',paymentStatus:'Not paid · demo only'});
  state.cart=[];count();persist();
- setTimeout(()=>{if(!document.querySelector('.payment-flow'))return;closeModal();nav('orders');toast('Demo receipt saved · no payment made')},1900);
+ setTimeout(()=>{if(!document.querySelector('.payment-flow'))return;closeModal();nav('orders');toast('Demo purchase recorded · commission preview updated')},1900);
 }
+
 render();count();if(state.user)$('#avatar').textContent=state.user.name[0].toUpperCase();
 </script></body></html>
