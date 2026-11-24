@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>uniEase Owner Dashboard</title>
+<link rel="icon" type="image/jpeg" href="./UniEase-logo.jpeg">
+<style>
+:root{--navy:#102d46;--blue:#0064e0;--teal:#159b83;--ink:#172b3b;--muted:#718092;--line:#e2e8ee;--bg:#f4f7fa;--card:#fff;--green:#13865e;--amber:#936514;--shadow:0 8px 26px rgba(17,43,63,.055)}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
+a{color:inherit}.shell{min-height:100vh}.topbar{height:76px;display:flex;align-items:center;justify-content:space-between;padding:0 32px;background:#fff;border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10}
+.brand{display:flex;align-items:center;gap:12px}.brand img{width:44px;height:44px;object-fit:contain}.brand strong{display:block;font-size:17px;letter-spacing:-.3px}.brand small{display:block;color:var(--muted);font-size:10px}
+.top-actions{display:flex;align-items:center;gap:10px}.top-actions a,.top-actions button{display:inline-flex;align-items:center;gap:7px;padding:9px 13px;border:1px solid var(--line);border-radius:11px;text-decoration:none;background:#fff;color:var(--ink);font-size:11px;font-weight:750;cursor:pointer}
+.top-actions .refresh{background:var(--blue);border-color:var(--blue);color:#fff}
+.container{width:min(1320px,calc(100% - 48px));margin:28px auto 60px}
+.heading{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;margin-bottom:18px}.eyebrow{color:var(--blue);font-size:9px;font-weight:900;letter-spacing:1.4px}.heading h1{margin:4px 0;font-size:clamp(26px,3vw,34px);letter-spacing:-1px}.heading p{margin:0;color:var(--muted);font-size:12px}
+.period{padding:7px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--muted);font-size:10px;white-space:nowrap}
+.local-banner{display:flex;align-items:flex-start;gap:11px;margin:15px 0 18px;padding:13px 15px;border:1px solid #ead7a1;border-radius:13px;background:#fff9e9;color:#745616}
+.local-banner b{display:block;font-size:11px}.local-banner p{margin:2px 0 0;font-size:10px;line-height:1.5}
+.metric-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:13px;margin:16px 0}
+.metric{min-width:0;padding:16px 17px;border:1px solid var(--line);border-radius:16px;background:var(--card);box-shadow:var(--shadow)}
+.metric-head{display:flex;justify-content:space-between;align-items:center;gap:8px;color:var(--muted);font-size:10px}.metric-icon{width:32px;height:32px;display:grid;place-items:center;border-radius:10px;background:#edf4fc;color:var(--blue);font-size:16px}
+.metric b{display:block;margin:10px 0 2px;color:var(--ink);font-size:clamp(20px,2.3vw,27px);letter-spacing:-.8px;overflow-wrap:anywhere}.metric small{color:var(--muted);font-size:9px;line-height:1.4}
+.metric.commission{border-color:#bdd9f8;background:#f8fbff}.metric.commission .metric-icon{background:#e5f1ff}.metric.commission b{color:var(--blue)}
+.section-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(300px,.9fr);gap:14px;margin:14px 0}
+.panel{min-width:0;padding:18px;border:1px solid var(--line);border-radius:17px;background:#fff;box-shadow:var(--shadow)}
+.panel-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:13px}.panel h2{margin:0;font-size:15px;letter-spacing:-.25px}.panel-head p{margin:3px 0 0;color:var(--muted);font-size:10px}
+.tag{padding:5px 8px;border-radius:99px;background:#eaf3ff;color:#24558d;font-size:9px;font-weight:850;white-space:nowrap}
+.chart-wrap{width:100%;overflow:hidden}.chart-wrap svg{display:block;width:100%;height:auto;min-height:190px}
+.chart-legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:5px;color:var(--muted);font-size:9px}.dot{display:inline-block;width:8px;height:8px;margin-right:5px;border-radius:50%;background:var(--blue)}
+.revenue-total{display:flex;align-items:baseline;gap:8px;margin:6px 0 15px}.revenue-total strong{font-size:28px;letter-spacing:-.8px}.revenue-total span{color:var(--muted);font-size:10px}
+.model-list{display:flex;flex-direction:column;gap:13px}.model-row{display:grid;grid-template-columns:minmax(130px,1.2fr) minmax(90px,2fr) 100px;align-items:center;gap:10px}.model-name b{display:block;font-size:10px}.model-name small{display:block;color:var(--muted);font-size:9px}.bar-track{height:9px;border-radius:99px;background:#eef2f6;overflow:hidden}.bar-fill{height:100%;border-radius:99px;background:linear-gradient(90deg,#0064e0,#38a6dc);transition:width .25s ease}.model-value{text-align:right;font-size:10px;font-weight:850}
+.assumptions{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:11px;margin-top:16px}.assumption{display:flex;flex-direction:column;gap:5px;min-width:0}.assumption label{color:var(--muted);font-size:9px;line-height:1.35}.assumption input{width:100%;padding:9px 10px;border:1px solid var(--line);border-radius:9px;background:#fff;color:var(--ink);font:inherit;font-size:11px}
+.assumption-note{margin-top:12px;color:var(--muted);font-size:9px;line-height:1.55}
+.table-wrap{width:100%;overflow:auto}.data-table{width:100%;border-collapse:collapse;min-width:560px}.data-table th,.data-table td{padding:11px 8px;border-bottom:1px solid #edf0f3;text-align:left;font-size:10px}.data-table th{color:var(--muted);font-size:9px;text-transform:uppercase;letter-spacing:.5px}.data-table td:last-child,.data-table th:last-child{text-align:right}
+.status{padding:4px 7px;border-radius:99px;background:#fff3da;color:#875e12;font-size:8px;font-weight:850}.empty{padding:28px 12px;text-align:center;color:var(--muted);font-size:11px}.empty b{display:block;margin-bottom:5px;color:var(--ink);font-size:12px}
+.seller-list{display:flex;flex-direction:column;gap:0}.seller{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #edf0f3}.avatar{width:34px;height:34px;flex:0 0 34px;display:grid;place-items:center;border-radius:50%;background:#eaf2fc;color:var(--blue);font-size:12px;font-weight:850}.seller-info{flex:1;min-width:0}.seller-info b{display:block;font-size:10px}.seller-info small{display:block;color:var(--muted);font-size:9px}.seller-count{color:var(--muted);font-size:9px;white-space:nowrap}
+.footer-note{margin-top:18px;padding:14px 16px;border:1px solid var(--line);border-radius:13px;background:#f8fafc;color:var(--muted);font-size:10px;line-height:1.55}
+@media(max-width:980px){.metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.section-grid{grid-template-columns:1fr}.assumptions{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:600px){.topbar{height:64px;padding:0 14px}.brand img{width:38px;height:38px}.brand strong{font-size:14px}.top-actions a,.top-actions button{padding:8px 9px;font-size:9px}.container{width:calc(100% - 24px);margin:20px auto 40px}.heading{align-items:flex-start;flex-direction:column}.metric-grid{gap:8px}.metric{padding:12px}.metric b{font-size:20px}.panel{padding:14px}.assumptions{grid-template-columns:1fr 1fr}.model-row{grid-template-columns:minmax(90px,1.1fr) minmax(40px,1fr) 82px;gap:7px}.model-name b{font-size:9px}.model-value{font-size:9px}}
+</style>
+</head>
+<body>
+<div class="shell">
+<header class="topbar">
+ <div class="brand"><img src="./UniEase-logo.jpeg" alt="uniEase logo"><div><strong>uniEase Owner</strong><small>Business intelligence workspace</small></div></div>
+ <div class="top-actions"><a href="./index.html">↖ Student app</a><button class="refresh" id="refreshBtn">↻ Refresh figures</button></div>
+</header>
+<main class="container">
+ <div class="heading"><div><div class="eyebrow">APPLICATION MANAGEMENT</div><h1>Owner dashboard</h1><p>Marketplace performance, platform earnings and business-model forecasts.</p></div><span class="period">Ghana cedis · Demo workspace</span></div>
+ <div class="local-banner"><span>ⓘ</span><div><b>Local demo analytics — not a secured live admin system</b><p>This page reads orders, sellers and listings saved in this browser on the uniEase student app. It does not see activity from other users' devices. Demo checkout records are not real payments or money received.</p></div></div>
+ <section class="metric-grid">
+  <article class="metric"><div class="metric-head"><span>Marketplace demo sales</span><span class="metric-icon">↗</span></div><b id="grossMetric">GH₵0.00</b><small id="grossSub">0 demo purchases recorded</small></article>
+  <article class="metric commission"><div class="metric-head"><span>5% platform commission</span><span class="metric-icon">%</span></div><b id="commissionMetric">GH₵0.00</b><small>Calculated from demo marketplace purchases only</small></article>
+  <article class="metric"><div class="metric-head"><span>Estimated seller proceeds</span><span class="metric-icon">♧</span></div><b id="payoutMetric">GH₵0.00</b><small>Marketplace sales less illustrative 5% commission</small></article>
+  <article class="metric"><div class="metric-head"><span>Demo transactions</span><span class="metric-icon">▤</span></div><b id="transactionMetric">0</b><small id="activitySub">Orders and bookings saved in this browser</small></article>
+ </section>
+ <section class="metric-grid">
+  <article class="metric"><div class="metric-head"><span>Seller accounts</span><span class="metric-icon">♙</span></div><b id="sellerMetric">0</b><small>Seller profiles registered in this browser</small></article>
+  <article class="metric"><div class="metric-head"><span>Seller listings</span><span class="metric-icon">▦</span></div><b id="listingMetric">0</b><small>Listings linked to seller accounts</small></article>
+  <article class="metric"><div class="metric-head"><span>Buyer accounts</span><span class="metric-icon">♡</span></div><b id="buyerMetric">0</b><small>Buyer profiles registered in this browser</small></article>
+  <article class="metric"><div class="metric-head"><span>All requests</span><span class="metric-icon">⌁</span></div><b id="requestMetric">0</b><small>Marketplace, China, printing and service records</small></article>
+ </section>
+ <section class="section-grid">
+  <article class="panel">
+   <div class="panel-head"><div><h2>Revenue forecast by business model</h2><p>Editable monthly assumptions · illustrative gross platform revenue</p></div><span class="tag">Projection</span></div>
+   <div class="revenue-total"><strong id="forecastTotal">GH₵0.00</strong><span>projected monthly revenue</span></div>
+   <div class="model-list" id="modelBars"></div>
+   <div class="assumptions">
+    <div class="assumption"><label for="marketOrders">Marketplace purchases / month</label><input id="marketOrders" type="number" min="0" value="180"></div>
+    <div class="assumption"><label for="marketValue">Average marketplace order (GH₵)</label><input id="marketValue" type="number" min="0" value="70"></div>
+    <div class="assumption"><label for="chinaOrders">China sourcing orders / month</label><input id="chinaOrders" type="number" min="0" value="70"></div>
+    <div class="assumption"><label for="chinaFee">Average sourcing fee (GH₵)</label><input id="chinaFee" type="number" min="0" value="25"></div>
+    <div class="assumption"><label for="skillBookings">Skills bookings / month</label><input id="skillBookings" type="number" min="0" value="120"></div>
+    <div class="assumption"><label for="skillValue">Average skill booking (GH₵)</label><input id="skillValue" type="number" min="0" value="60"></div>
+    <div class="assumption"><label for="skillRate">Skills commission (%)</label><input id="skillRate" type="number" min="0" max="100" step=".5" value="8"></div>
+    <div class="assumption"><label for="printJobs">Printing jobs / month</label><input id="printJobs" type="number" min="0" value="800"></div>
+    <div class="assumption"><label for="printFee">Average print referral fee (GH₵)</label><input id="printFee" type="number" min="0" step=".1" value="1.5"></div>
+    <div class="assumption"><label for="featuredSlots">Featured listings / month</label><input id="featuredSlots" type="number" min="0" value="30"></div>
+    <div class="assumption"><label for="featuredFee">Featured listing fee (GH₵)</label><input id="featuredFee" type="number" min="0" value="25"></div>
+    <div class="assumption"><label for="partners">Partner packages / month</label><input id="partners" type="number" min="0" value="2"></div>
+    <div class="assumption"><label for="partnerFee">Average partner package (GH₵)</label><input id="partnerFee" type="number" min="0" value="500"></div>
+   </div>
+   <div class="assumption-note">Assumptions are planning inputs, not sales history or guaranteed income. Marketplace commission is fixed at 5% in this demo. China sourcing, Skills & Tutors, Smart Printing, featured listings and partnerships are proposed revenue models; their rates must be validated and agreed before launch.</div>
+  </article>
+  <article class="panel">
+   <div class="panel-head"><div><h2>Six-month revenue outlook</h2><p>Scenario based on gradual monthly growth assumptions</p></div><span class="tag">Forecast</span></div>
+   <div class="chart-wrap" id="forecastChart"></div>
+   <div class="chart-legend"><span><i class="dot"></i>Projected platform revenue</span></div>
+   <div class="footer-note">The chart is a simple scenario model using the assumptions on the left and illustrative growth factors. It is not an AI prediction, budget, or audited financial projection.</div>
+  </article>
+ </section>
+ <section class="section-grid">
+  <article class="panel">
+   <div class="panel-head"><div><h2>Recorded marketplace commissions</h2><p>5% calculated from saved demo purchase records</p></div><span class="tag">Actual demo records</span></div>
+   <div class="table-wrap"><table class="data-table"><thead><tr><th>Reference / date</th><th>Buyer</th><th>Gross sale</th><th>5% commission</th><th>Seller proceeds</th><th>Status</th></tr></thead><tbody id="commissionRows"><tr><td colspan="6" class="empty">No demo purchases yet.</td></tr></tbody></table></div>
+  </article>
+  <article class="panel">
+   <div class="panel-head"><div><h2>Seller community</h2><p>Seller accounts and their listing counts</p></div><span class="tag">Local accounts</span></div>
+   <div class="seller-list" id="sellerRows"><div class="empty"><b>No sellers yet</b>Seller accounts created in the student app appear here in this browser.</div></div>
+  </article>
+ </section>
+ <div class="footer-note"><b>Production boundary:</b> GitHub Pages is a static host. This dashboard currently reads browser-local storage shared between pages on this same site and browser. It has no owner authentication, central database, server-side permission checks, verified payment webhooks, or connection to a live payment provider. Do not use it to manage real customer data or real payouts. A production owner console must be protected behind server-side authentication and read verified payment records from a central database.</div>
+</main>
+</div>
+<script>
+(function(){
+"use strict";
+const $=function(selector){return document.querySelector(selector)};
+const money=function(value){return "GH₵"+(Number(value)||0).toLocaleString("en-GH",{minimumFractionDigits:2,maximumFractionDigits:2})};
+const read=function(key,fallback){try{const value=localStorage.getItem(key);return value?JSON.parse(value):fallback}catch(error){return fallback}};
+const safe=function(value){return String(value==null?"":value).replace(/[&<>"']/g,function(ch){return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[ch]})};
+function snapshot(){
+ return {orders:read("unieaseOrders",[]),sellers:read("unieaseSellers",[]),accounts:read("unieaseAccounts",[]),listings:read("unieaseListings",[])};
+}
+function marketplaceOrders(orders){
+ return orders.filter(function(order){
+  return order.isMarketplacePurchase===true||String(order.orderType||"").toLowerCase().indexOf("marketplace purchase")>=0||String(order.orderType||"").toLowerCase().indexOf("marketplace checkout")>=0;
+ });
+}
+function lineTotals(order){
+ const lines=Array.isArray(order.items)&&order.items.length?order.items:null;
+ if(lines){
+  const gross=lines.reduce(function(sum,line){return sum+(Number(line.price)||0)},0);
+  const commission=lines.reduce(function(sum,line){const base=Number(line.price)||0;return sum+(Number.isFinite(Number(line.commissionAmount))?Number(line.commissionAmount):Math.round(base*.05*100)/100)},0);
+  return {gross:gross,commission:commission,payout:gross-commission};
+ }
+ const gross=Number(order.grossAmount??order.price)||0,commission=Math.round(gross*.05*100)/100;
+ return {gross:gross,commission:commission,payout:gross-commission};
+}
+function renderMetrics(data){
+ const purchases=marketplaceOrders(data.orders);
+ const totals=purchases.map(lineTotals);
+ const gross=totals.reduce(function(sum,row){return sum+row.gross},0);
+ const commission=totals.reduce(function(sum,row){return sum+row.commission},0);
+ const payout=totals.reduce(function(sum,row){return sum+row.payout},0);
+ const sellers=data.sellers.length;
+ const listings=data.listings.filter(function(item){return !!item.sellerId}).length;
+ const buyers=data.accounts.filter(function(account){return account.role==="buyer"}).length;
+ $("#grossMetric").textContent=money(gross);
+ $("#grossSub").textContent=purchases.length+" recorded demo marketplace purchases";
+ $("#commissionMetric").textContent=money(commission);
+ $("#payoutMetric").textContent=money(payout);
+ $("#transactionMetric").textContent=String(data.orders.length);
+ $("#activitySub").textContent=purchases.length+" marketplace purchases · "+Math.max(0,data.orders.length-purchases.length)+" other requests";
+ $("#sellerMetric").textContent=String(sellers);
+ $("#listingMetric").textContent=String(listings);
+ $("#buyerMetric").textContent=String(buyers);
+ $("#requestMetric").textContent=String(data.orders.length);
+ const rows=purchases.slice().reverse().map(function(order,index){
+  const t=lineTotals(order);
+  return "<tr><td><b>"+safe(order.reference||"Demo purchase")+"</b><br><small>"+safe(order.date||"")+"</small></td><td>"+safe(order.customerName||"Student buyer")+"</td><td>"+money(t.gross)+"</td><td><b>"+money(t.commission)+"</b></td><td>"+money(t.payout)+"</td><td><span class=\"status\">DEMO · NOT PAID</span></td></tr>";
+ }).join("");
+ $("#commissionRows").innerHTML=rows||'<tr><td colspan="6" class="empty">No demo purchases yet. Complete a marketplace demo checkout in the student app to populate this table.</td></tr>';
+ const sellerRows=data.sellers.map(function(seller){
+  const count=data.listings.filter(function(item){return item.sellerId===seller.id}).length;
+  return '<div class="seller"><div class="avatar">'+safe((seller.storeName||seller.name||"S").charAt(0).toUpperCase())+'</div><div class="seller-info"><b>'+safe(seller.storeName||seller.name)+'</b><small>'+safe(seller.name)+" · "+safe(seller.hall||"UCC campus")+'</small></div><span class="seller-count">'+count+" listings</span></div>";
+ }).join("");
+ $("#sellerRows").innerHTML=sellerRows||'<div class="empty"><b>No sellers yet</b>Seller accounts created in the student app appear here in this browser.</div>';
+}
+const inputIds=["marketOrders","marketValue","chinaOrders","chinaFee","skillBookings","skillValue","skillRate","printJobs","printFee","featuredSlots","featuredFee","partners","partnerFee"];
+function n(id){const el=$("#"+id);const value=el?Number(el.value):0;return Number.isFinite(value)?Math.max(0,value):0}
+function forecastModels(){
+ const marketplace=n("marketOrders")*n("marketValue")*.05;
+ const china=n("chinaOrders")*n("chinaFee");
+ const skills=n("skillBookings")*n("skillValue")*n("skillRate")/100;
+ const printing=n("printJobs")*n("printFee");
+ const featured=n("featuredSlots")*n("featuredFee");
+ const partnerships=n("partners")*n("partnerFee");
+ return [
+  {name:"Marketplace · 5% commission",detail:"Purchase volume × average basket × 5%",value:marketplace},
+  {name:"China Shopping · sourcing fees",detail:"Orders × average coordination fee",value:china},
+  {name:"Skills & Tutors · proposed cut",detail:"Bookings × average booking × assumed rate",value:skills},
+  {name:"Smart Printing · partner referral",detail:"Jobs × referral fee per completed job",value:printing},
+  {name:"Featured listings",detail:"Promoted seller slots × listing fee",value:featured},
+  {name:"Campus & brand partnerships",detail:"Monthly partner packages × package fee",value:partnerships}
+ ];
+}
+function renderForecast(){
+ const models=forecastModels(),total=models.reduce(function(sum,row){return sum+row.value},0);
+ $("#forecastTotal").textContent=money(total);
+ const max=Math.max(1,...models.map(function(row){return row.value}));
+ $("#modelBars").innerHTML=models.map(function(row){
+  const width=Math.max(0,Math.min(100,row.value/max*100));
+  return '<div class="model-row"><div class="model-name"><b>'+safe(row.name)+'</b><small>'+safe(row.detail)+'</small></div><div class="bar-track"><div class="bar-fill" style="width:'+width.toFixed(1)+'%"></div></div><div class="model-value">'+money(row.value)+'</div></div>';
+ }).join("");
+ const growth=[1,1.08,1.16,1.25,1.35,1.46],values=growth.map(function(factor){return total*factor});
+ const chartWidth=520,chartHeight=240,left=52,right=14,top=20,bottom=34,plotW=chartWidth-left-right,plotH=chartHeight-top-bottom;
+ const yMax=Math.max(100,...values)*1.12;
+ let svg='<svg viewBox="0 0 '+chartWidth+' '+chartHeight+'" role="img" aria-label="Illustrative six month revenue forecast">';
+ for(let tick=0;tick<=4;tick++){
+  const y=top+plotH-(tick/4)*plotH,amount=yMax*tick/4;
+  svg+='<line x1="'+left+'" y1="'+y.toFixed(1)+'" x2="'+(chartWidth-right)+'" y2="'+y.toFixed(1)+'" stroke="#e8edf2" stroke-width="1"/>';
+  svg+='<text x="'+(left-8)+'" y="'+(y+4).toFixed(1)+'" font-size="9" text-anchor="end" fill="#7b8795">'+Math.round(amount).toLocaleString("en-GH")+'</text>';
+ }
+ const gap=plotW/6,barW=Math.min(36,gap*.5);
+ values.forEach(function(value,index){
+  const h=value/yMax*plotH,x=left+gap*index+(gap-barW)/2,y=top+plotH-h;
+  svg+='<rect x="'+x.toFixed(1)+'" y="'+y.toFixed(1)+'" width="'+barW.toFixed(1)+'" height="'+h.toFixed(1)+'" rx="6" fill="#1675d1"/>';
+  svg+='<text x="'+(x+barW/2).toFixed(1)+'" y="'+(y-7).toFixed(1)+'" font-size="8" text-anchor="middle" fill="#30485f">'+(value>=1000?(value/1000).toFixed(1)+"k":Math.round(value))+'</text>';
+  svg+='<text x="'+(x+barW/2).toFixed(1)+'" y="'+(chartHeight-12)+'" font-size="9" text-anchor="middle" fill="#728092">M'+(index+1)+'</text>';
+ });
+ svg+='</svg>';
+ $("#forecastChart").innerHTML=svg;
+}
+function exportCommissions(){
+ const data=snapshot(),purchases=marketplaceOrders(data.orders);
+ const rows=[["Reference","Date","Buyer","Gross sales GHS","Commission 5% GHS","Seller proceeds GHS","Payment status"]];
+ purchases.forEach(function(order){
+  const t=lineTotals(order);
+  rows.push([order.reference||"",order.date||"",order.customerName||"",t.gross.toFixed(2),t.commission.toFixed(2),t.payout.toFixed(2),"Demo only · not paid"]);
+ });
+ const csv=rows.map(function(row){return row.map(function(value){return '"'+String(value).replace(/"/g,'""')+'"'}).join(",")}).join("\r\n");
+ const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
+ const a=document.createElement("a");a.href=url;a.download="uniEase-demo-commission-report.csv";document.body.append(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url)},1200);
+}
+function refresh(){
+ const data=snapshot();renderMetrics(data);renderForecast();
+}
+inputIds.forEach(function(id){$("#"+id).addEventListener("input",renderForecast)});
+$("#refreshBtn").addEventListener("click",refresh);
+$("#exportBtn").addEventListener("click",exportCommissions);
+window.addEventListener("storage",function(event){
+ if(["unieaseOrders","unieaseSellers","unieaseAccounts","unieaseListings"].includes(event.key))refresh();
+});
+refresh();
+})();
+</script>
+</body>
+</html>
