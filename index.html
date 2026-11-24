@@ -666,6 +666,160 @@ body.drawer-open{overflow:hidden}
 .owner-link-panel{margin-top:14px}.owner-link-panel .btn{display:inline-flex;align-items:center;margin-top:8px;text-decoration:none}
 @media(max-width:900px){.seller-metric-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.seller-welcome{align-items:flex-start;flex-direction:column;padding:16px}.seller-metric{padding:12px}}
 </style>
+
+<style id="uniease-seller-workspace">
+.seller-dashboard-shell{display:flex;flex-direction:column;gap:15px}
+.seller-dashboard-banner{position:relative;isolation:isolate;display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:190px;overflow:hidden;padding:26px 28px;border-radius:20px;background:linear-gradient(112deg,#102d46 0%,#174b61 62%,#0b806d 135%);color:#fff;box-shadow:0 13px 30px rgba(16,45,70,.12)}
+.seller-dashboard-copy{position:relative;z-index:2;max-width:620px}
+.seller-overline{display:block;color:#16886f;font-size:9px;font-weight:900;letter-spacing:1.35px;margin-bottom:7px}
+.seller-dashboard-banner .seller-overline{color:#a8e1d0}
+.seller-dashboard-banner h2{margin:0 0 7px;font-size:clamp(22px,3vw,30px);letter-spacing:-.8px}
+.seller-dashboard-banner p{max-width:500px;margin:0;color:#d6e5eb;font-size:12px;line-height:1.6}
+.seller-banner-actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:18px}
+.seller-banner-secondary{background:#ffffff18;border:1px solid #ffffff45;color:#fff}
+.seller-dashboard-decoration{position:relative;width:190px;height:140px;flex:none;display:grid;place-items:center}
+.seller-dashboard-orbit{position:absolute;border:1px solid #ffffff32;border-radius:50%;transform:rotate(-20deg)}
+.seller-dashboard-orbit.orbit-one{width:172px;height:104px}
+.seller-dashboard-orbit.orbit-two{width:128px;height:145px;transform:rotate(38deg)}
+.seller-dashboard-shop-icon{width:67px;height:67px;display:grid;place-items:center;border-radius:21px;background:#ffffff1c;border:1px solid #ffffff55;color:#fff;font-size:34px;box-shadow:0 10px 28px #092b3d55}
+.seller-tabs{display:flex;align-items:center;gap:6px;padding:6px;background:#fff;border:1px solid #e3ebee;border-radius:13px;overflow-x:auto;scrollbar-width:thin}
+.seller-tabs button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:9px 14px;flex:none;border-radius:9px;background:transparent;color:#667887;font-size:11px;font-weight:800;white-space:nowrap}
+.seller-tabs button span{font-size:15px}
+.seller-tabs button.active{background:#eaf7f2;color:#087d63}
+.seller-metric-grid-new{margin:0;gap:10px}
+.seller-overview-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:14px}
+.seller-setup-panel,.seller-activity-panel,.seller-storefront-panel,.seller-listings-panel,.seller-orders-panel,.seller-profile-panel{min-width:0;padding:19px}
+.seller-panel-heading{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;margin-bottom:14px}
+.seller-panel-heading h2{margin:1px 0 4px;font-size:16px;letter-spacing:-.4px}
+.seller-panel-heading p{margin:0;color:#71818e;font-size:11px;line-height:1.5}
+.seller-panel-heading .seller-overline{margin-bottom:4px}
+.seller-progress-count{flex:none;padding:6px 9px;border-radius:30px;background:#edf6f3;color:#087d63;font-size:10px;font-weight:850}
+.seller-setup-step{display:flex;align-items:center;gap:10px;padding:13px 0;border-top:1px solid #edf1f3}
+.seller-step-check{width:29px;height:29px;flex:none;display:grid;place-items:center;border-radius:50%;background:#f0f4f6;color:#657987;font-size:11px;font-weight:900}
+.seller-step-check.done{background:#e2f4ec;color:#087d63}
+.seller-setup-step>div:nth-child(2){display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+.seller-setup-step b{font-size:11px}
+.seller-setup-step small{font-size:10px;color:#788895;line-height:1.4}
+.seller-setup-step .btn{flex:none}
+.seller-setup-bar{height:5px;margin-top:9px;overflow:hidden;border-radius:10px;background:#edf1f2}
+.seller-setup-bar span{display:block;height:100%;border-radius:10px;background:#0e9f7d;transition:width .25s ease}
+.seller-mini-sale{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:12px 0;border-top:1px solid #edf1f3}
+.seller-mini-sale>div{display:flex;flex-direction:column;gap:3px;min-width:0}
+.seller-mini-sale b{font-size:11px;overflow-wrap:anywhere}
+.seller-mini-sale small{font-size:9px;color:#7b8993}
+.seller-mini-sale strong{font-size:11px;white-space:nowrap}
+.seller-activity-empty{display:flex;align-items:center;gap:11px;padding:16px 10px;border:1px dashed #dce7e9;border-radius:12px;background:#f9fbfb}
+.seller-activity-empty>span{width:34px;height:34px;display:grid;place-items:center;border-radius:10px;background:#eaf7f2;color:#087d63;font-size:17px}
+.seller-activity-empty>div{display:flex;flex-direction:column;gap:3px}
+.seller-activity-empty b{font-size:11px}
+.seller-activity-empty small{font-size:10px;color:#768793;line-height:1.4}
+.seller-storefront-panel{overflow:hidden}
+.seller-store-preview{border:1px solid #e5ecef;border-radius:14px;overflow:hidden;background:#fff}
+.seller-store-cover{height:104px;overflow:hidden;background:linear-gradient(115deg,#dff1eb,#e9f0f5 55%,#e5f4ed)}
+.seller-store-cover>img{width:100%;height:100%;object-fit:cover}
+.seller-cover-art{height:100%;position:relative;display:flex;align-items:center;padding:20px 24px;overflow:hidden;background:linear-gradient(115deg,#153b52,#1b796d)}
+.seller-cover-art span{position:relative;z-index:1;color:#ffffffbd;font-size:9px;font-weight:900;letter-spacing:2px}
+.seller-cover-art i,.seller-cover-art b{position:absolute;display:block;width:160px;height:160px;border:1px solid #ffffff36;border-radius:50%;right:20px;top:-65px}
+.seller-cover-art b{width:115px;height:115px;right:80px;top:20px}
+.seller-store-identity{display:flex;align-items:center;gap:12px;padding:0 16px;margin-top:-23px;position:relative}
+.seller-store-logo,.seller-profile-mark{width:54px;height:54px;flex:none;display:grid;place-items:center;overflow:hidden;border:3px solid #fff;border-radius:15px;background:#12324a;color:#fff;font-size:22px;font-weight:900;box-shadow:0 3px 10px #102d4620}
+.seller-store-logo img,.seller-profile-mark img{width:100%;height:100%;object-fit:cover}
+.seller-store-name{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0;padding-top:20px}
+.seller-store-name b{font-size:13px;overflow-wrap:anywhere}
+.seller-store-name small{font-size:9px;color:#73838e;line-height:1.4}
+.seller-store-demo-tag{align-self:flex-start;margin-top:26px;padding:5px 7px;border-radius:20px;background:#f0f5f4;color:#647b75;font-size:8px;font-weight:900;letter-spacing:.4px}
+.seller-store-description{padding:11px 16px 13px;color:#617380;font-size:10px;line-height:1.6}
+.seller-preview-heading{display:flex;justify-content:space-between;gap:10px;padding:12px 16px;border-top:1px solid #edf1f2}
+.seller-preview-heading b{font-size:10px}
+.seller-preview-heading span{font-size:9px;color:#70818c}
+.seller-preview-products{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:0 16px 15px}
+.seller-preview-product{min-width:0;display:flex;flex-direction:column;gap:5px}
+.seller-preview-image{height:68px;display:grid;place-items:center;overflow:hidden;border-radius:9px;background:#f0f4f5;color:#80919b;font-size:21px}
+.seller-preview-image img{width:100%;height:100%;object-fit:cover}
+.seller-preview-product b{font-size:9px;line-height:1.35;overflow-wrap:anywhere}
+.seller-preview-product strong{font-size:10px;color:#173a50}
+.seller-preview-empty{display:flex;flex-direction:column;align-items:center;gap:6px;padding:20px;border-top:1px solid #edf1f2;text-align:center}
+.seller-preview-empty span{font-size:22px}
+.seller-preview-empty b{font-size:10px}
+.seller-preview-empty small{max-width:250px;color:#7a8993;font-size:9px;line-height:1.4}
+.seller-empty{display:flex;flex-direction:column;align-items:center;justify-content:center;min-height:245px;padding:25px 15px;text-align:center;border:1px dashed #d8e5e7;border-radius:14px;background:linear-gradient(180deg,#fbfdfc,#f7faf9)}
+.seller-empty-compact{min-height:190px}
+.seller-empty-icon{width:54px;height:54px;display:grid;place-items:center;border-radius:17px;background:#eaf6f1;color:#087d63;font-size:24px}
+.seller-empty h3{margin:12px 0 4px;font-size:15px;letter-spacing:-.3px}
+.seller-empty p{max-width:390px;margin:0 0 15px;color:#74848e;font-size:11px;line-height:1.55}
+.seller-product-summary{display:flex;gap:18px;flex-wrap:wrap;padding:10px 0 13px;border-bottom:1px solid #edf1f3}
+.seller-product-summary span{color:#71818c;font-size:10px}
+.seller-product-summary b{color:#18374d;font-size:13px}
+.seller-product-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid #edf1f3;min-width:0}
+.seller-product-photo{width:54px;height:54px;flex:none;display:grid;place-items:center;overflow:hidden;border-radius:11px;background:#eff4f5;font-size:20px}
+.seller-product-photo img{width:100%;height:100%;object-fit:cover}
+.seller-product-info{display:flex;flex:1;flex-direction:column;gap:3px;min-width:0}
+.seller-product-info b{font-size:11px;overflow-wrap:anywhere}
+.seller-product-info small{color:#75848e;font-size:9px;line-height:1.3}
+.seller-product-status{color:#087d63!important;font-weight:800}
+.seller-product-row>strong{font-size:11px;white-space:nowrap}
+.seller-product-row>.btn{flex:none}
+.seller-order-row{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(65px,.5fr) auto auto;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid #edf1f3}
+.seller-order-main{display:flex;flex-direction:column;gap:3px;min-width:0}
+.seller-order-main b{font-size:11px;overflow-wrap:anywhere}
+.seller-order-main small,.seller-order-date{color:#788791;font-size:9px}
+.seller-order-row>strong{font-size:11px;white-space:nowrap}
+.seller-demo-status{display:inline-block;padding:5px 7px;border-radius:7px;background:#fff5e4;color:#95651a;font-size:8px;font-weight:900;letter-spacing:.35px;white-space:nowrap}
+.seller-order-disclaimer{margin-top:14px;padding:11px 12px;border-radius:10px;background:#f7f9fa;color:#6d7d88;font-size:10px;line-height:1.5}
+.seller-profile-card{display:flex;align-items:center;gap:13px;padding:15px;border-radius:13px;background:#f6f9f9;border:1px solid #e8eff0}
+.seller-profile-mark{border:0;box-shadow:none;width:60px;height:60px}
+.seller-profile-card h3{margin:0 0 3px;font-size:15px}
+.seller-profile-card p{margin:0 0 3px;color:#5e7580;font-size:11px}
+.seller-profile-card span{color:#74848f;font-size:9px}
+.seller-profile-description{padding:15px 2px;color:#657884;font-size:11px;line-height:1.6}
+.seller-profile-checklist{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin-top:7px}
+.seller-profile-checklist>div{display:flex;flex-direction:column;gap:5px;padding:12px;border:1px solid #e7edef;border-radius:11px}
+.seller-profile-checklist b{font-size:10px;color:#6f7f8a}
+.seller-profile-checklist b.complete{color:#087d63}
+.seller-profile-checklist small{font-size:9px;color:#7a8993;line-height:1.4}
+.seller-footnote{margin:0 0 8px;padding:11px 13px;border-radius:10px;background:#f0f4f5;color:#6e7f89;font-size:10px;line-height:1.55}
+@media(max-width:760px){
+ .seller-overview-grid{grid-template-columns:1fr}
+ .seller-dashboard-banner{min-height:175px;padding:21px}
+ .seller-dashboard-decoration{width:105px;height:112px;margin-right:-5px}
+ .seller-dashboard-orbit.orbit-one{width:108px;height:73px}
+ .seller-dashboard-orbit.orbit-two{width:84px;height:101px}
+ .seller-dashboard-shop-icon{width:54px;height:54px;border-radius:17px;font-size:28px}
+ .seller-order-row{grid-template-columns:minmax(0,1fr) auto;gap:5px 10px}
+ .seller-order-date{display:none}
+ .seller-profile-checklist{grid-template-columns:1fr}
+}
+@media(max-width:560px){
+ .seller-dashboard-banner{min-height:0;padding:19px 17px}
+ .seller-dashboard-decoration{width:64px;height:86px}
+ .seller-dashboard-orbit.orbit-one{width:75px;height:55px}
+ .seller-dashboard-orbit.orbit-two{width:55px;height:76px}
+ .seller-dashboard-shop-icon{width:44px;height:44px;border-radius:14px;font-size:23px}
+ .seller-banner-actions .btn{min-height:36px;padding:8px 10px;font-size:10px}
+ .seller-tabs{gap:3px;padding:4px}
+ .seller-tabs button{min-height:37px;padding:8px 10px;font-size:10px;gap:5px}
+ .seller-tabs button span{font-size:13px}
+ .seller-metric-grid-new{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .seller-metric-grid-new .seller-metric{padding:12px}
+ .seller-panel-heading{gap:7px}
+ .seller-panel-heading h2{font-size:14px}
+ .seller-setup-step{gap:7px}
+ .seller-setup-step small{font-size:9px}
+ .seller-setup-step .btn{padding:7px 8px;font-size:9px}
+ .seller-store-demo-tag{display:none}
+ .seller-store-identity{gap:9px;padding-inline:11px}
+ .seller-store-name b{font-size:12px}
+ .seller-store-description{padding-inline:11px}
+ .seller-preview-products{padding-inline:11px}
+ .seller-product-row{gap:8px}
+ .seller-product-photo{width:43px;height:43px}
+ .seller-product-row>strong{font-size:10px}
+ .seller-product-row>.btn{padding:6px 7px;font-size:9px}
+ .seller-orders-panel,.seller-listings-panel,.seller-profile-panel{padding:14px}
+ .seller-profile-card{align-items:flex-start;padding:11px}
+ .seller-profile-mark{width:49px;height:49px}
+}
+</style>
 </head>
 <body>
 <div class="app">
@@ -1029,20 +1183,104 @@ function ordersPage(){
  (entries?'<div class="receipt-order-list">'+entries+'</div>':'<div class="panel"><div class="empty"><div class="big">🧾</div><b>No orders yet</b><p>Your purchases and bookings will appear here. Each saved request will have its own uniEase receipt.</p><button class="btn teal" onclick="nav(\'market\')">Explore marketplace</button></div></div>');
 }
 function securityPrivacyPanel(){return '<section class="panel privacy-panel" aria-labelledby="privacyTitle"><div class="privacy-panel-head"><div><span class="eyebrow">TRUST & TRANSPARENCY</span><h3 id="privacyTitle">Security & Privacy</h3><p class="muted">Visible safeguards in this prototype, with limitations stated clearly.</p></div><span class="prototype-pill">Prototype safeguards</span></div><div class="privacy-feature-grid"><div><span class="privacy-feature-mark">✓</span><b>No PIN / OTP collection</b><small>Checkout never asks for Mobile Money PINs, bank passwords or one-time codes.</small></div><div><span class="privacy-feature-mark">✓</span><b>Payment preview only</b><small>No card details are collected and no live payment request is sent.</small></div><div><span class="privacy-feature-mark">✓</span><b>Clear order review</b><small>The student sees the total and collection choice before confirming the demo flow.</small></div><div><span class="privacy-feature-mark">i</span><b>Local browser storage</b><small>Demo profile, listings and orders stay in this browser. They are not in a secured shared account database.</small></div><div><span class="privacy-feature-mark">i</span><b>Print document handling</b><small>The cloud inbox animation is a preview. Selected files are not uploaded to a drive or print shop.</small></div><div><span class="privacy-feature-mark">i</span><b>Production controls still needed</b><small>Verified sign-in, server-side access control, protected file storage, audit logs and payment-provider integration.</small></div></div><div class="privacy-warning"><b>Use demo data only.</b> Do not enter real passwords, payment credentials, confidential documents or sensitive personal information in this prototype.</div></section>'}
+function setSellerTab(tab){
+ const allowed=['overview','products','orders','store'];
+ state.sellerTab=allowed.includes(tab)?tab:'overview';
+ render();
+ window.scrollTo(0,0);
+}
+function openStoreSetup(){
+ if(!state.user){openAuth('seller');return}
+ if(state.user.role!=='seller'){openAuth('seller');return}
+ const user=state.user;
+ modal({title:'Set up your campus shop',body:
+ '<p class="muted">Give students a clear idea of what your shop offers. Your store profile and optional images are saved in this browser demo.</p>'+
+ '<div class="formgrid">'+
+ '<div class="field full"><label>Shop name</label><input id="storeSetupName" value="'+escapeHtml(user.storeName||user.name)+'" placeholder="e.g. Ama Campus Finds"></div>'+
+ '<div class="field"><label>Shop category</label><select id="storeSetupCategory"><option value="">Choose a category</option>'+['Books & stationery','Fashion & accessories','Electronics','Furniture & appliances','Beauty & personal care','Everyday essentials','Mixed campus shop','Other'].map(x=>'<option '+(user.storeCategory===x?'selected':'')+'>'+x+'</option>').join('')+'</select></div>'+
+ '<div class="field"><label>Collection point / hall</label><input id="storeSetupLocation" value="'+escapeHtml(user.sellerHall||'')+'" placeholder="e.g. Valco Hall, Science Market"></div>'+
+ '<div class="field full"><label>Short shop tagline</label><input id="storeSetupTagline" maxlength="90" value="'+escapeHtml(user.storeTagline||'')+'" placeholder="e.g. Affordable finds for UCC students"></div>'+
+ '<div class="field full"><label>About your shop</label><textarea id="storeSetupDescription" rows="3" maxlength="400" placeholder="Tell students what you sell, your prices or how collection works...">'+escapeHtml(user.storeDescription||'')+'</textarea></div>'+
+ '<div class="field"><label>Shop logo / profile photo (optional)</label><input id="storeLogoFile" type="file" accept="image/*"><small class="muted">Image up to 700 KB</small></div>'+
+ '<div class="field"><label>Shop cover photo (optional)</label><input id="storeBannerFile" type="file" accept="image/*"><small class="muted">Image up to 700 KB</small></div>'+
+ '</div><div class="notice">This is a front-end demo. Store details and images are stored only in this browser; they are not uploaded to a shared server or automatically visible on other students’ devices.</div>'+
+ '<button id="storeSaveButton" class="btn teal" style="margin-top:12px" onclick="saveStoreSetup()">Save shop profile</button>'
+ });
+}
+function saveStoreSetup(){
+ if(!state.user||state.user.role!=='seller'){toast('Sign in with a seller account first');return}
+ const storeName=$('#storeSetupName')?.value.trim(),category=$('#storeSetupCategory')?.value||'';
+ const location=$('#storeSetupLocation')?.value.trim()||'UCC campus';
+ const tagline=$('#storeSetupTagline')?.value.trim()||'';
+ const description=$('#storeSetupDescription')?.value.trim()||'';
+ if(!storeName){toast('Enter your shop name');return}
+ if(!category){toast('Choose a shop category');return}
+ if(!description){toast('Add a short description of your shop');return}
+ const button=$('#storeSaveButton');if(button){button.disabled=true;button.textContent='Saving shop profile…'}
+ const images={};
+ const inputs=[['storeLogoFile','storeLogo'],['storeBannerFile','storeBanner']];
+ const readImage=(index)=>{
+  if(index>=inputs.length){
+   state.user={...state.user,storeName,sellerHall:location,storeCategory:category,storeTagline:tagline,storeDescription:description,storeSetupCompleted:true,...images};
+   state.sellers=state.sellers||[];
+   const seller={id:state.user.accountId,name:state.user.name,storeName,hall:location,category,tagline,description,joinedAt:state.user.createdAt};
+   const at=state.sellers.findIndex(x=>x.id===state.user.accountId);
+   if(at>=0)state.sellers[at]=seller;else state.sellers.push(seller);
+   persist();closeModal();state.sellerTab='overview';render();toast('Your campus shop profile has been saved');return;
+  }
+  const [inputId,key]=inputs[index],file=$('#'+inputId)?.files?.[0];
+  if(!file){readImage(index+1);return}
+  if(!file.type.startsWith('image/')){if(button){button.disabled=false;button.textContent='Save shop profile'}toast('Choose a valid image file');return}
+  if(file.size>700*1024){if(button){button.disabled=false;button.textContent='Save shop profile'}toast('Each shop image must be 700 KB or smaller');return}
+  const reader=new FileReader();
+  reader.onload=()=>{images[key]=reader.result;readImage(index+1)};
+  reader.onerror=()=>{if(button){button.disabled=false;button.textContent='Save shop profile'}toast('Could not read that image. Please try again')};
+  reader.readAsDataURL(file);
+ };
+ readImage(0);
+}
+function removeSellerListing(id){
+ const item=(state.listings||sample).find(x=>String(x.id)===String(id)&&x.sellerId===state.user?.accountId);
+ if(!item){toast('That listing could not be found');return}
+ modal({title:'Remove this product?',body:'<p>Remove <b>'+escapeHtml(item.title)+'</b> from your shop and the Student Marketplace in this browser demo?</p><div class="row" style="justify-content:flex-end;margin-top:16px"><button class="btn outline" onclick="closeModal()">Keep listing</button><button class="btn" style="background:#b42318" onclick="confirmRemoveSellerListing('+Number(id)+')">Remove product</button></div>'});
+}
+function confirmRemoveSellerListing(id){
+ state.listings=(state.listings||sample).filter(x=>!(String(x.id)===String(id)&&x.sellerId===state.user?.accountId));
+ persist();closeModal();render();toast('Product removed from your shop');
+}
+
 function sellerPage(){
- if(!state.user)return pageHead('Seller portal','Create a seller account to list products and track campus sales.')+'<div class="panel role-gate"><h2>Start selling on uniEase</h2><p>Register as a seller, create a shop profile and publish products for UCC students.</p><button class="btn teal" onclick="openAuth(\'seller\')">Sign up as a seller</button><button class="btn outline" onclick="openAuth(\'buyer\')">Continue as a buyer</button></div>';
- if(state.user.role!=='seller')return pageHead('Seller portal','Your current account is registered as a buyer.')+'<div class="panel role-gate"><h2>Become a uniEase seller</h2><p>Switch your demo account to Seller to publish listings and view your sales activity.</p><button class="btn teal" onclick="openAuth(\'seller\')">Upgrade to seller account</button></div>';
- const id=state.user.accountId,mine=(state.listings||sample).filter(item=>item.sellerId===id);
+ if(!state.user)return pageHead('Seller portal','Create a seller account to open your campus shop.')+'<div class="panel role-gate"><h2>Start selling on uniEase</h2><p>Set up your shop, publish products and manage your campus sales from one workspace.</p><button class="btn teal" onclick="openAuth(\'seller\')">Create seller account</button><button class="btn outline" onclick="openAuth(\'buyer\')">Continue as a buyer</button></div>';
+ if(state.user.role!=='seller')return pageHead('Seller portal','Your current account is registered as a buyer.')+'<div class="panel role-gate"><h2>Open your campus shop</h2><p>Upgrade to a seller account to create a shop, publish products and manage your listings.</p><button class="btn teal" onclick="openAuth(\'seller\')">Become a seller</button></div>';
+ const user=state.user,id=user.accountId,mine=(state.listings||sample).filter(item=>item.sellerId===id);
  const sales=state.orders.flatMap(order=>(order.items||[]).filter(item=>item.sellerId===id).map(item=>({item,order})));
- const gross=sales.reduce((sum,row)=>sum+Number(row.item.price||0),0),fee=sales.reduce((sum,row)=>sum+Number(row.item.commissionAmount??(Number(row.item.price||0)*.05)),0),net=gross-fee;
- const listings=mine.length?mine.map(item=>'<div class="seller-listing-row"><div class="seller-listing-thumb">'+(item.image?'<img src="'+escapeHtml(asset(item.image))+'" alt="">':'<span>📦</span>')+'</div><div class="seller-listing-copy"><b>'+escapeHtml(item.title)+'</b><small>'+escapeHtml(item.cat||'Product')+' · '+escapeHtml(item.listingStatus||'Active')+'</small></div><strong>'+money(item.price)+'</strong></div>').join(''):'<div class="empty"><div class="big">🏷️</div><b>No listings yet</b><p>Publish your first product to reach other UCC students.</p></div>';
- const salesMarkup=sales.length?sales.slice().reverse().map(row=>'<div class="seller-sale-row"><div><b>'+escapeHtml(row.item.title)+'</b><small>'+escapeHtml(row.order.reference||'Demo sale')+' · '+escapeHtml(row.order.date||'')+'</small></div><strong>'+money(row.item.price)+'</strong></div>').join(''):'<p class="muted">Demo sales linked to your listings appear here after a marketplace checkout.</p>';
- return pageHead('Seller portal','Your campus shop at a glance.','<button class="btn teal" onclick="openListing()">＋ Add a product</button>')+
- '<div class="seller-welcome"><div><span class="eyebrow">SELLER ACCOUNT</span><h2>'+escapeHtml(state.user.storeName||state.user.name)+'</h2><p>'+escapeHtml(state.user.sellerHall||'UCC campus')+' · Seller workspace</p></div><span class="seller-live-tag">LOCAL DEMO</span></div>'+
- '<div class="seller-metric-grid"><div class="seller-metric"><span>Active listings</span><b>'+mine.length+'</b></div><div class="seller-metric"><span>Demo items sold</span><b>'+sales.length+'</b></div><div class="seller-metric"><span>Gross demo sales</span><b>'+money(gross)+'</b></div><div class="seller-metric"><span>Estimated seller proceeds</span><b>'+money(net)+'</b><small>After 5% platform commission: '+money(fee)+'</small></div></div>'+
- '<div class="panel seller-section"><div class="sectionhead"><div><h2>My listings</h2><div class="sub">Products attached to this seller profile</div></div></div>'+listings+'</div>'+
- '<div class="panel seller-section"><div class="sectionhead"><div><h2>Sales activity</h2><div class="sub">Demo purchases associated with your listings</div></div></div>'+salesMarkup+'</div>'+
- '<div class="seller-footnote">Figures are browser-local demo records. They are not verified payments or actual seller payouts.</div>';
+ const gross=sales.reduce((sum,row)=>sum+Number(row.item.price||0),0);
+ const fee=sales.reduce((sum,row)=>sum+Number(row.item.commissionAmount??(Number(row.item.price||0)*.05)),0);
+ const net=gross-fee,orderCount=new Set(sales.map(row=>row.order.reference||row.order.id)).size;
+ const profileReady=!!(user.storeCategory&&user.storeDescription);
+ const tab=state.sellerTab||'overview';
+ const logo=user.storeLogo?'<img src="'+escapeHtml(asset(user.storeLogo))+'" alt="'+escapeHtml(user.storeName||'Shop logo')+'">':'<span>'+escapeHtml((user.storeName||user.name||'U').charAt(0).toUpperCase())+'</span>';
+ const cover=user.storeBanner?'<img src="'+escapeHtml(asset(user.storeBanner))+'" alt="Shop cover photo">':'<div class="seller-cover-art"><span>YOUR CAMPUS SHOP</span><i></i><b></b></div>';
+ const tabs=[['overview','Overview','⌂'],['products','Products','▦'],['orders','Orders & sales','↗'],['store','Store profile','⚙']];
+ const tabMarkup='<div class="seller-tabs" role="tablist" aria-label="Seller workspace sections">'+tabs.map(x=>'<button type="button" role="tab" aria-selected="'+(tab===x[0]?'true':'false')+'" class="'+(tab===x[0]?'active':'')+'" onclick="setSellerTab(\''+x[0]+'\')"><span aria-hidden="true">'+x[2]+'</span>'+x[1]+'</button>').join('')+'</div>';
+ const productRows=mine.length?mine.map(item=>'<div class="seller-product-row"><div class="seller-product-photo">'+(item.image?'<img src="'+escapeHtml(asset(item.image))+'" alt="">':'<span>📦</span>')+'</div><div class="seller-product-info"><b>'+escapeHtml(item.title)+'</b><small>'+escapeHtml(item.cat||'Product')+' · '+escapeHtml(item.condition||'Student listing')+'</small><small class="seller-product-status">'+escapeHtml(item.listingStatus||'Active')+'</small></div><strong>'+money(item.price)+'</strong><button class="btn outline small" onclick="removeSellerListing('+Number(item.id)+')" aria-label="Remove '+escapeHtml(item.title)+'">Remove</button></div>').join(''):'<div class="seller-empty"><div class="seller-empty-icon">📦</div><h3>Your product shelf is empty</h3><p>Products you publish will appear here and in the Student Marketplace.</p><button class="btn teal" onclick="openListing()">＋ Add your first product</button></div>';
+ const salesRows=sales.length?sales.slice().reverse().map(row=>'<div class="seller-order-row"><div class="seller-order-main"><b>'+escapeHtml(row.item.title)+'</b><small>'+escapeHtml(row.order.customerName||'UCC buyer')+' · '+escapeHtml(row.order.reference||row.order.id||'Demo order')+'</small></div><div class="seller-order-date">'+escapeHtml(row.order.date||'')+'</div><strong>'+money(row.item.price)+'</strong><span class="seller-demo-status">DEMO · NOT PAID</span></div>').join(''):'<div class="seller-empty seller-empty-compact"><div class="seller-empty-icon">🧾</div><h3>No orders yet</h3><p>When students buy your listed products through the demo checkout, the sale records will appear here.</p><button class="btn outline" onclick="setSellerTab(\'products\')">View my products</button></div>';
+ const listingPreview=mine.length?'<div class="seller-preview-products">'+mine.slice(0,3).map(item=>'<div class="seller-preview-product"><div class="seller-preview-image">'+(item.image?'<img src="'+escapeHtml(asset(item.image))+'" alt="">':'<span>📦</span>')+'</div><b>'+escapeHtml(item.title)+'</b><strong>'+money(item.price)+'</strong></div>').join('')+'</div>':'<div class="seller-preview-empty"><span>🛍️</span><b>Your products will appear here</b><small>Add your first item to start building your storefront preview.</small></div>';
+ let workspace='';
+ if(tab==='overview'){
+  workspace='<div class="seller-metric-grid seller-metric-grid-new"><div class="seller-metric"><span>Active listings</span><b>'+mine.filter(x=>(x.listingStatus||'Active')==='Active').length+'</b><small>Products in your shop</small></div><div class="seller-metric"><span>Demo items sold</span><b>'+sales.length+'</b><small>Item lines in demo checkouts</small></div><div class="seller-metric"><span>Demo orders</span><b>'+orderCount+'</b><small>Recorded marketplace checkouts</small></div><div class="seller-metric"><span>Estimated seller proceeds</span><b>'+money(net)+'</b><small>After estimated 5% fee: '+money(fee)+'</small></div></div>'+
+  '<div class="seller-overview-grid"><section class="panel seller-setup-panel"><div class="seller-panel-heading"><div><span class="seller-overline">YOUR NEXT STEPS</span><h2>Get your shop ready</h2><p>Complete these basics before sharing your campus store.</p></div><span class="seller-progress-count">'+((profileReady?1:0)+(mine.length?1:0))+'/2 done</span></div><div class="seller-setup-step"><div class="seller-step-check '+(profileReady?'done':'')+'">'+(profileReady?'✓':'1')+'</div><div><b>Build your shop profile</b><small>Add a category, description and collection location.</small></div><button class="btn outline small" onclick="openStoreSetup()">'+(profileReady?'Edit shop':'Set up shop')+'</button></div><div class="seller-setup-step"><div class="seller-step-check '+(mine.length?'done':'')+'">'+(mine.length?'✓':'2')+'</div><div><b>Publish your first product</b><small>Add a photo, price and details students can browse.</small></div><button class="btn outline small" onclick="openListing()">'+(mine.length?'Add another':'Add product')+'</button></div><div class="seller-setup-bar"><span style="width:'+(((profileReady?1:0)+(mine.length?1:0))*50)+'%"></span></div></section>'+
+  '<section class="panel seller-activity-panel"><div class="seller-panel-heading"><div><span class="seller-overline">SHOP ACTIVITY</span><h2>Recent sales</h2><p>Transactions associated with your products.</p></div><button class="textbtn" onclick="setSellerTab(\'orders\')">View orders</button></div>'+(sales.length?sales.slice().reverse().slice(0,3).map(row=>'<div class="seller-mini-sale"><div><b>'+escapeHtml(row.item.title)+'</b><small>'+escapeHtml(row.order.date||'')+' · '+escapeHtml(row.order.reference||'Demo sale')+'</small></div><strong>'+money(row.item.price)+'</strong></div>').join(''):'<div class="seller-activity-empty"><span>✦</span><div><b>Your sales will show up here</b><small>There are no demo purchases linked to your shop yet.</small></div></div>')+'</section></div>'+
+  '<section class="panel seller-storefront-panel"><div class="seller-panel-heading"><div><span class="seller-overline">STOREFRONT PREVIEW</span><h2>How students will see your shop</h2><p>A preview of your shop identity and published products.</p></div><button class="btn outline small" onclick="openStoreSetup()">Edit store details</button></div><div class="seller-store-preview"><div class="seller-store-cover">'+cover+'</div><div class="seller-store-identity"><div class="seller-store-logo">'+logo+'</div><div class="seller-store-name"><b>'+escapeHtml(user.storeName||user.name)+'</b><small>'+escapeHtml(user.storeTagline||'Your campus shop on uniEase')+'</small><small>📍 '+escapeHtml(user.sellerHall||'UCC campus')+' · '+escapeHtml(user.storeCategory||'Category not set')+'</small></div><span class="seller-store-demo-tag">LOCAL PREVIEW</span></div><div class="seller-store-description">'+escapeHtml(user.storeDescription||'Your shop description will appear here after you complete your store profile.')+'</div><div class="seller-preview-heading"><b>Products in your shop</b><span>'+mine.length+' listed</span></div>'+listingPreview+'</div></section>';
+ }else if(tab==='products'){
+  workspace='<section class="panel seller-listings-panel"><div class="seller-panel-heading"><div><span class="seller-overline">CATALOGUE MANAGEMENT</span><h2>My products</h2><p>Manage the products you have published to the Student Marketplace.</p></div><button class="btn teal" onclick="openListing()">＋ Add product</button></div><div class="seller-product-summary"><span><b>'+mine.length+'</b> total products</span><span><b>'+mine.filter(x=>(x.listingStatus||'Active')==='Active').length+'</b> active</span></div>'+productRows+'</section>';
+ }else if(tab==='orders'){
+  workspace='<section class="panel seller-orders-panel"><div class="seller-panel-heading"><div><span class="seller-overline">SALES MANAGEMENT</span><h2>Orders & sales</h2><p>Marketplace demo checkouts that include products from your shop.</p></div><span class="seller-demo-status">DEMO RECORDS ONLY</span></div>'+salesRows+'<div class="seller-order-disclaimer">No live payment is connected. These records do not confirm that money was collected or that a payout is due.</div></section>';
+ }else{
+  workspace='<section class="panel seller-profile-panel"><div class="seller-panel-heading"><div><span class="seller-overline">SHOP IDENTITY</span><h2>Store profile</h2><p>Keep your store name, category and collection details clear for campus buyers.</p></div><button class="btn teal" onclick="openStoreSetup()">Edit store profile</button></div><div class="seller-profile-card"><div class="seller-profile-mark">'+logo+'</div><div><h3>'+escapeHtml(user.storeName||user.name)+'</h3><p>'+escapeHtml(user.storeTagline||'Add a tagline for your shop')+'</p><span>'+escapeHtml(user.storeCategory||'Category not set')+' · '+escapeHtml(user.sellerHall||'UCC campus')+'</span></div></div><div class="seller-profile-description">'+escapeHtml(user.storeDescription||'Your shop description has not been added yet.')+'</div><div class="seller-profile-checklist"><div><b class="'+(profileReady?'complete':'')+'">'+(profileReady?'✓':'○')+' Store description</b><small>'+(profileReady?'Your shop description is saved.':'Add a short description to complete your shop profile.')+'</small></div><div><b class="'+(user.storeLogo?'complete':'')+'">'+(user.storeLogo?'✓':'○')+' Shop logo</b><small>'+(user.storeLogo?'A shop image is saved.':'You can add a shop logo or profile photo.')+'</small></div><div><b class="'+(user.storeBanner?'complete':'')+'">'+(user.storeBanner?'✓':'○')+' Cover photo</b><small>'+(user.storeBanner?'A cover photo is saved.':'You can add a cover photo for your storefront preview.')+'</small></div></div></section>';
+ }
+ return pageHead('Seller portal','Your campus shop workspace. Manage products, orders and your store profile.','<button class="btn teal" onclick="openListing()">＋ Add product</button>')+
+ '<div class="seller-dashboard-shell"><section class="seller-dashboard-banner"><div class="seller-dashboard-copy"><span class="seller-overline">SELLER WORKSPACE · UCC CAMPUS</span><h2>Welcome to your shop, '+escapeHtml(user.name.split(' ')[0]||'Seller')+'.</h2><p>Manage your storefront and put your products in front of the UCC community.</p><div class="seller-banner-actions"><button class="btn teal" onclick="openListing()">＋ Add a product</button><button class="btn seller-banner-secondary" onclick="openStoreSetup()">Set up your shop</button></div></div><div class="seller-dashboard-decoration"><div class="seller-dashboard-orbit orbit-one"></div><div class="seller-dashboard-orbit orbit-two"></div><div class="seller-dashboard-shop-icon">▦</div></div></section>'+tabMarkup+workspace+'</div><div class="seller-footnote">Seller data is stored in this browser demo. Sales, commissions and proceeds are estimates from simulated checkouts only; no live payments or actual payouts are connected.</div>';
 }
 function adminDashboardPage(){return pageHead('Owner workspace','The full owner dashboard is hosted as a separate page.')+'<div class="panel"><h2>Manage uniEase performance</h2><p class="muted">The separate owner dashboard includes commission tracking and revenue forecasts.</p><a class="btn teal" href="./admin.html">Open owner dashboard ↗</a></div>'}
 function profilePage(){
@@ -1088,6 +1326,7 @@ function saveAuth(){
  const firstBuyer=role==='buyer'&&!oldUser.onboardingCompleted;
  persist();$('#avatar').textContent=name[0].toUpperCase();closeModal();
  if(firstBuyer){render();showBuyerOnboarding(false);return}
+ if(role==='seller'){state.page='seller';state.sellerTab='overview';}
  toast(role==='seller'?'Seller account ready · welcome to your portal':'Buyer account ready · welcome to uniEase');render();
 }
 function logout(){state.user=null;persist();$('#avatar').textContent='G';render();toast('Signed out')}
